@@ -8,7 +8,7 @@ This is the repo used for version control on a uni group project studying compil
 The goal is to make functioning Syntax and Word analyser of a version of the programming language C, Uni-C.
 
 #### What is Uni-C? 
-Uni-C is an implementation of the C programming language to be used on university projects.
+Uni-C is an implementation of the C programming language to be used in university projects.
 
 Uni-C strips some things off of C to make it easier to make a compiler for educational purposes.
 
