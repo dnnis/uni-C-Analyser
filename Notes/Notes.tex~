@@ -1,0 +1,73 @@
+\documentclass[14pt]{extarticle}
+
+\usepackage[LGR]{fontenc}
+\usepackage[main=greek,english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[unicode]{hyperref}
+\usepackage{titlepic}
+\usepackage{graphicx}
+\usepackage{listings}
+
+\graphicspath{ {./images/} }
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+\hyphenpenalty=10000
+\hbadness=10000
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{frame=shadowbox, framexleftmargin=4mm, rulesepcolor=\color{black}, style=mystyle}
+
+\title{\bf Εξέταση Θεωρίας Τεχνητής Νοημοσύνης}
+\author{Διονύσης Νικολόπουλος}
+\date{ΑΜ 18390126 \\ \vspace{5mm} \footnotesize{Πραγματοποιήθηκε με χρήση \LaTeX}}
+\titlepic{\includegraphics[scale=3]{computer.png}}
+
+\begin{document}
+
+\begin{titlepage}
+  \maketitle
+  \begin{center}
+    \small (Κείμενο απάντησης στην επόμενη σελίδα)
+  \end{center}
+\end{titlepage}
+
+\section*{Απάντηση Άσκησης 4}
+    \vspace{5mm}    
+Η Θεωριτική αυτή εφαρμογή θα έχει τον σκοπό της αναπαράστασης ενός γιατρού (ανθρώπου) ο οποίος:
+    \begin{itemize}
+    \item Θα ρωτάει και στην συνέχεια θα ακούει τα συμπτώματα του χρήστη μέσω ενώς έμπειρου συστήματος.
+    \item Θα φτιάχνει ένα δένδρο απόφασης με το οποίο θα καταλήγει σε συμπέρασμα πάνω στην νόσο απο την οποία πάσχει ο χρήστης, μέσω της ομαδοποίησης και τις συσχέτισης των συμπτωμάτων “κάτω” απο μια νόσο (αυτό θα έχει γίνει με την χρήση των δεδομένων που εξορύχει απο το Διαδίκτυο).
+    \item  Θα ρωτάει τον χρήστη αμα το πρόβλεψε σωστά, ώστε το νευρωνικό δίκτυο να μαθάινει, ανάλογα με το αν προέβλεψε σωστά την νόσο του χρήστη, ποιά λάθη έκανε. Το νευρονικό δίκτυο θα μπορούσε να χρησιμοποιηθεί και για την αξιολόγιση της “συζήτησης” της εφαρμογής με τον χρήστη και την βελτίωση της (αύξηση της ικανότητας του δικτύου να έχει την πιο επιθυμιτή συμπεριφορά).
+        
+      
+    \end{itemize}
+    (Η επόμενη γραμμή είναι διαφορετικά συντεταγμένη απο την υποβολή με τον κειμενογράφο του σαιτ, αλλά είναι ίδιο το νόημα, δεν είχα προλάβει μονάχα να κάνω αποθήκευση στο πρόγραμμα κειμενογράφου του υπολογιστή μου.)
+    \\
+      Η εφαρμογή θα επιδικνύει ανθρώπινη συμπεριφορά μέσω της μάθησης που θα γίνεται με την συζήτηση με τον χρήστη και την ερώτηση για το άν η διάγνωση είναι σωστή (θα γίνονται καλύτερες συζητήσεις και διαγνώσεις με αρκετά "τρεξίματα")
+
+\end{document}
