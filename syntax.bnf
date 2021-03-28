@@ -1,18 +1,19 @@
-<symbol>        ::= "|" | " " | "!" | "#" | "$" | "%" | "&" | "(" | ")" | "*" | "+" | "," | "-" | "." | "/" | ":" | ";" | ">" | "=" | "<" | "?" | "@" | "[" | "\" | "]" | "^" | "_" | "`" | "{" | "}" | "~"
-<letter>        ::= "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z" | "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z"
-<digit>         ::= "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
-<character>     ::= <letter> | <symbol> | <digit>
-<character1>    ::= <character> | "'"
-<character2>    ::= <character> | '"'
-<text1>         ::= "" | <character1> <text1>
-<text2>         ::= '' | <character2> <text2>
-<literal>       ::= '"' <text1> '"' | "'" <text2> "'"
-<identifier>    ::= <character> <text1>
-<operator>      ::= "+" | "-" | "*" | "/" | "%" | "=" | "+=" | "-=" | "*=" | "<" | ">" | "--" | "<=" | ">=" | "&" | "==" | "!=" | "++" | "&&" | "||"
-<number1>       ::= <digit> <number1> | "'"
-<number2>       ::= <digit> <number2> | '"'
-<number>        ::= <number1> | <number2>
-<integer>       ::= <number> | "0X" <number> | "0x" <number> | "0"  
-<float>         ::= <number> "." <number> | <number> "e" <number> | <number> "e" <number> "-" <number>
+;;; This is a BNF for Uni-C
+symbol        ::= "|" | " " | "!" | "#" | "$" | "%" | "&" | "(" | ")" | "*" | "+" | "," | "-" | "." | "/" | ":" | "\;" | ">" | "=" | "<" | "?" | "@" | "[" | "\" | "]" | "^" | "_" | "`" | "{" | "}" | "~"
+letter        ::= "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z" | "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z"
+digit         ::= "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
+character     ::= letter | symbol | digit
+character1    ::= character | "'"
+character2    ::= character | '"'
+text1         ::= "" | character1 text1
+text2         ::= '' | character2 text2
+literal       ::= '"' text1 '"' | "'" text2 "'"
+identifier    ::= character text1
+operator      ::= "+" | "-" | "*" | "/" | "%" | "=" | "+=" | "-=" | "*=" | "" | "" | "--" | "=" | "=" | "&" | "==" | "!=" | "++" | "&&" | "||"
+number1       ::= digit number1 | "'"
+number2       ::= digit number2 | '"'
+number        ::= number1 | number2
+integer       ::= number | "0X" number | "0x" number | "0"  
+float         ::= number "." number | number "e" number | number "e" number "-" number
 
 ;; Φτιάχνουμε εδώ την σύνταξη σχολίων και τα white space?

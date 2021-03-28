@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/Arch Linux) (preloaded format=pdflatex 2021.3.23)  27 MAR 2021 17:39
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/Arch Linux) (preloaded format=pdflatex 2021.3.23)  28 MAR 2021 14:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -732,32 +732,38 @@ you forgot something else, as in `\hbox{$x}'. In such cases
 the way to recover is to insert both the forgotten and the
 deleted material, e.g., by typing `I$}'.
 
-[2]
+[2] (./Notes.toc)
+\tf@toc=\write4
 <./img//automata.png, id=26, 936.49875pt x 999.735pt>
 File: ./img//automata.png Graphic file (type png)
 <use ./img//automata.png>
-Package pdftex.def Info: ./img//automata.png  used on input line 84.
+Package pdftex.def Info: ./img//automata.png  used on input line 86.
 (pdftex.def)             Requested size: 468.24823pt x 499.86627pt.
 
-Overfull \hbox (38.24823pt too wide) in paragraph at lines 83--85
+Overfull \hbox (38.24823pt too wide) in paragraph at lines 85--87
 [] 
  []
-
-
-Overfull \vbox (5.8648pt too high) has occurred while \output is active []
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.86 \end{document}
-                    [1 <./img//automata.png (PNG copy)>] (./Notes.aux)
+l.88 \end{document}
+                    [1]
+Overfull \vbox (5.8648pt too high) has occurred while \output is active []
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has 
+been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.88 \end{document}
+                    [2 <./img//automata.png (PNG copy)>] (./Notes.aux)
 Package rerunfilecheck Info: File `Notes.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 12444 strings out of 479383
- 182433 string characters out of 5875830
+ 12448 strings out of 479383
+ 182464 string characters out of 5875830
  475661 words of memory out of 5000000
  29407 multiletter control sequences out of 15000+600000
  413228 words of font info for 46 fonts, out of 8000000 for 9000
@@ -773,10 +779,10 @@ ts/type1/public/cbfonts/grmn1200.pfb></usr/share/texmf-dist/fonts/type1/public/
 cbfonts/grmn1440.pfb></usr/share/texmf-dist/fonts/type1/public/cbfonts/grmn1728
 .pfb></usr/share/texmf-dist/fonts/type1/public/cbfonts/grxn2074.pfb></usr/share
 /texmf-dist/fonts/type1/public/cbfonts/grxn2488.pfb>
-Output written on Notes.pdf (3 pages, 347251 bytes).
+Output written on Notes.pdf (4 pages, 371433 bytes).
 PDF statistics:
- 73 PDF objects out of 1000 (max. 8388607)
- 52 compressed objects within 1 object stream
- 4 named destinations out of 1000 (max. 500000)
+ 77 PDF objects out of 1000 (max. 8388607)
+ 55 compressed objects within 1 object stream
+ 5 named destinations out of 1000 (max. 500000)
  11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
