@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/Arch Linux) (preloaded format=pdflatex 2021.3.23)  28 MAR 2021 14:19
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/Arch Linux) (preloaded format=pdflatex 2021.3.23)  28 MAR 2021 19:23
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -710,7 +710,7 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 \c@lstlisting=\count282
-<./img//computer.png, id=4, 160.4394pt x 129.8451pt>
+<./img//computer.png, id=20, 160.4394pt x 129.8451pt>
 File: ./img//computer.png Graphic file (type png)
 <use ./img//computer.png>
 Package pdftex.def Info: ./img//computer.png  used on input line 55.
@@ -722,67 +722,72 @@ LaTeX Font Info:    External font `cmex7' loaded for size
 (Font)              <7> on input line 78.
 LaTeX Font Info:    External font `cmex7' loaded for size
 (Font)              <5> on input line 78.
-
-! Extra }, or forgotten \endgroup.
-l.78 ...øœÄŒøŒπŒÆŒ∏Œ∑Œ∫Œµ ŒºŒµ œáœÅŒÆœÉŒ∑ \LaTeX}}
-                                                  
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-[2] (./Notes.toc)
+ [2] (./Notes.toc)
 \tf@toc=\write4
-<./img//automata.png, id=26, 936.49875pt x 999.735pt>
-File: ./img//automata.png Graphic file (type png)
-<use ./img//automata.png>
-Package pdftex.def Info: ./img//automata.png  used on input line 86.
-(pdftex.def)             Requested size: 468.24823pt x 499.86627pt.
-
-Overfull \hbox (38.24823pt too wide) in paragraph at lines 85--87
-[] 
- []
-
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.88 \end{document}
-                    [1]
-Overfull \vbox (5.8648pt too high) has occurred while \output is active []
-
-pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has 
-been already used, duplicate ignored
+l.83 \clearpage
+                [1]pdfTeX warning (ext4): destination with the same identifier 
+(name{page.2}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.88 \end{document}
-                    [2 <./img//automata.png (PNG copy)>] (./Notes.aux)
+l.91 \clearpage
+                [2
+
+]
+Overfull \hbox (65.4855pt too wide) in paragraph at lines 93--93
+[]\LGR/cmr/bx/n/20.74 GenikeumËno Di-àgram-ma E-nia-–ou Au-tÏma-tou 
+ []
+
+<./img//automata_general.png, id=57, 936.49875pt x 999.735pt>
+File: ./img//automata_general.png Graphic file (type png)
+<use ./img//automata_general.png>
+Package pdftex.def Info: ./img//automata_general.png  used on input line 96.
+(pdftex.def)             Requested size: 421.42055pt x 449.87659pt.
+
+Overfull \hbox (57.94443pt too wide) in paragraph at lines 99--99
+[]\LGR/cmr/bx/n/20.74 LeptomerËc Di-àgram-ma E-nia-–ou Au-tÏma-tou 
+ []
+
+[3
+
+ <./img//automata_general.png (PNG copy)>]
+<./img//automata_detailed.png, id=62, 940.51375pt x 999.735pt>
+File: ./img//automata_detailed.png Graphic file (type png)
+<use ./img//automata_detailed.png>
+Package pdftex.def Info: ./img//automata_detailed.png  used on input line 102.
+(pdftex.def)             Requested size: 423.22728pt x 449.87659pt.
+ [4 <./img//automata_detailed.png (PNG copy)>] [5] [6] [7] [8] (./Notes.aux)
 Package rerunfilecheck Info: File `Notes.out' has not changed.
-(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
+(rerunfilecheck)             Checksum: 88FADD8ADC714B2484C1B847714FC261;1099.
  ) 
 Here is how much of TeX's memory you used:
- 12448 strings out of 479383
- 182464 string characters out of 5875830
- 475661 words of memory out of 5000000
- 29407 multiletter control sequences out of 15000+600000
- 413228 words of font info for 46 fonts, out of 8000000 for 9000
+ 12881 strings out of 479383
+ 187072 string characters out of 5875830
+ 972667 words of memory out of 5000000
+ 29692 multiletter control sequences out of 15000+600000
+ 415183 words of font info for 52 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 66i,7n,72p,567b,452s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/font
-s/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmr17.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
-7.pfb></usr/share/texmf-dist/fonts/type1/public/cbfonts/grmi1728.pfb></usr/shar
-e/texmf-dist/fonts/type1/public/cbfonts/grmn1000.pfb></usr/share/texmf-dist/fon
-ts/type1/public/cbfonts/grmn1200.pfb></usr/share/texmf-dist/fonts/type1/public/
-cbfonts/grmn1440.pfb></usr/share/texmf-dist/fonts/type1/public/cbfonts/grmn1728
-.pfb></usr/share/texmf-dist/fonts/type1/public/cbfonts/grxn2074.pfb></usr/share
-/texmf-dist/fonts/type1/public/cbfonts/grxn2488.pfb>
-Output written on Notes.pdf (4 pages, 371433 bytes).
+ 66i,7n,72p,567b,1844s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+r17.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/sh
+are/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texmf-dist/fonts/type1/pub
+lic/cbfonts/grmi1728.pfb></usr/share/texmf-dist/fonts/type1/public/cbfonts/grmn
+1000.pfb></usr/share/texmf-dist/fonts/type1/public/cbfonts/grmn1200.pfb></usr/s
+hare/texmf-dist/fonts/type1/public/cbfonts/grmn1440.pfb></usr/share/texmf-dist/
+fonts/type1/public/cbfonts/grmn1728.pfb></usr/share/texmf-dist/fonts/type1/publ
+ic/cbfonts/grxn1440.pfb></usr/share/texmf-dist/fonts/type1/public/cbfonts/grxn2
+074.pfb></usr/share/texmf-dist/fonts/type1/public/cbfonts/grxn2488.pfb>
+Output written on Notes.pdf (10 pages, 633458 bytes).
 PDF statistics:
- 77 PDF objects out of 1000 (max. 8388607)
- 55 compressed objects within 1 object stream
- 5 named destinations out of 1000 (max. 500000)
- 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 305 PDF objects out of 1000 (max. 8388607)
+ 270 compressed objects within 3 object streams
+ 147 named destinations out of 1000 (max. 500000)
+ 48 words of extra memory for PDF output out of 10000 (max. 10000000)
 
