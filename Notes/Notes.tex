@@ -16,6 +16,9 @@
 \hyphenpenalty=10000
 \hbadness=10000
 
+\colorlinks=true
+\linkcolor=blue
+\urlcolor=cyan
 
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
@@ -74,6 +77,20 @@
     \\
     \small Υπεύθυνος Τμήματος Εργασίας Α2: Διονύσης Νικολόπουλος
   \end{tabular}
+\vspace{5mm}
+\\
+  \textlatin{Usernames} στο \textlatin{Github}
+\\
+  \vspace{5mm}
+  \begin{tabular}{r l}
+    \small Διονύσης Νικολόπουλος : \textlatin{jiud}
+    \\
+    \small Θανάσης Αναγνωστόπουλος : \textlatin{ThanasisAnagno}
+    \\
+    \small Αριστείδης Αναγνωστόπουλος : \textlatin{Aris-Anag}
+    \\
+    \small Σπυρίδων Φλώρος : \textlatin{spirosfl}
+  \end{tabular}
   \\
 \vspace*{\fill}
     \footnotesize{Η εργασία αυτή πραγματοποιήθηκε με χρήση \LaTeX}
@@ -107,6 +124,18 @@
 \\
 \\
 \\
+\large{\bfΣελίδα στο \textlatin{Github}}
+\\
+\\
+Η σελίδα μας στο \textlatin{Github}, με την οποία διοργανώσαμε την εργασία και δουλέψαμε όλοι μαζί είναι (κάντε κλικ για το λινκ):
+\begin{center}
+  \textlatin{
+  \href{https://github.com/jiud/uni-C-Analyser}{Uni-C-Analyser}
+}
+\end{center}
+Μπορείτε να δείτε αναλυτικά όλη μας την πρόοδο εκεί.
+  \\
+  \\
 \large{\bfΕξήγηση για το τι ακολουθεί}
 \\
 Σε αυτό το \textlatin{PDF} αρχικά θα παρατεθεί η περιγραφή της \textlatin{Uni-C} σε \textlatin{BNF}.
@@ -118,7 +147,7 @@
 Στην συνέχεια, θα ακολουθήσει ο κώδικας του αυτόματου τμηματικά με εξηγήσεις της λειτουργίας του.
 \\
 \\
-Τελος, εφόσον ο κώδικας παραδωθεί και ολοκληρωμένα, θα παρατεθούν ορισμένοι ελέγχοι πραγματικής λειτουργίας του αυτόματου σε εικόνες.
+Τελος, εφόσον ο κώδικας παραδωθεί και ολοκληρωμένα, θα παρατεθούν ορισμένοι ελέγχοι πραγματικής λειτουργίας του αυτόματου σε εικόνες, καταλίγοντας και σε εικόνες που αποδεικνουν ότι οι έλεγχοι έγιναν.
 
 
 \clearpage
@@ -185,6 +214,7 @@ SZ: % -> OPERATOR
     0 -> SPRE_NUM
     1-9 -> SDEC_OCT_NUM
     * -> BAD
+    EOF -> GOOD
     \end{lstlisting}
 \selectlanguage{greek}
 Εδώ, βλέπουμε ότι ο αναλυτής μας περιμένει τον πρώτο, ουσιαστικά χαρακτήρα απο τον χρήστη, ο οποίος θα έχει μεγάλη σημασία στο να καθορίσουμε "τι πάει να γράψει ο χρήστης".
@@ -220,10 +250,12 @@ SCAPE:  n -> NEWLINE
         \\ -> SCHARS
         * -> BAD
 
-NEWLINE: " -> STRING
+NEWLINE: " -> STR
          * -> SCHARS 
 
 STR:        \s \n -> SZ
+            ;     -> DELIMITER
+            EOF   -> GOOD
     \end{lstlisting}
 \selectlanguage{greek}
 
@@ -263,17 +295,18 @@ SCOMM21:    / -> COMMENT
             * -> SCOMM2
 
 COMMENT:    \n \s -> SZ  
+            EOF -> GOOD
     \end{lstlisting}
 \selectlanguage{greek}
 \\
 Παρατηρούμε και την κατάσταση \textlatin{SI}, η οποία δέχεται τους επιτρεπτούς χαρακτήρες ως κομμάτια της πιθανής λέξης ενός \textlatin{identifier}, που με τον χαρακτηρα \boxed{;}, με κενό, ή με τέλος αρχείου γίνεται η μεταβολή του αναλυτή στην κατάσταση \textlatin{IDENTIFIER}.
 \selectlanguage{english}
     \begin{lstlisting}
-SI:      a-z A-Z 0-9 -> SI
-         ;           -> IDENTIFIER
-         \s          -> IDENTIFIER 
-         EOF         -> IDENTIFIER
-         \+ \- =     -> IDENTIFIER
+SI:      a-z A-Z 0-9 _ -> SI
+         ;             -> IDENTIFIER
+         \s            -> IDENTIFIER 
+         EOF           -> IDENTIFIER
+         \+ \- =       -> IDENTIFIER
          * -> BAD
     \end{lstlisting}
 \selectlanguage{greek}
@@ -283,11 +316,12 @@ SI:      a-z A-Z 0-9 -> SI
 Παρατηρούμε ότι, με βάση την γλώσσα \textlatin{Uni-C}, οι λεκτικές μονάδες είναι δυνατό να ακολουθηθούν απο συγκεκριμένες λεκτικές μονάδες (παράδειγμα οι τελεστές μονάχα από ένα νούμερο ή \textlatin{identifier}, για αυτό οι μοναδικές επιτρεπτές καταστάσεις που μεταβαίνει ο αναλυτής μετά απο την κατάσταση \textlatin{OPERATOR} είναι η ενδιάμεση κατάσταση έιτε αριθμού έιτε \textlatin{identifier}) 
 \selectlanguage{english}
     \begin{lstlisting}
- OPERATOR:   a-z A-Z _ -> SI
+ OPERATOR:  a-z A-Z _ -> SI
             0 -> SPRE_NUM
             1-9 -> SDEC_OCT_NUM    
             " -> SCHARS
             * -> BAD
+            \s -> SZ
 
 DELIMITER:  * -> SZ
 INT:        \s \n -> SZ
@@ -303,6 +337,7 @@ INT:        \s \n -> SZ
             1-9 -> SDEC_OCT_NUM
             * -> BAD
             " -> SCHARS
+            EOF -> GOOD
 
 FLOAT:      \s \n -> SZ
             A-Z a-z _ -> SI
@@ -316,6 +351,7 @@ FLOAT:      \s \n -> SZ
             0 -> SPRE_NUM
             1-9 -> SDEC_OCT_NUM
             * -> BAD
+            EOF -> GOOD
     
 IDENTIFIER: \s \n -> SZ
             A-Z a-z _ -> SI
@@ -330,6 +366,7 @@ IDENTIFIER: \s \n -> SZ
             1-9 -> SDEC_OCT_NUM
             * -> BAD
             " -> SCHARS
+            EOF -> GOOD
 
 
     \end{lstlisting}
@@ -345,9 +382,10 @@ IDENTIFIER: \s \n -> SZ
     \begin{lstlisting}
 SPRE_NUM:   x X -> SHEX
             0-9 -> SDEC_OCT_NUM
-            \. ->  SFLO1
+            \.  ->  SFLO1
             e E -> SFLO2
-            * -> BAD
+            *   -> BAD
+            \s  -> INT
             
 SDEC_OCT_NUM:   0-9     -> SDEC_OCT_NUM
                 \.      -> SFLO_COMMA
@@ -403,6 +441,7 @@ SZ: % -> OPERATOR
     0 -> SPRE_NUM
     1-9 -> SDEC_OCT_NUM
     * -> BAD
+    EOF -> GOOD
 
 
 SCHARS: * -> SCHARS
@@ -413,7 +452,7 @@ SCAPE:  n -> NEWLINE
         \\ -> SCHARS
         * -> BAD
 
-NEWLINE: " -> STRING
+NEWLINE: " -> STR
          * -> SCHARS 
     
 SSLASH: / -> SCOMM1
@@ -432,9 +471,9 @@ SAMP:    & \s  -> OPERATOR
 SPIPE:   |     -> OPERATOR
         * -> BAD
 
-SI:      a-z A-Z 0-9 -> SI
+SI:      a-z A-Z 0-9 _ -> SI
          ;           -> IDENTIFIER
-         \s          -> IDENTIFIER 
+         \s \n       -> IDENTIFIER 
          EOF         -> IDENTIFIER
          \+ \- =     -> IDENTIFIER
          * -> BAD
@@ -455,14 +494,16 @@ OPERATOR:   a-z A-Z _ -> SI
             1-9 -> SDEC_OCT_NUM    
             " -> SCHARS
             * -> BAD
+            \s -> SZ
 
 DELIMITER:  * -> SZ
 
 SPRE_NUM:   x X -> SHEX
             0-9 -> SDEC_OCT_NUM
-            \. ->  SFLO1
+            \.  ->  SFLO1
             e E -> SFLO2
-            * -> BAD
+            *   -> BAD
+            \s  -> INT
             
 SDEC_OCT_NUM:   0-9     -> SDEC_OCT_NUM
                 \.      -> SFLO_COMMA
@@ -507,6 +548,7 @@ INT:        \s \n -> SZ
             1-9 -> SDEC_OCT_NUM
             * -> BAD
             " -> SCHARS
+            EOF -> GOOD
 
 FLOAT:      \s \n -> SZ
             A-Z a-z _ -> SI
@@ -520,6 +562,7 @@ FLOAT:      \s \n -> SZ
             0 -> SPRE_NUM
             1-9 -> SDEC_OCT_NUM
             * -> BAD
+            EOF -> GOOD
     
 IDENTIFIER: \s \n -> SZ
             A-Z a-z _ -> SI
@@ -534,11 +577,221 @@ IDENTIFIER: \s \n -> SZ
             1-9 -> SDEC_OCT_NUM
             * -> BAD
             " -> SCHARS
+            EOF -> GOOD
 
 STR:        \s \n -> SZ
+            ;     -> DELIMITER
+            EOF   -> GOOD
     
 BAD(OK): \n -> SZ
-GOOD(OK): \n -> GOOD
+         * -> BAD        
+GOOD(OK):
 
     \end{lstlisting}
+\selectlanguage{greek}
+
+\clearpage
+\section{Αποτελέσματα δοκιμών}
+Ακολοθούν ορισμένα απο τα αποτελέσματα που είχαμε όταν τράξαμε το πρόγραμμα στο \textlatin{bash terminal} σε λειτουργικό σύστημα \textlatin{Linux.}  
+\\
+Όλα τα τρεξίματα του αυτόματου με το \textlatin{fsm} γίνονται με την εντολή
+\begin{center}
+\texttt{\textlatin{./fsm -trace automaton.fsm}}
+\end{center}
+
+\subsection{Εισαγωγή\textlatin{\texttt{ int metavliti = 23.3e19 ; }}}
+Αποτέλεσμα στο τερματικό:
+\selectlanguage{english}
+    \begin{lstlisting}
+int metavliti = 23.3e19 ;
+sz i -> si 
+si n -> si 
+si t -> si 
+si \s -> identifier 
+identifier m -> si 
+si e -> si 
+si t -> si 
+si a -> si 
+si v -> si 
+si l -> si 
+si i -> si 
+si t -> si 
+si i -> si 
+si \s -> identifier 
+identifier = -> seq 
+seq \s -> operator 
+operator 2 -> sdec_oct_num 
+sdec_oct_num 3 -> sdec_oct_num 
+sdec_oct_num . -> sflo_comma 
+sflo_comma 3 -> sflo_digits 
+sflo_digits e -> sflo_e 
+sflo_e 1 -> sflo_digits 
+sflo_digits 9 -> sflo_digits 
+sflo_digits \s -> float 
+float ; -> delimiter 
+delimiter \n -> sz
+    \end{lstlisting}
+\selectlanguage{greek}
+Βλέπουμε ότι το πρόγραμμα μας αναγνώρισε επιτυχώς όλες τις λέξεις! Αναγνώρισε τις λέξεις \textlatin{int} και \textlatin{metavliti} ως \textlatin{identifier}, την λέξη \textlatin{23.3e19} ως \textlatin{float}, την λέξη ";" ως \textlatin{delimiter}. 
+
+\clearpage
+\subsection{Εισαγωγή\textlatin{\texttt{ str1 = "really l0ng str\_1ing() -+!\@\#\%\textasciicircum\textampersand*()"}}}
+Αποτέλεσμα στο τερματικό:
+\selectlanguage{english}
+    \begin{lstlisting}
+$ ./fsm -trace automaton.fsm
+str1 = "really l0ng str_1ing() -+!@#%^&*()";   
+sz s -> si 
+si t -> si 
+si r -> si 
+si 1 -> si 
+si \s -> identifier 
+identifier = -> seq 
+seq \s -> operator 
+operator " -> schars 
+schars r -> schars 
+schars e -> schars 
+schars a -> schars 
+schars l -> schars 
+schars l -> schars 
+schars y -> schars 
+schars \s -> schars 
+schars l -> schars 
+schars 0 -> schars 
+schars n -> schars 
+schars g -> schars 
+schars \s -> schars 
+schars s -> schars 
+schars t -> schars 
+schars r -> schars 
+schars _ -> schars 
+schars 1 -> schars 
+schars i -> schars 
+schars n -> schars 
+schars g -> schars 
+schars ( -> schars 
+schars ) -> schars 
+schars \s -> schars 
+schars - -> schars 
+schars + -> schars 
+schars ! -> schars 
+schars @ -> schars 
+schars # -> schars 
+schars % -> schars 
+schars ^ -> schars 
+schars & -> schars 
+schars * -> schars 
+schars ( -> schars 
+schars ) -> schars 
+schars " -> str  
+str ; -> delimiter 
+str \n -> sz 
+    \end{lstlisting}
+\selectlanguage{greek}
+Εδώ βλέπουμε ότι παρόλο που η συμβολοσειρά που δώθηκε είναι αρκετά "δύσκολη", το πρόγραμμά μας κατάφερε να ερμηνεύσει πάλι σωστά κάθε λέξη, από το αρχικό όνομα, τον τελεστή, την γραμματοσειρά μέχρι τον \textlatin{delimiter} στο τέλος!  
+
+\clearpage
+\subsection{Εισαγωγή\textlatin{\texttt{ if m1 == 2 && m2 == 0 then m = "\textbackslash n"}}}
+Αποτέλεσμα στο τερματικό:
+\selectlanguage{english}
+    \begin{lstlisting}
+if m1 == 2 && m2 == 0 then m = "\n"
+sz i -> si 
+si f -> si 
+si \s -> identifier 
+identifier m -> si 
+si 1 -> si 
+si \s -> identifier 
+identifier = -> seq 
+seq = -> operator 
+operator \s -> sz 
+sz 2 -> sdec_oct_num 
+sdec_oct_num \s -> float 
+float & -> samp 
+samp & -> operator 
+operator \s -> sz 
+sz m -> si 
+si 2 -> si 
+si \s -> identifier 
+identifier = -> seq 
+seq = -> operator 
+operator \s -> sz 
+sz 0 -> spre_num 
+spre_num \s -> int 
+int t -> si 
+si h -> si 
+si e -> si 
+si n -> si 
+si \s -> identifier 
+identifier m -> si 
+si \s -> identifier 
+identifier = -> seq 
+seq \s -> operator 
+operator " -> schars 
+schars \ -> scape 
+scape n -> newline 
+newline " -> str 
+str \n -> sz 
+    \end{lstlisting}
+\selectlanguage{greek}
+Ξανά, αν και σχετικά πολύπλοκη η εισαγωγή μας,το πρόγραμμα κατάφερε ορθώς να καταλάβει τους αριθμούς, τα ονόματα, την συμβολοσειρά και τα \textlatin{newlines} μέσα σε αυτή.
+
+\subsection{Εισαγωγή \textlatin{\texttt{mistake === this!}}}
+Αποτέλεσμα στο τερματικό:
+\selectlanguage{english}
+    \begin{lstlisting}
+./fsm -trace automaton.fsm
+mistake === this!
+sz m -> si 
+si i -> si 
+si s -> si 
+si t -> si 
+si a -> si 
+si k -> si 
+si e -> si 
+si \s -> identifier 
+identifier = -> seq 
+seq = -> operator 
+operator = -> bad 
+bad \s -> bad 
+bad t -> bad 
+bad h -> bad 
+bad i -> bad 
+bad s -> bad 
+bad ! -> bad 
+bad \n -> sz 
+    \end{lstlisting}
+ \selectlanguage{greek}
+ Τώρα εισάγαμε μια λανθασμένη εντολή στο πρόγραμμα, για να δούμε άμα την χειρησθεί σωστά.
+ \\
+ Πράγματι, η εντολή δεν είναι σωστή, και θα πρέπει, όπως και το πρόγραμμα μας έκανε, να θεωρήται κάθε λέξη μετά απο το λάθος στην γραμμή αυτή λανθασμένη επίσης.
+
+\clearpage
+\subsection{Αποδείξεις για τα αποτελέσματα}
+Ακολουθούν οι αποδείξεις ότι το πρόγραμμα πράγματι έδωσε τα παραπάνω αποτελέσματα (των κεφαλάιων 6.1, 6.2, 6.3, 6.4):
+
+\begin{figure}[h]
+  \caption{Για αποτέλεσμα 6.1}
+  \centering
+  \includegraphics[width=0.5\textwidth]{test_metavliti}
+\end{figure}
+
+\begin{figure}[h]
+  \caption{Για αποτέλεσμα 6.2}
+  \centering
+  \includegraphics[width=0.45\textwidth]{test_long_string}
+\end{figure}
+
+\begin{figure}[h]
+  \caption{Για αποτέλεσμα 6.3}
+  \centering
+  \includegraphics[width=0.5\textwidth]{test_mistake}
+\end{figure}
+
+\begin{figure}[hc]
+  \caption{Για αποτέλεσμα 6.4}
+  \centering
+  \includegraphics[width=0.5\textwidth]{test_if}
+\end{figure}
+
 \end{document}

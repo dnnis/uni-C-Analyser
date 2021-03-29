@@ -12,6 +12,7 @@ SZ: % -> OPERATOR
     0 -> SPRE_NUM
     1-9 -> SDEC_OCT_NUM
     * -> BAD
+    EOF -> GOOD
 
 
 SCHARS: * -> SCHARS
@@ -22,7 +23,7 @@ SCAPE:  n -> NEWLINE
         \\ -> SCHARS
         * -> BAD
 
-NEWLINE: " -> STRING
+NEWLINE: " -> STR
          * -> SCHARS 
     
 SSLASH: / -> SCOMM1
@@ -41,7 +42,7 @@ SAMP:    & \s  -> OPERATOR
 SPIPE:   |     -> OPERATOR
         * -> BAD
 
-SI:      a-z A-Z 0-9 -> SI
+SI:      a-z A-Z 0-9 _ -> SI
          ;           -> IDENTIFIER
          \s \n       -> IDENTIFIER 
          EOF         -> IDENTIFIER
@@ -58,19 +59,22 @@ SCOMM21:    / -> COMMENT
             * -> SCOMM2
 
 COMMENT:    \n \s -> SZ  
+            EOF -> GOOD
 
 OPERATOR:   a-z A-Z _ -> SI
             0 -> SPRE_NUM
             1-9 -> SDEC_OCT_NUM    
             " -> SCHARS
             * -> BAD
+            \s -> SZ
 
 DELIMITER:  * -> SZ
 
 SPRE_NUM:   x X -> SHEX
             0-9 -> SDEC_OCT_NUM
-            \. ->  SFLO1
+            \.  -> SFLO1
             e E -> SFLO2
+            \s  -> INT
             * -> BAD
             
 SDEC_OCT_NUM:   0-9     -> SDEC_OCT_NUM
@@ -116,6 +120,7 @@ INT:        \s \n -> SZ
             1-9 -> SDEC_OCT_NUM
             * -> BAD
             " -> SCHARS
+            EOF -> GOOD
 
 FLOAT:      \s \n -> SZ
             A-Z a-z _ -> SI
@@ -129,6 +134,7 @@ FLOAT:      \s \n -> SZ
             0 -> SPRE_NUM
             1-9 -> SDEC_OCT_NUM
             * -> BAD
+            EOF -> GOOD
     
 IDENTIFIER: \s \n -> SZ
             A-Z a-z _ -> SI
@@ -143,8 +149,12 @@ IDENTIFIER: \s \n -> SZ
             1-9 -> SDEC_OCT_NUM
             * -> BAD
             " -> SCHARS
+            EOF -> GOOD
 
 STR:        \s \n -> SZ
-    
+            ; -> DELIMITER
+            EOF -> GOOD
+            
 BAD(OK): \n -> SZ
-GOOD(OK): \n -> GOOD
+         * -> BAD        
+GOOD(OK):
