@@ -1,4 +1,4 @@
-# uni-C-Compiler
+# uni-C-Analyser
 A compiler for uni-C.
 
 ### Purpose of this repo
