@@ -1,5 +1,5 @@
 # uni-C-Analyser
-A compiler for uni-C.
+An lexical analyser for uni-C.
 
 ### Purpose of this repo
 This is the repo used for version control on a uni group project studying compilers.
