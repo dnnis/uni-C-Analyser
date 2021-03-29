@@ -1,0 +1,150 @@
+START=SZ
+SZ: % -> OPERATOR
+    ! < > \- = \* -> SEQ
+    \+ -> SPLUS
+    & -> SAMP
+    ; -> DELIMITER
+    | -> SPIPE
+    a-z A-Z _ -> SI
+    \n \s -> SZ
+    / -> SSLASH
+    " -> SCHARS
+    0 -> SPRE_NUM
+    1-9 -> SDEC_OCT_NUM
+    * -> BAD
+
+
+SCHARS: * -> SCHARS
+        " -> STR
+        \\ -> SCAPE
+
+SCAPE:  n -> NEWLINE
+        \\ -> SCHARS
+        * -> BAD
+
+NEWLINE: " -> STRING
+         * -> SCHARS 
+    
+SSLASH: / -> SCOMM1
+        = \n \s -> OPERATOR
+        \* -> SCOMM2
+    
+SEQ:     = \n \s -> OPERATOR
+        * -> BAD
+
+SPLUS:   = \+  -> OPERATOR
+        * -> BAD
+
+SAMP:    & \s  -> OPERATOR
+        * -> BAD
+
+SPIPE:   |     -> OPERATOR
+        * -> BAD
+
+SI:      a-z A-Z 0-9 -> SI
+         ;           -> IDENTIFIER
+         \s \n       -> IDENTIFIER 
+         EOF         -> IDENTIFIER
+         \+ \- =     -> IDENTIFIER
+         * -> BAD
+        
+SCOMM1:     * -> SCOMM1
+           \n -> SZ
+
+SCOMM2:    \* -> SCOMM21
+           * -> SCOMM2
+            
+SCOMM21:    / -> COMMENT
+            * -> SCOMM2
+
+COMMENT:    \n \s -> SZ  
+
+OPERATOR:   a-z A-Z _ -> SI
+            0 -> SPRE_NUM
+            1-9 -> SDEC_OCT_NUM    
+            " -> SCHARS
+            * -> BAD
+
+DELIMITER:  * -> SZ
+
+SPRE_NUM:   x X -> SHEX
+            0-9 -> SDEC_OCT_NUM
+            \. ->  SFLO1
+            e E -> SFLO2
+            * -> BAD
+            
+SDEC_OCT_NUM:   0-9     -> SDEC_OCT_NUM
+                \.      -> SFLO_COMMA
+                e E     -> SFLO_E
+                \s \n ; -> FLOAT
+                * -> BAD
+
+SFLO_COMMA:     \s \n ; -> FLOAT
+                e E     -> SFLO_E
+                0-9     -> SFLO_DIGITS
+                * -> BAD
+
+SFLO_DIGITS:    0-9     -> SFLO_DIGITS
+                \n \s ; -> FLOAT
+                e E     -> SFLO_E
+                \.      -> SFLO_COMMA
+                * -> BAD
+
+SFLO_E:         \.       -> SFLO_COMMA
+                \-       -> SFLO_POWER 
+                0-9     -> SFLO_DIGITS
+                * -> BAD
+
+SFLO_POWER:     0-9     -> SFLO_DIGITS
+                * -> BAD
+    
+SHEX:       A-F     -> SHEX
+            0-9     -> SHEX
+            \s \n ; -> INT
+            * -> BAD
+
+INT:        \s \n -> SZ
+            A-Z a-z _ -> SI
+            % -> OPERATOR
+            ! < > \- = \* -> SEQ
+            \+ -> SPLUS
+            & -> SAMP
+            ; -> DELIMITER
+            | -> SPIPE
+            / -> SSLASH
+            0 -> SPRE_NUM
+            1-9 -> SDEC_OCT_NUM
+            * -> BAD
+            " -> SCHARS
+
+FLOAT:      \s \n -> SZ
+            A-Z a-z _ -> SI
+            % -> OPERATOR
+            ! < > \- = \* -> SEQ
+            \+ -> SPLUS
+            & -> SAMP
+            ; -> DELIMITER
+            | -> SPIPE
+            / -> SSLASH
+            0 -> SPRE_NUM
+            1-9 -> SDEC_OCT_NUM
+            * -> BAD
+    
+IDENTIFIER: \s \n -> SZ
+            A-Z a-z _ -> SI
+            % -> OPERATOR
+            ! < > \- = \* -> SEQ
+            \+ -> SPLUS
+            & -> SAMP
+            ; -> DELIMITER
+            | -> SPIPE
+            / -> SSLASH
+            0 -> SPRE_NUM
+            1-9 -> SDEC_OCT_NUM
+            * -> BAD
+            " -> SCHARS
+
+STR:        \s \n -> SZ
+    
+BAD(OK): \n -> SZ
+GOOD(OK): \n -> GOOD
