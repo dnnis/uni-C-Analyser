@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/Arch Linux) (preloaded format=pdflatex 2021.3.23)  28 MAR 2021 19:23
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/Arch Linux) (preloaded format=pdflatex 2021.3.23)  29 MAR 2021 17:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -635,31 +635,89 @@ Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
 )
+(/usr/share/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2020/09/23 v2.17i AMS math features
+\@mathmargin=\skip50
+
+For additional information on amsmath, use the `?' option.
+(/usr/share/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01 AMS text
+
+(/usr/share/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks19
+\ex@=\dimen151
+))
+(/usr/share/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen152
+)
+(/usr/share/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2016/03/08 v2.02 operator names
+)
+\inf@bad=\count274
+LaTeX Info: Redefining \frac on input line 234.
+\uproot@=\count275
+\leftroot@=\count276
+LaTeX Info: Redefining \overline on input line 399.
+\classnum@=\count277
+\DOTSCASE@=\count278
+LaTeX Info: Redefining \ldots on input line 496.
+LaTeX Info: Redefining \dots on input line 499.
+LaTeX Info: Redefining \cdots on input line 620.
+\Mathstrutbox@=\box49
+\strutbox@=\box50
+\big@size=\dimen153
+LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
+\macc@depth=\count279
+\c@MaxMatrixCols=\count280
+\dotsspace@=\muskip17
+\c@parentequation=\count281
+\dspbrk@lvl=\count282
+\tag@help=\toks20
+\row@=\count283
+\column@=\count284
+\maxfields@=\count285
+\andhelp@=\toks21
+\eqnshift@=\dimen154
+\alignsep@=\dimen155
+\tagshift@=\dimen156
+\tagwidth@=\dimen157
+\totwidth@=\dimen158
+\lineht@=\dimen159
+\@envbody=\toks22
+\multlinegap=\skip51
+\multlinetaggap=\skip52
+\mathdisplay@stack=\toks23
+LaTeX Info: Redefining \[ on input line 2923.
+LaTeX Info: Redefining \] on input line 2924.
+)
 (/usr/share/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2020-09-24 L3 backend support: PDF output (pdfTeX)
-\l__kernel_color_stack_int=\count274
-\l__pdf_internal_box=\box49
+\l__kernel_color_stack_int=\count286
+\l__pdf_internal_box=\box51
 ) (./Notes.aux)
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for LGR/cmr/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for LGR/cmr/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
 
 (/usr/share/texmf-dist/tex/latex/greek-fontenc/puenc-greek.def
 File: puenc-greek.def 2020/10/18 2.0 Greek LICRs for PDF strings
@@ -667,7 +725,7 @@ File: puenc-greek.def 2020/10/18 2.0 Greek LICRs for PDF strings
 (/usr/share/texmf-dist/tex/latex/greek-fontenc/greek-fontenc.def
 File: greek-fontenc.def 2020/10/30 2.0 Common Greek font encoding definitions
 ))
-Package hyperref Info: Link coloring OFF on input line 51.
+Package hyperref Info: Link coloring OFF on input line 52.
 
 (/usr/share/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
@@ -678,28 +736,28 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 (/usr/share/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count275
+\c@section@level=\count287
 )
-LaTeX Info: Redefining \ref on input line 51.
-LaTeX Info: Redefining \pageref on input line 51.
-LaTeX Info: Redefining \nameref on input line 51.
+LaTeX Info: Redefining \ref on input line 52.
+LaTeX Info: Redefining \pageref on input line 52.
+LaTeX Info: Redefining \nameref on input line 52.
 
 (./Notes.out) (./Notes.out)
 \@outlinefile=\write3
 
 (/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count276
-\scratchdimen=\dimen151
-\scratchbox=\box50
-\nofMPsegments=\count277
-\nofMParguments=\count278
-\everyMPshowfont=\toks19
-\MPscratchCnt=\count279
-\MPscratchDim=\dimen152
-\MPnumerator=\count280
-\makeMPintoPDFobject=\count281
-\everyMPtoPDFconversion=\toks20
+\scratchcounter=\count288
+\scratchdimen=\dimen160
+\scratchbox=\box52
+\nofMPsegments=\count289
+\nofMParguments=\count290
+\everyMPshowfont=\toks24
+\MPscratchCnt=\count291
+\MPscratchDim=\dimen161
+\MPnumerator=\count292
+\makeMPintoPDFobject=\count293
+\everyMPtoPDFconversion=\toks25
 ) (/usr/share/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
@@ -709,85 +767,227 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-\c@lstlisting=\count282
-<./img//computer.png, id=20, 160.4394pt x 129.8451pt>
+\c@lstlisting=\count294
+<./img//computer.png, id=32, 160.4394pt x 129.8451pt>
 File: ./img//computer.png Graphic file (type png)
 <use ./img//computer.png>
-Package pdftex.def Info: ./img//computer.png  used on input line 55.
+Package pdftex.def Info: ./img//computer.png  used on input line 56.
 (pdftex.def)             Requested size: 401.09752pt x 324.6119pt.
  [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./img//computer.png>]
-LaTeX Font Info:    External font `cmex7' loaded for size
-(Font)              <7> on input line 78.
-LaTeX Font Info:    External font `cmex7' loaded for size
-(Font)              <5> on input line 78.
- [2] (./Notes.toc)
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./img//computer.png>] [2] 
+(./Notes.toc)
 \tf@toc=\write4
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.83 \clearpage
-                [1]pdfTeX warning (ext4): destination with the same identifier 
-(name{page.2}) has been already used, duplicate ignored
+l.84 \clearpage
+                [1]
+Overfull \hbox (20.448pt too wide) in paragraph at lines 87--122
+\LGR/cmr/m/n/17.28 Sthn er-ga-sth-ria-k† er-ga-s–a au-t† a-sqo-lh-j†ka-me me th
+n dh-miour-g–a
+ []
+
+
+Overfull \hbox (23.41023pt too wide) in paragraph at lines 87--122
+\LGR/cmr/m/n/17.28 Prin prag-ma-to-poi-h-je-– fu-si-kà h kw-di-ko-po-–h-sh gia 
+thn pros-sËg-gi-sh
+ []
+
+
+Overfull \hbox (30.41023pt too wide) in paragraph at lines 87--122
+\LGR/cmr/m/n/17.28 Sthn su-nËqeia, ja a-ko-lou-j†sei o k∏di-kac tou au-tÏma-tou
+ tmh-ma-ti-kà
+ []
+
+
+Overfull \hbox (47.60999pt too wide) in paragraph at lines 87--122
+\LGR/cmr/m/n/17.28 pa-ra-te-jo-‘n o-ri-smËnoi e-lËg-qoi prag-ma-ti-k†c lei-tour
+-g–ac tou au-tÏma-tou
+ []
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has 
+been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.91 \clearpage
-                [2
+l.122 
+       [2
+
+] [3]
+Overfull \hbox (16.08418pt too wide) in paragraph at lines 125--125
+[]\LGR/cmr/bx/n/20.74 Perigraf† s‘nta-xhc thc \OT1/cmr/bx/n/20.74 Uni-C \LGR/cm
+r/bx/n/20.74 se \OT1/cmr/bx/n/20.74 BNF 
+ []
+
+
+Overfull \hbox (11.91321pt too wide) in paragraph at lines 126--129
+\LGR/cmr/m/n/17.28 a-na-fËra-me pa-ra-pànw, Ëgi-ne h a-nàlu-sh thc s‘nta-xhc th
+c gl∏s-sac
+ []
+
+
+Overfull \hbox (4.97838pt too wide) in paragraph at lines 126--129
+\LGR/cmr/m/n/17.28 OpÏte, me thn bo-†jeia tou pe-ri-bàl-lo-ntoc le-kti-ko-‘ e-p
+e-xer-ga-st†
+ []
+
+
+! Package keyval Error: bnf undefined.
+
+See the keyval package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.131     \begin{lstlisting}[bnf]
+                                 
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+LaTeX Font Info:    Trying to load font information for TS1+cmtt on input line 
+132.
+(/usr/share/texmf-dist/tex/latex/base/ts1cmtt.fd
+File: ts1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
+) [4
 
 ]
-Overfull \hbox (65.4855pt too wide) in paragraph at lines 93--93
-[]\LGR/cmr/bx/n/20.74 GenikeumËno Di-àgram-ma E-nia-–ou Au-tÏma-tou 
+Overfull \hbox (3.65552pt too wide) in paragraph at lines 155--155
+[]\LGR/cmr/bx/n/17.28 GenikeumËno Di-àgram-ma E-nia-–ou Au-tÏma-tou 
  []
 
-<./img//automata_general.png, id=57, 936.49875pt x 999.735pt>
+<./img//automata_general.png, id=102, 936.49875pt x 999.735pt>
 File: ./img//automata_general.png Graphic file (type png)
 <use ./img//automata_general.png>
-Package pdftex.def Info: ./img//automata_general.png  used on input line 96.
-(pdftex.def)             Requested size: 421.42055pt x 449.87659pt.
-
-Overfull \hbox (57.94443pt too wide) in paragraph at lines 99--99
-[]\LGR/cmr/bx/n/20.74 LeptomerËc Di-àgram-ma E-nia-–ou Au-tÏma-tou 
- []
-
-[3
+Package pdftex.def Info: ./img//automata_general.png  used on input line 159.
+(pdftex.def)             Requested size: 386.99738pt x 413.128pt.
+[5
 
  <./img//automata_general.png (PNG copy)>]
-<./img//automata_detailed.png, id=62, 940.51375pt x 999.735pt>
+<./img//automata_detailed.png, id=109, 940.51375pt x 999.735pt>
 File: ./img//automata_detailed.png Graphic file (type png)
 <use ./img//automata_detailed.png>
-Package pdftex.def Info: ./img//automata_detailed.png  used on input line 102.
-(pdftex.def)             Requested size: 423.22728pt x 449.87659pt.
- [4 <./img//automata_detailed.png (PNG copy)>] [5] [6] [7] [8] (./Notes.aux)
+Package pdftex.def Info: ./img//automata_detailed.png  used on input line 166.
+(pdftex.def)             Requested size: 430.0pt x 457.07681pt.
+ [6
+
+ <./img//automata_detailed.png (PNG copy)>]
+Overfull \hbox (26.27846pt too wide) in paragraph at lines 196--197
+\LGR/cmr/m/n/12 ka-j∏c o a-na-lu-t†c mac e-–nai s–gou-roc, \LGR/cmr/m/it/12 me 
+bàsh ka-nÏnec pou a-ko-lou-je-– nte-ter-mi-ni-sti-kà\LGR/cmr/m/n/12 ,
+ []
+
+[7
+
+]
+LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 2
+05.
+ (/usr/share/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 205.
+
+Overfull \hbox (7.83525pt too wide) in paragraph at lines 199--214
+[]\LGR/cmr/m/n/12 Suneq–zontac, blËpou-me 2 ka-ta-stàseic pou a-fo-ro-‘n thn a-
+na-gn∏ri-sh sum-bo-lo-sei-ràc,
+ []
+
+
+Overfull \hbox (10.5478pt too wide) in paragraph at lines 199--214
+\LGR/cmr/m/n/12 pe-ri-mËnei na ei-sa-qjËi e-–te o qa-ra-kt†rac [], o-pÏte na e-
+pi-stra-fe-– h ka-tàsta-sh \OT1/cmr/m/n/12 NE-W-LI-NE\LGR/cmr/m/n/12 ,
+ []
+
+[8
+
+]
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.253 Œ
+       ïœÄŒØœÉŒ∑œÇ, ŒµŒ¥œé Œ≤ŒªŒ≠œÄŒøœÖŒºŒµ, ŒºŒµ œÄŒ±œÅœåŒºŒøŒπŒø œÉœÖŒªŒªŒ...
+
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+Overfull \hbox (8.42598pt too wide) in paragraph at lines 253--255
+\LGR/cmr/m/n/12 Ep–shc, e-d∏ blËpou-me, me pa-rÏmoio sul-lo-gi-smÏ me tic ka-ta
+-stàseic gia tic sum-bo-lo-sei-rËc,
+ []
+
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.269 Œ
+       †Œ±œÅŒ±œÑŒ∑œÅŒøœçŒºŒµ Œ∫Œ±Œπ œÑŒ∑ŒΩ Œ∫Œ±œÑŒ¨œÉœÑŒ±œÉŒ∑ \textlatin{SI}...
+
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+[9
+
+]
+Overfull \hbox (6.88905pt too wide) in paragraph at lines 280--284
+\LGR/cmr/m/n/12 a-pÏ Ëna no-‘me-ro † \OT1/cmr/m/n/12 i-de-nti-fier\LGR/cmr/m/n/
+12 , gia au-tÏ oi mo-na-di-kËc e-pi-tre-ptËc ka-ta-stàseic pou me-ta-ba-–nei
+ []
+
+[10] [11] [12
+
+]
+Overfull \hbox (6.52101pt too wide) in paragraph at lines 386--390
+\LGR/cmr/m/n/12 O k∏di-kac tou au-to-ma-to-‘ mac mpo-re-– na bre-je-– wc ar-qe-
+–o kai ston fàke-lo []
+ []
+
+[13
+
+] [14] [15] [16] (./Notes.aux)
 Package rerunfilecheck Info: File `Notes.out' has not changed.
-(rerunfilecheck)             Checksum: 88FADD8ADC714B2484C1B847714FC261;1099.
+(rerunfilecheck)             Checksum: 21A27B3D241B4ED0ADB569905C00BAB4;1871.
  ) 
 Here is how much of TeX's memory you used:
- 12881 strings out of 479383
- 187072 string characters out of 5875830
- 972667 words of memory out of 5000000
- 29692 multiletter control sequences out of 15000+600000
- 415183 words of font info for 52 fonts, out of 8000000 for 9000
+ 13771 strings out of 479383
+ 198261 string characters out of 5875830
+ 1036282 words of memory out of 5000000
+ 30343 multiletter control sequences out of 15000+600000
+ 422882 words of font info for 71 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 66i,7n,72p,567b,1844s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-r17.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/sh
-are/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texmf-dist/fonts/type1/pub
-lic/cbfonts/grmi1728.pfb></usr/share/texmf-dist/fonts/type1/public/cbfonts/grmn
-1000.pfb></usr/share/texmf-dist/fonts/type1/public/cbfonts/grmn1200.pfb></usr/s
-hare/texmf-dist/fonts/type1/public/cbfonts/grmn1440.pfb></usr/share/texmf-dist/
-fonts/type1/public/cbfonts/grmn1728.pfb></usr/share/texmf-dist/fonts/type1/publ
-ic/cbfonts/grxn1440.pfb></usr/share/texmf-dist/fonts/type1/public/cbfonts/grxn2
-074.pfb></usr/share/texmf-dist/fonts/type1/public/cbfonts/grxn2488.pfb>
-Output written on Notes.pdf (10 pages, 633458 bytes).
+ 66i,7n,72p,757b,1862s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/
+share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmti12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><
+/usr/share/texmf-dist/fonts/type1/public/cbfonts/grmi1200.pfb></usr/share/texmf
+-dist/fonts/type1/public/cbfonts/grmi1728.pfb></usr/share/texmf-dist/fonts/type
+1/public/cbfonts/grmn1000.pfb></usr/share/texmf-dist/fonts/type1/public/cbfonts
+/grmn1200.pfb></usr/share/texmf-dist/fonts/type1/public/cbfonts/grmn1440.pfb></
+usr/share/texmf-dist/fonts/type1/public/cbfonts/grmn1728.pfb></usr/share/texmf-
+dist/fonts/type1/public/cbfonts/grxn1440.pfb></usr/share/texmf-dist/fonts/type1
+/public/cbfonts/grxn1728.pfb></usr/share/texmf-dist/fonts/type1/public/cbfonts/
+grxn2074.pfb></usr/share/texmf-dist/fonts/type1/public/cbfonts/grxn2488.pfb></u
+sr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf-
+dist/fonts/type1/public/cm-super/sftt1000.pfb>
+Output written on Notes.pdf (18 pages, 748144 bytes).
 PDF statistics:
- 305 PDF objects out of 1000 (max. 8388607)
- 270 compressed objects within 3 object streams
- 147 named destinations out of 1000 (max. 500000)
- 48 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 616 PDF objects out of 1000 (max. 8388607)
+ 564 compressed objects within 6 object streams
+ 352 named destinations out of 1000 (max. 500000)
+ 72 words of extra memory for PDF output out of 10000 (max. 10000000)
 

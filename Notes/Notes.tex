@@ -7,14 +7,15 @@
 \usepackage{titlepic}
 \usepackage{graphicx}
 \usepackage{listings}
+\usepackage{xcolor}
+\usepackage{amsmath}
 
 \graphicspath{ {./img/} }
 
-\usepackage{listings}
-\usepackage{xcolor}
 
 \hyphenpenalty=10000
 \hbadness=10000
+
 
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
@@ -42,7 +43,7 @@
 
 \lstset{frame=shadowbox, framexleftmargin=4mm, rulesepcolor=\color{black}, style=mystyle}
 
-\title{\bfΕργασία Μεταγλωττιστών \\ Τμήμα Α2}
+\title{\bf Εργασία Μεταγλωττιστών \\ Τμήμα Α2}
 \titlepic{\includegraphics[scale=2.5]{computer.png}}
 \author{
   \emph{Ομάδα 15}
@@ -83,26 +84,308 @@
 \clearpage
 
 \section{Εισαγωγή}
-Στην εργαστηριακή άσκηση αυτή ασχοληθήκαμε με την δημιουργία ενός ντετερμινιστικού αυτόματου πεπερασμένων καταστάσεων.
+\large{\bfΤι πραγματεύεται η εργασία}
+\\
+Στην εργαστηριακή εργασία αυτή ασχοληθήκαμε με την δημιουργία ενός ντετερμινιστικού αυτόματου πεπερασμένων καταστάσεων.
+\\
+\\
+\large{\bfΟ σκοπός του αυτομάτου}
 \\
 Το αυτόματο αυτό έχει ως σκοπό να λειτουργεί σαν Λεκτικός Αναλυτής της γλώσσας \textlatin{Uni-C}, ενός παρακλαδιού της γλώσσας \textlatin{C}, απο το Πανεπιστήμιο Δυτικής Αττικής.  
 \\
-Η κωδικοποίηση του έχει γίνει με την βοήθεια του προγράμματος \textlatin{FSM}, που επίσης είναι προγραμματισμένο πάνω στην γλώσσα \textlatin{C}. 
+\\
+\large{\bfΒήματα Υλοποίησης}
+\\
+Πριν πραγματοποιηθεί φυσικά η κωδικοποίηση για την προσσέγγιση του προβλήματος αυτόυ, έγινε η περιγραφή της γλώσσας \textlatin{Uni-C} σε μορφή \textlatin{BNF}. 
+\\
+\\
+Η κωδικοποίηση του έχει γίνει καταρχήν με την βοήθεια του προγράμματος \emph{\textlatin{FSM}}, που επίσης είναι προγραμματισμένο πάνω στην γλώσσα \textlatin{C}.
+\\
+\\
+Ο σχεδιασμός των διαγραμμάτων έχει γίνει με το πρόγραμμα \emph{\textlatin {JFLAP}}.
+\\
+\\
+\\
+\\
+\large{\bfΕξήγηση για το τι ακολουθεί}
+\\
+Σε αυτό το \textlatin{PDF} αρχικά θα παρατεθεί η περιγραφή της \textlatin{Uni-C} σε \textlatin{BNF}.
+\\
+\\
+Έπειτα, θα παρατεθούν επίσης και τα διαγράμματα του εναίου αυτόματου που βοηθούν στην κωδικοποίηση του αλλά και στην σύλληψη νοητά του τι περιμένουμε να κάνει το αυτόματό μας, πως θα το υλοποιήσουμε τεχνικά. 
+\\
+\\
+Στην συνέχεια, θα ακολουθήσει ο κώδικας του αυτόματου τμηματικά με εξηγήσεις της λειτουργίας του.
+\\
+\\
+Τελος, εφόσον ο κώδικας παραδωθεί και ολοκληρωμένα, θα παρατεθούν ορισμένοι ελέγχοι πραγματικής λειτουργίας του αυτόματου σε εικόνες.
+
+
 \clearpage
+\section{Περιγραφή σύνταξης της \textlatin{Uni-C} σε \textlatin{BNF}}
+Πριν την υλοποίηση του αυτομάτου σε εκτελέσιμο κώδικα, όπως αναφέραμε παραπάνω, έγινε η ανάλυση της σύνταξης της γλώσσας \textlatin{Uni-C} σε μορφή \textlatin{BNF (Backus-Naur Form} ή Μορφή Μπάκους-Ναούρ).
+\\
+Οπότε, με την βοήθεια του περιβάλλοντος λεκτικού επεξεργαστή \textlatin{Emacs}, γράψαμε τον εξής συμβολισμό.   
 
-\section{Γενικευμένο Διάγραμμα Ενιαίου Αυτόματου}
-\smallΕδώ είναι (γενικευμένα) το ενιαίο αυτόματο που σχεδιάσαμε:
-  \begin{center}
-\includegraphics[scale=0.45]{automata_general.png}
-  \end{center}
-   
-\section{Λεπτομερές Διάγραμμα Ενιαίου Αυτόματου}
-\smallΕδώ είναι (γενικευμένα) το ενιαίο αυτόματο που σχεδιάσαμε:
-  \begin{center}
-\includegraphics[scale=0.45]{automata_detailed.png}
-  \end{center}
+\selectlanguage{english}
+    \begin{lstlisting}[bnf]
+symbol        ::= "|" | " " | "!" | "#" | "$" | "%" | "&" | "(" | ")" | "*" | "+" | "," | "-" | "." | "/" | ":" | "\;" | ">" | "=" | "<" | "?" | "@" | "[" | "\" | "]" | "^" | "_" | "`" | "{" | "}" | "~"
+letter        ::= "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z" | "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z"
+digit         ::= "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
+character     ::= letter | symbol | digit
+character1    ::= character | "'"
+character2    ::= character | '"'
+text1         ::= "" | character1 text1
+text2         ::= '' | character2 text2
+literal       ::= '"' text1 '"' | "'" text2 "'"
+identifier    ::= character text1
+operator      ::= "+" | "-" | "*" | "/" | "%" | "=" | "+=" | "-=" | "*=" | "" | "" | "--" | "=" | "=" | "&" | "==" | "!=" | "++" | "&&" | "||"
+number1       ::= digit number1 | "'"
+number2       ::= digit number2 | '"'
+number        ::= number1 | number2
+integer       ::= number | "0X" number | "0x" number | "0"  
+float         ::= number "." number | number "e" number | number "e" number "-" number
+    \end{lstlisting}
+\selectlanguage{greek}
 
-\section{Κώδικας Ενιαίου Αυτομάτου σε \textlatin{FSM}}
+
+
+\clearpage
+\section{Διαγράμματα Ενιαίου Αυτόματου}
+\subsection{Γενικευμένο Διάγραμμα Ενιαίου Αυτόματου}
+\smallΕδώ είναι το γενικευμένο ενιαίο αυτόματο που σχεδιάσαμε:
+\begin{figure}[h!]
+  \caption{Γενικευμένο Αυτόματο}
+  \includegraphics[width=0.9\textwidth]{automata_general}
+\end{figure}
+\clearpage
+\subsection{Λεπτομερές Διάγραμμα Ενιαίου Αυτόματου}
+\smallΕδώ είναι το λεπτομερές ενιαίο αυτόματο που σχεδιάσαμε:
+\begin{figure}[h!]
+  \caption{Λεπτομερές Αυτόματο}
+  \includegraphics[width=1\textwidth]{automata_detailed}
+\end{figure}
+
+\clearpage
+\section{Εξήγηση Κώδικα σε \textlatin{FSM}}
+Το πρώτο κομμάτι κώδικα σε \textlatin{FSM} είναι, ασφαλώς, η αρχική μας κατάσταση:
+\selectlanguage{english}
+    \begin{lstlisting}
+START=SZ
+SZ: % -> OPERATOR
+    ! < > \- = \* -> SEQ
+    \+ -> SPLUS
+    & -> SAMP
+    ; -> DELIMITER
+    | -> SPIPE
+    a-z A-Z _ -> SI
+    \n \s -> SZ
+    / -> SSLASH
+    " -> SCHARS
+    0 -> SPRE_NUM
+    1-9 -> SDEC_OCT_NUM
+    * -> BAD
+    \end{lstlisting}
+\selectlanguage{greek}
+Εδώ, βλέπουμε ότι ο αναλυτής μας περιμένει τον πρώτο, ουσιαστικά χαρακτήρα απο τον χρήστη, ο οποίος θα έχει μεγάλη σημασία στο να καθορίσουμε "τι πάει να γράψει ο χρήστης".
+\\
+\\
+Βλέπουμε πολλές καταστάσεις, των οποίων η φιλοσοφία εξηγείται ως εξής.
+\begin{itemize}
+  \item Οι καταστάσεις που το όνομα τους αρχίζει με \textlatin{"S"} είναι για τον αναλυτή μας οι "μεταβατικές" μας καταστάσεις, οι καταστάσεις στις οποίες δεν έιναι απόλυτα σίγουρο το τι θέλει να γράψει ο χρήστης, αλλά είναι σίγουροι, με βάση κανόνες και ντετερμινιστικά οι "δρόμοι" που μπορεί να ακολουθήσει ο χρήστης. 
+  \item Οι υπόλοιπες καταστάσεις, καταστάσεις όπως η \textlatin{DELIMITER} που βλέπουμε εδώ, εκφράζουν επιστροφή του αναγνωριστικού (και άρα επιτυχής αναγνώριση) της λεκτικής μονάδας (πχ εδώ το \textlatin{token} (λεκτική μονάδα) είναι \textlatin{DELIMETER}) καθώς ο αναλυτής μας είναι σίγουρος, \emph{με βάση κανόνες που ακολουθεί ντετερμινιστικά}, ότι η λέξη η οποία ο χρήστης εισήγαγε είναι ενός συγκεκριμένου τύπου.  
+\end{itemize}
+\clearpage
+Συνεχίζοντας, βλέπουμε 2 καταστάσεις που αφορούν την αναγνώριση συμβολοσειράς, στις οποίες είναι δυνατόν να μεταβεί το αυτόματο, αν ο χρήστης εισάγει σε ορισμένες καταστάσεις τον χαρακτήρα \boxed{ "}.
+\\
+\\
+Αυτό ισχύει για την αρχική κατάσταση, όπως είδαμε παραπάνω, αλλά και για τις καταστάσεις \textlatin{IDENTIFIER, INT, FLOAT}, αφού είναι πιθανό ο χρήστης να γράφει μια συμβολοσειρά έπειτα απο τους τύπους λέξεων αυτούς.
+\\
+\\
+Η κατάσταση \textlatin{SCHARS} συγκεκριμένα είναι αυτή στην οποία δίνονται οι χαρακτήρες της συμβολοσειράς, και αφήνεται ένα ενδεχόμενο είτε να τερματισθεί η συμβολοσειρά με το να εισαχθεί ξανά ο χαρακτήρας \boxed{"} (και να μεταβεί στην κατάσταση \textlatin{STR}), είτε να να εισαχθεί ο χαρακτήρας \textbackslash.
+\\
+\\
+Στην τελευταία περίπτωση, ο αναλυτής έρχεται στην κατάσταση \textlatin{SCAPE}, την οποία περιμένει να εισαχθέι είτε ο χαρακτήρας \boxed{\textlatin{n}}, οπότε να επιστραφεί η κατάσταση \textlatin{NEWLINE}, είτε να εισαχθεί ο χαρακτήρας \textbackslash  ξανά, οπότε να επιστρέψει στην κατάσταση \textlatin{SCHARS}, είτε να κάνει λάθος και να εισαχθεί οποιοσδήποτε άλλος χαρακτήρας, οπότε να παέι στην κατάσταση \textlatin{BAD}.  
+\\
+\\
+Στην κατάσταση \textlatin{NEWLINE}, οποιοσδήποτε χαρακτήρας μας πάει πίσω στην κατάσταση \textlatin{SCHARS}, ενώ ο χαρακτήρας \boxed{"} στην κατάσταση \textlatin{STR}
+\\
+\selectlanguage{english}
+    \begin{lstlisting}
+SCHARS: * -> SCHARS
+        " -> STR
+        \\ -> SCAPE
+
+SCAPE:  n -> NEWLINE
+        \\ -> SCHARS
+        * -> BAD
+
+NEWLINE: " -> STRING
+         * -> SCHARS 
+
+STR:        \s \n -> SZ
+    \end{lstlisting}
+\selectlanguage{greek}
+
+\clearpage
+Με παρόμοια λογική βλέπουμε διάφορους χαρακτήρες που είναι \emph{δυνητικά} τελεστές (ο πρώτος είναι δυνητικά και σχόλιο).
+\selectlanguage{english}
+    \begin{lstlisting}
+SSLASH: / -> SCOMM1
+        = \n \s -> OPERATOR
+        \* -> SCOMM2
+         * -> BAD
+    
+SEQ:     = \n \s -> OPERATOR
+         * -> BAD
+
+SPLUS:   = \+  -> OPERATOR
+         * -> BAD
+
+SAMP:    & \s  -> OPERATOR
+         * -> BAD
+
+SPIPE:   |     -> OPERATOR
+         * -> BAD
+    \end{lstlisting}
+\selectlanguage{greek}
+\\   
+Επίσης, εδώ βλέπουμε, με παρόμοιο συλλογισμό με τις καταστάσεις για τις συμβολοσειρές, και την επεξεργασία για τα σχόλια (με τελική κατάσταση την κατάσταση \textlatin{COMMENT})
+\selectlanguage{english}
+    \begin{lstlisting}
+SCOMM1:     * -> SCOMM1
+           \n -> SZ
+
+SCOMM2:    \* -> SCOMM21
+           * -> SCOMM2
+            
+SCOMM21:    / -> COMMENT
+            * -> SCOMM2
+
+COMMENT:    \n \s -> SZ  
+    \end{lstlisting}
+\selectlanguage{greek}
+\\
+Παρατηρούμε και την κατάσταση \textlatin{SI}, η οποία δέχεται τους επιτρεπτούς χαρακτήρες ως κομμάτια της πιθανής λέξης ενός \textlatin{identifier}, που με τον χαρακτηρα \boxed{;}, με κενό, ή με τέλος αρχείου γίνεται η μεταβολή του αναλυτή στην κατάσταση \textlatin{IDENTIFIER}.
+\selectlanguage{english}
+    \begin{lstlisting}
+SI:      a-z A-Z 0-9 -> SI
+         ;           -> IDENTIFIER
+         \s          -> IDENTIFIER 
+         EOF         -> IDENTIFIER
+         \+ \- =     -> IDENTIFIER
+         * -> BAD
+    \end{lstlisting}
+\selectlanguage{greek}
+
+Εδώ βλέπουμε τις "τελικές" καταστάσεις στις οποίες φτάνει ο αναλυτής οταν κρίνει μια λέξη να πληρεί τις προϋποθέσεις για να χαρακτηρισθεί ως μια συγκεκριμένη λεκτική μονάδα.
+\\
+Παρατηρούμε ότι, με βάση την γλώσσα \textlatin{Uni-C}, οι λεκτικές μονάδες είναι δυνατό να ακολουθηθούν απο συγκεκριμένες λεκτικές μονάδες (παράδειγμα οι τελεστές μονάχα από ένα νούμερο ή \textlatin{identifier}, για αυτό οι μοναδικές επιτρεπτές καταστάσεις που μεταβαίνει ο αναλυτής μετά απο την κατάσταση \textlatin{OPERATOR} είναι η ενδιάμεση κατάσταση έιτε αριθμού έιτε \textlatin{identifier}) 
+\selectlanguage{english}
+    \begin{lstlisting}
+ OPERATOR:   a-z A-Z _ -> SI
+            0 -> SPRE_NUM
+            1-9 -> SDEC_OCT_NUM    
+            " -> SCHARS
+            * -> BAD
+
+DELIMITER:  * -> SZ
+INT:        \s \n -> SZ
+            A-Z a-z _ -> SI
+            % -> OPERATOR
+            ! < > \- = \* -> SEQ
+            \+ -> SPLUS
+            & -> SAMP
+            ; -> DELIMITER
+            | -> SPIPE
+            / -> SSLASH
+            0 -> SPRE_NUM
+            1-9 -> SDEC_OCT_NUM
+            * -> BAD
+            " -> SCHARS
+
+FLOAT:      \s \n -> SZ
+            A-Z a-z _ -> SI
+            % -> OPERATOR
+            ! < > \- = \* -> SEQ
+            \+ -> SPLUS
+            & -> SAMP
+            ; -> DELIMITER
+            | -> SPIPE
+            / -> SSLASH
+            0 -> SPRE_NUM
+            1-9 -> SDEC_OCT_NUM
+            * -> BAD
+    
+IDENTIFIER: \s \n -> SZ
+            A-Z a-z _ -> SI
+            % -> OPERATOR
+            ! < > \- = \* -> SEQ
+            \+ -> SPLUS
+            & -> SAMP
+            ; -> DELIMITER
+            | -> SPIPE
+            / -> SSLASH
+            0 -> SPRE_NUM
+            1-9 -> SDEC_OCT_NUM
+            * -> BAD
+            " -> SCHARS
+
+
+    \end{lstlisting}
+\selectlanguage{greek}
+
+\clearpage
+Τέλος, έχουμε τις ενδιάμεσες καταστάσεις με τις οποίες ο αναλυτής κρίνει αν ο αριθμός που εισάγεται είναι πραγματικός ή ακέραιος.
+\\
+Με βάση λοιπόν την σύνταξη της \textlatin{Uni-C}, διαχωρίζονται αυτές οι δυό κατηγορίες.
+\\
+(πχ. ακέραιοι: 0, 954, 4235 πχ. πραγματικοί: 3.14 2.43Ε31, 35.3\textlatin{e}10, 34\textlatin{e}12, 0\textlatin{e}0, 0.2222)  
+\selectlanguage{english}
+    \begin{lstlisting}
+SPRE_NUM:   x X -> SHEX
+            0-9 -> SDEC_OCT_NUM
+            \. ->  SFLO1
+            e E -> SFLO2
+            * -> BAD
+            
+SDEC_OCT_NUM:   0-9     -> SDEC_OCT_NUM
+                \.      -> SFLO_COMMA
+                e E     -> SFLO_E
+                \s \n ; -> FLOAT
+                * -> BAD
+
+SFLO_COMMA:     \s \n ; -> FLOAT
+                e E     -> SFLO_E
+                0-9     -> SFLO_DIGITS
+                * -> BAD
+
+SFLO_DIGITS:    0-9     -> SFLO_DIGITS
+                \n \s ; -> FLOAT
+                e E     -> SFLO_E
+                \.      -> SFLO_COMMA
+                * -> BAD
+
+SFLO_E:         \.       -> SFLO_COMMA
+                \-       -> SFLO_POWER 
+                0-9     -> SFLO_DIGITS
+                * -> BAD
+
+SFLO_POWER:     0-9     -> SFLO_DIGITS
+                * -> BAD
+    
+SHEX:       A-F     -> SHEX
+            0-9     -> SHEX
+            \s \n ; -> INT
+            * -> BAD
+    \end{lstlisting}
+\selectlanguage{greek}
+
+
+\clearpage
+\section{Ολοκληρωμένος Κώδικας σε \textlatin{FSM}}
+Ο κώδικας του αυτοματού μας μπορεί να βρεθεί ως αρχείο και στον φάκελο \textlatin{\boxed{Source\_Code}} που βρήκεται μέσα στον κύριο φάκελο του παραδοτέου.
+\\
 \small Ακολουθεί ο ολοκληρωμένος κώδικας σε \textlatin{FSM} του αυτόματού μας:  
 \selectlanguage{english}
     \begin{lstlisting}
@@ -130,24 +413,31 @@ SCAPE:  n -> NEWLINE
         \\ -> SCHARS
         * -> BAD
 
-NEWLINE: \s \n a-z A-Z -> SCHARS 
+NEWLINE: " -> STRING
+         * -> SCHARS 
     
 SSLASH: / -> SCOMM1
         = \n \s -> OPERATOR
         \* -> SCOMM2
     
 SEQ:     = \n \s -> OPERATOR
+        * -> BAD
 
 SPLUS:   = \+  -> OPERATOR
+        * -> BAD
 
 SAMP:    & \s  -> OPERATOR
+        * -> BAD
 
 SPIPE:   |     -> OPERATOR
+        * -> BAD
 
 SI:      a-z A-Z 0-9 -> SI
          ;           -> IDENTIFIER
          \s          -> IDENTIFIER 
          EOF         -> IDENTIFIER
+         \+ \- =     -> IDENTIFIER
+         * -> BAD
         
 SCOMM1:     * -> SCOMM1
            \n -> SZ
@@ -156,41 +446,53 @@ SCOMM2:    \* -> SCOMM21
            * -> SCOMM2
             
 SCOMM21:    / -> COMMENT
+            * -> SCOMM2
 
 COMMENT:    \n \s -> SZ  
+
 OPERATOR:   a-z A-Z _ -> SI
             0 -> SPRE_NUM
             1-9 -> SDEC_OCT_NUM    
             " -> SCHARS
+            * -> BAD
+
 DELIMITER:  * -> SZ
+
 SPRE_NUM:   x X -> SHEX
             0-9 -> SDEC_OCT_NUM
             \. ->  SFLO1
             e E -> SFLO2
+            * -> BAD
             
 SDEC_OCT_NUM:   0-9     -> SDEC_OCT_NUM
                 \.      -> SFLO_COMMA
                 e E     -> SFLO_E
                 \s \n ; -> FLOAT
+                * -> BAD
 
 SFLO_COMMA:     \s \n ; -> FLOAT
                 e E     -> SFLO_E
                 0-9     -> SFLO_DIGITS
+                * -> BAD
 
 SFLO_DIGITS:    0-9     -> SFLO_DIGITS
                 \n \s ; -> FLOAT
                 e E     -> SFLO_E
                 \.      -> SFLO_COMMA
+                * -> BAD
 
 SFLO_E:         \.       -> SFLO_COMMA
                 \-       -> SFLO_POWER 
                 0-9     -> SFLO_DIGITS
+                * -> BAD
 
 SFLO_POWER:     0-9     -> SFLO_DIGITS
+                * -> BAD
     
 SHEX:       A-F     -> SHEX
             0-9     -> SHEX
             \s \n ; -> INT
+            * -> BAD
 
 INT:        \s \n -> SZ
             A-Z a-z _ -> SI
@@ -237,5 +539,6 @@ STR:        \s \n -> SZ
     
 BAD(OK): \n -> SZ
 GOOD(OK): \n -> GOOD
+
     \end{lstlisting}
 \end{document}
