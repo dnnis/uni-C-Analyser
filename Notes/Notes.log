@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/Arch Linux) (preloaded format=pdflatex 2021.3.23)  29 MAR 2021 19:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/Arch Linux) (preloaded format=pdflatex 2021.3.23)  29 MAR 2021 19:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -693,70 +693,31 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
 LaTeX Info: Redefining \[ on input line 2923.
 LaTeX Info: Redefining \] on input line 2924.
 )
-! Undefined control sequence.
-l.19 \colorlinks
-                =true
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
-! LaTeX Error: Missing \begin{document}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.19 \colorlinks=
-                 true
-You're in trouble here.  Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-! Undefined control sequence.
-l.20 \linkcolor
-               =blue
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.21 \urlcolor
-              =cyan
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
 (/usr/share/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2020-09-24 L3 backend support: PDF output (pdfTeX)
 \l__kernel_color_stack_int=\count286
 \l__pdf_internal_box=\box51
 ) (./Notes.aux)
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for LGR/cmr/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for LGR/cmr/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
 
 (/usr/share/texmf-dist/tex/latex/greek-fontenc/puenc-greek.def
 File: puenc-greek.def 2020/10/18 2.0 Greek LICRs for PDF strings
@@ -764,7 +725,7 @@ File: puenc-greek.def 2020/10/18 2.0 Greek LICRs for PDF strings
 (/usr/share/texmf-dist/tex/latex/greek-fontenc/greek-fontenc.def
 File: greek-fontenc.def 2020/10/30 2.0 Common Greek font encoding definitions
 ))
-Package hyperref Info: Link coloring OFF on input line 55.
+Package hyperref Info: Link coloring OFF on input line 51.
 
 (/usr/share/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
@@ -777,9 +738,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count287
 )
-LaTeX Info: Redefining \ref on input line 55.
-LaTeX Info: Redefining \pageref on input line 55.
-LaTeX Info: Redefining \nameref on input line 55.
+LaTeX Info: Redefining \ref on input line 51.
+LaTeX Info: Redefining \pageref on input line 51.
+LaTeX Info: Redefining \nameref on input line 51.
 
 (./Notes.out) (./Notes.out)
 \@outlinefile=\write3
@@ -807,20 +768,14 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 \c@lstlisting=\count294
- [1
-
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-<./img//computer.png, id=62, 160.4394pt x 129.8451pt>
+<./img//computer.png, id=56, 160.4394pt x 129.8451pt>
 File: ./img//computer.png Graphic file (type png)
 <use ./img//computer.png>
-Package pdftex.def Info: ./img//computer.png  used on input line 59.
+Package pdftex.def Info: ./img//computer.png  used on input line 55.
 (pdftex.def)             Requested size: 401.09752pt x 324.6119pt.
-pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
-been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.62     Œë
-           ŒΩŒ±ŒªœÖœÑŒπŒ∫Œ¨ œÑŒ± ŒºŒ≠ŒªŒ∑: [1 <./img//computer.png>] [2]
+ [1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./img//computer.png>] [2] 
 (./Notes.toc
 Overfull \hbox (18.42369pt too wide) in paragraph at lines 31--31
  [][] [][]\LGR/cmr/m/n/14.4 Eisagwg† \OT1/cmtt/m/n/14.4 str1 = "really l0ng str
@@ -865,15 +820,15 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.101 \clearpage
-                 [1]
-Overfull \hbox (20.448pt too wide) in paragraph at lines 104--131
+l.97 \clearpage
+                [1]
+Overfull \hbox (20.448pt too wide) in paragraph at lines 100--127
 \LGR/cmr/m/n/17.28 Sthn er-ga-sth-ria-k† er-ga-s–a au-t† a-sqo-lh-j†ka-me me th
 n dh-miour-g–a
  []
 
 
-Overfull \hbox (23.41023pt too wide) in paragraph at lines 104--131
+Overfull \hbox (23.41023pt too wide) in paragraph at lines 100--127
 \LGR/cmr/m/n/17.28 Prin prag-ma-to-poi-h-je-– fu-si-kà h kw-di-ko-po-–h-sh gia 
 thn pros-sËg-gi-sh
  []
@@ -882,35 +837,35 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.131 \begin{center}
+l.127 \begin{center}
                      [2
 
 ]
-Overfull \hbox (30.41023pt too wide) in paragraph at lines 136--151
+Overfull \hbox (30.41023pt too wide) in paragraph at lines 132--147
 \LGR/cmr/m/n/17.28 Sthn su-nËqeia, ja a-ko-lou-j†sei o k∏di-kac tou au-tÏma-tou
  tmh-ma-ti-kà
  []
 
 
-Overfull \hbox (47.60999pt too wide) in paragraph at lines 136--151
+Overfull \hbox (47.60999pt too wide) in paragraph at lines 132--147
 \LGR/cmr/m/n/17.28 pa-ra-te-jo-‘n o-ri-smËnoi e-lËg-qoi prag-ma-ti-k†c lei-tour
 -g–ac tou au-tÏma-tou
  []
 
 [3]
-Overfull \hbox (16.08418pt too wide) in paragraph at lines 154--154
+Overfull \hbox (16.08418pt too wide) in paragraph at lines 150--150
 []\LGR/cmr/bx/n/20.74 Perigraf† s‘nta-xhc thc \OT1/cmr/bx/n/20.74 Uni-C \LGR/cm
 r/bx/n/20.74 se \OT1/cmr/bx/n/20.74 BNF 
  []
 
 
-Overfull \hbox (11.91321pt too wide) in paragraph at lines 155--158
+Overfull \hbox (11.91321pt too wide) in paragraph at lines 151--154
 \LGR/cmr/m/n/17.28 a-na-fËra-me pa-ra-pànw, Ëgi-ne h a-nàlu-sh thc s‘nta-xhc th
 c gl∏s-sac
  []
 
 
-Overfull \hbox (4.97838pt too wide) in paragraph at lines 155--158
+Overfull \hbox (4.97838pt too wide) in paragraph at lines 151--154
 \LGR/cmr/m/n/17.28 OpÏte, me thn bo-†jeia tou pe-ri-bàl-lo-ntoc le-kti-ko-‘ e-p
 e-xer-ga-st†
  []
@@ -922,39 +877,39 @@ See the keyval package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.160     \begin{lstlisting}[bnf]
+l.156     \begin{lstlisting}[bnf]
                                  
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 LaTeX Font Info:    Trying to load font information for TS1+cmtt on input line 
-161.
+157.
 (/usr/share/texmf-dist/tex/latex/base/ts1cmtt.fd
 File: ts1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 ) [4
 
 ]
-Overfull \hbox (3.65552pt too wide) in paragraph at lines 184--184
+Overfull \hbox (3.65552pt too wide) in paragraph at lines 180--180
 []\LGR/cmr/bx/n/17.28 GenikeumËno Di-àgram-ma E-nia-–ou Au-tÏma-tou 
  []
 
-<./img//automata_general.png, id=140, 936.49875pt x 999.735pt>
+<./img//automata_general.png, id=136, 936.49875pt x 999.735pt>
 File: ./img//automata_general.png Graphic file (type png)
 <use ./img//automata_general.png>
-Package pdftex.def Info: ./img//automata_general.png  used on input line 188.
+Package pdftex.def Info: ./img//automata_general.png  used on input line 184.
 (pdftex.def)             Requested size: 386.99738pt x 413.128pt.
 [5
 
  <./img//automata_general.png (PNG copy)>]
-<./img//automata_detailed.png, id=146, 940.51375pt x 999.735pt>
+<./img//automata_detailed.png, id=143, 940.51375pt x 999.735pt>
 File: ./img//automata_detailed.png Graphic file (type png)
 <use ./img//automata_detailed.png>
-Package pdftex.def Info: ./img//automata_detailed.png  used on input line 195.
+Package pdftex.def Info: ./img//automata_detailed.png  used on input line 191.
 (pdftex.def)             Requested size: 430.0pt x 457.07681pt.
  [6
 
  <./img//automata_detailed.png (PNG copy)>]
-Overfull \hbox (26.27846pt too wide) in paragraph at lines 226--227
+Overfull \hbox (26.27846pt too wide) in paragraph at lines 222--223
 \LGR/cmr/m/n/12 ka-j∏c o a-na-lu-t†c mac e-–nai s–gou-roc, \LGR/cmr/m/it/12 me 
 bàsh ka-nÏnec pou a-ko-lou-je-– nte-ter-mi-ni-sti-kà\LGR/cmr/m/n/12 ,
  []
@@ -963,20 +918,20 @@ bàsh ka-nÏnec pou a-ko-lou-je-– nte-ter-mi-ni-sti-kà\LGR/cmr/m/n/12 ,
 
 ]
 LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 2
-35.
+31.
  (/usr/share/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 235.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 231.
 
-Overfull \hbox (7.83525pt too wide) in paragraph at lines 229--244
+Overfull \hbox (7.83525pt too wide) in paragraph at lines 225--240
 []\LGR/cmr/m/n/12 Suneq–zontac, blËpou-me 2 ka-ta-stàseic pou a-fo-ro-‘n thn a-
 na-gn∏ri-sh sum-bo-lo-sei-ràc,
  []
 
 
-Overfull \hbox (10.5478pt too wide) in paragraph at lines 229--244
+Overfull \hbox (10.5478pt too wide) in paragraph at lines 225--240
 \LGR/cmr/m/n/12 pe-ri-mËnei na ei-sa-qjËi e-–te o qa-ra-kt†rac [], o-pÏte na e-
 pi-stra-fe-– h ka-tàsta-sh \OT1/cmr/m/n/12 NE-W-LI-NE\LGR/cmr/m/n/12 ,
  []
@@ -991,7 +946,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.285 Œ
+l.281 Œ
        ïœÄŒØœÉŒ∑œÇ, ŒµŒ¥œé Œ≤ŒªŒ≠œÄŒøœÖŒºŒµ, ŒºŒµ œÄŒ±œÅœåŒºŒøŒπŒø œÉœÖŒªŒªŒ...
 
 Your command was ignored.
@@ -999,7 +954,7 @@ Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
 
-Overfull \hbox (8.42598pt too wide) in paragraph at lines 285--287
+Overfull \hbox (8.42598pt too wide) in paragraph at lines 281--283
 \LGR/cmr/m/n/12 Ep–shc, e-d∏ blËpou-me, me pa-rÏmoio sul-lo-gi-smÏ me tic ka-ta
 -stàseic gia tic sum-bo-lo-sei-rËc,
  []
@@ -1011,7 +966,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.302 Œ
+l.298 Œ
        †Œ±œÅŒ±œÑŒ∑œÅŒøœçŒºŒµ Œ∫Œ±Œπ œÑŒ∑ŒΩ Œ∫Œ±œÑŒ¨œÉœÑŒ±œÉŒ∑ \textlatin{SI}...
 
 Your command was ignored.
@@ -1021,7 +976,7 @@ or  <return>  to continue without it.
 [9
 
 ]
-Overfull \hbox (6.88905pt too wide) in paragraph at lines 314--318
+Overfull \hbox (6.88905pt too wide) in paragraph at lines 310--314
 \LGR/cmr/m/n/12 a-pÏ Ëna no-‘me-ro † \OT1/cmr/m/n/12 i-de-nti-fier\LGR/cmr/m/n/
 12 , gia au-tÏ oi mo-na-di-kËc e-pi-tre-ptËc ka-ta-stàseic pou me-ta-ba-–nei
  []
@@ -1029,7 +984,7 @@ Overfull \hbox (6.88905pt too wide) in paragraph at lines 314--318
 [10] [11] [12
 
 ]
-Overfull \hbox (6.52101pt too wide) in paragraph at lines 425--429
+Overfull \hbox (6.52101pt too wide) in paragraph at lines 421--425
 \LGR/cmr/m/n/12 O k∏di-kac tou au-to-ma-to-‘ mac mpo-re-– na bre-je-– wc ar-qe-
 –o kai ston fàke-lo []
  []
@@ -1038,28 +993,28 @@ Overfull \hbox (6.52101pt too wide) in paragraph at lines 425--429
 
 ] [14] [15] [16]
 LaTeX Font Info:    Trying to load font information for LGR+cmtt on input line 
-599.
+595.
  (/usr/share/texmf-dist/tex/latex/cbfonts-fd/lgrcmtt.fd
 File: lgrcmtt.fd 2017/07/29 v1.2 Greek European Computer Typewriter
 )
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <17.28> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 602.
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 598.
 
 [17
 
 ]
-Overfull \hbox (85.56001pt too wide) in paragraph at lines 638--638
+Overfull \hbox (85.56001pt too wide) in paragraph at lines 634--634
 []\LGR/cmr/bx/n/17.28 Eisagwg† \OT1/cmtt/m/n/17.28 str1 = "really l0ng str[]1in
 g() -+!#%^&*()" 
  []
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\spacefactor' on input line 638.
+(hyperref)                removing `\spacefactor' on input line 634.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@m' on input line 638.
+(hyperref)                removing `\@m' on input line 634.
 
 [18
 
@@ -1067,7 +1022,7 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 ! Misplaced alignment tab character &.
 <argument>  if m1 == 2 &
                         & m2 == 0 then m = "\textbackslash n"
-l.694 ...&& m2 == 0 then m = "\textbackslash n"}}}
+l.690 ...&& m2 == 0 then m = "\textbackslash n"}}}
                                                   
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -1079,7 +1034,7 @@ might try typing `S' now just to see what is salvageable.
 ! Misplaced alignment tab character &.
 <argument>  if m1 == 2 &&
                           m2 == 0 then m = "\textbackslash n"
-l.694 ...&& m2 == 0 then m = "\textbackslash n"}}}
+l.690 ...&& m2 == 0 then m = "\textbackslash n"}}}
                                                   
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -1091,46 +1046,46 @@ might try typing `S' now just to see what is salvageable.
 
 LaTeX Font Warning: Font shape `OMS/cmtt/bx/n' undefined
 (Font)              using `OMS/cmtt/m/n' instead
-(Font)              for symbol `textbackslash' on input line 694.
+(Font)              for symbol `textbackslash' on input line 690.
 
 
-Overfull \hbox (7.76982pt too wide) in paragraph at lines 694--694
+Overfull \hbox (7.76982pt too wide) in paragraph at lines 690--690
 []\LGR/cmr/bx/n/17.28 Eisagwg† \OT1/cmtt/m/n/17.28 if m1 == 2  m2 == 0 then m =
  "\OMS/cmtt/m/n/17.28 n\OT1/cmtt/m/n/17.28 n" 
  []
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `alignment tab' on input line 694.
+(hyperref)                removing `alignment tab' on input line 690.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `alignment tab' on input line 694.
+(hyperref)                removing `alignment tab' on input line 690.
 
 [20
 
 ] [21]
-<./img//test_metavliti.png, id=688, 278.54062pt x 504.38437pt>
+<./img//test_metavliti.png, id=685, 278.54062pt x 504.38437pt>
 File: ./img//test_metavliti.png Graphic file (type png)
 <use ./img//test_metavliti.png>
-Package pdftex.def Info: ./img//test_metavliti.png  used on input line 776.
+Package pdftex.def Info: ./img//test_metavliti.png  used on input line 772.
 (pdftex.def)             Requested size: 215.0pt x 389.3315pt.
-<./img//test_long_string.png, id=689, 252.945pt x 822.82407pt>
+<./img//test_long_string.png, id=686, 252.945pt x 822.82407pt>
 File: ./img//test_long_string.png Graphic file (type png)
 <use ./img//test_long_string.png>
-Package pdftex.def Info: ./img//test_long_string.png  used on input line 782.
+Package pdftex.def Info: ./img//test_long_string.png  used on input line 778.
 (pdftex.def)             Requested size: 193.49869pt x 629.45837pt.
 
 
-LaTeX Warning: Float too large for page by 113.28932pt on input line 783.
+LaTeX Warning: Float too large for page by 113.28932pt on input line 779.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<./img//test_mistake.png, id=690, 231.11343pt x 391.4625pt>
+<./img//test_mistake.png, id=687, 231.11343pt x 391.4625pt>
 File: ./img//test_mistake.png Graphic file (type png)
 <use ./img//test_mistake.png>
-Package pdftex.def Info: ./img//test_mistake.png  used on input line 788.
+Package pdftex.def Info: ./img//test_mistake.png  used on input line 784.
 (pdftex.def)             Requested size: 215.0pt x 364.16985pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
@@ -1142,14 +1097,14 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.791 \begin{figure}[hc]
+l.787 \begin{figure}[hc]
                         
 Option `c' ignored and `p' used.
 
-<./img//test_if.png, id=691, 231.11343pt x 428.35031pt>
+<./img//test_if.png, id=688, 231.11343pt x 428.35031pt>
 File: ./img//test_if.png Graphic file (type png)
 <use ./img//test_if.png>
-Package pdftex.def Info: ./img//test_if.png  used on input line 794.
+Package pdftex.def Info: ./img//test_if.png  used on input line 790.
 (pdftex.def)             Requested size: 215.0pt x 398.48586pt.
 [22
 
@@ -1166,7 +1121,7 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 Here is how much of TeX's memory you used:
  14023 strings out of 479383
  202700 string characters out of 5875830
- 1037300 words of memory out of 5000000
+ 1037285 words of memory out of 5000000
  30411 multiletter control sequences out of 15000+600000
  423838 words of font info for 74 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1191,10 +1146,10 @@ s/grxn1728.pfb></usr/share/texmf-dist/fonts/type1/public/cbfonts/grxn2074.pfb><
 /usr/share/texmf-dist/fonts/type1/public/cbfonts/grxn2488.pfb></usr/share/texmf
 -dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf-dist/fonts/typ
 e1/public/cm-super/sftt1000.pfb>
-Output written on Notes.pdf (28 pages, 872652 bytes).
+Output written on Notes.pdf (27 pages, 871683 bytes).
 PDF statistics:
- 898 PDF objects out of 1000 (max. 8388607)
- 828 compressed objects within 9 object streams
+ 895 PDF objects out of 1000 (max. 8388607)
+ 826 compressed objects within 9 object streams
  530 named destinations out of 1000 (max. 500000)
  140 words of extra memory for PDF output out of 10000 (max. 10000000)
 
