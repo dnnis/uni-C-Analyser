@@ -1,3 +1,8 @@
-58
-135
-4321
+int main (int argc*, int argv**) {
+    float metavliti = 4;
+    if ( metavliti == 12 ) {
+        printf("A string");
+    }
+    $
+    return 0;
+}

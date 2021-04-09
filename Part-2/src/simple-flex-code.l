@@ -42,15 +42,21 @@ int line = 1;
    Meta apo auto, mporei na ginei xrhsh twn onomatwn (aristera) anti twn,
    synhthws idiaiterws makroskelwn kai dysnohtwn, kanonikwn ekfrasewn */
 
-DELIMITER       ;
-FLOAT           [0-9]+\.[0-9]+|[0-9]+\.[0-9]+e[0-9]+
-INTCONST        0|[1-9]+[0-9]*
-STRING          '.*'|\".*\"
-IDENTIFIER      [a-zA-Z_]+[0-9]*
-COMMENT         \/\/.*|\/\*.*\*\/
-OPERATOR        \+|\-|==|!=|\+\+|\*|\|\||\!|\&|\/|\%|=|\*=|\/=|\&\&|\-\-|\<|\>|\<=|\>=|\+=|\-=
-WHITE_SPACES    [ \t]+
-
+DELIMITER            ;
+FLOAT                [0-9]+\.[0-9]+|[0-9]+\.[0-9]+e[0-9]+
+INTCONST             0|[1-9]+[0-9]*
+STRING               '.*'|\".*\"
+IDENTIFIER           [a-zA-Z_]+[0-9]*
+COMMENT              \/\/.*|\/\*.*\*\/
+OPERATOR             \+|\-|==|!=|\+\+|\*|\|\||\!|\&|\/|\%|=|\*=|\/=|\&\&|\-\-|\<|\>|\<=|\>=|\+=|\-=
+WHITE_SPACES         [ \t]+
+OPEN_BRACKETS        \[
+CLOSE_BRACKETS       \]
+OPEN_BRACES          \{
+CLOSE_BRACES         \}
+OPEN_PARENTHESES     \(
+CLOSE_PARENTHESES    \)
+UNKNOWN              \$
 
 /* Gia kathe pattern (aristera) pou tairiazei ekteleitai o antistoixos
    kwdikas mesa sta agkistra. H entolh return epitrepei thn epistrofh
@@ -64,39 +70,46 @@ WHITE_SPACES    [ \t]+
 {INTCONST}      { return INTCONST;  }
 
 {IDENTIFIER}    { 
-                    if      ( !strcmp(yytext,"break") )     return KEYWORD;
-                    else if ( !strcmp(yytext,"case") )      return KEYWORD;
-                    else if ( !strcmp(yytext,"func") )      return KEYWORD;
-                    else if ( !strcmp(yytext,"const") )     return KEYWORD;
-                    else if ( !strcmp(yytext,"continue") )  return KEYWORD;
-                    else if ( !strcmp(yytext,"do") )        return KEYWORD;
-                    else if ( !strcmp(yytext,"double") )    return KEYWORD;
-                    else if ( !strcmp(yytext,"else") )      return KEYWORD;
-                    else if ( !strcmp(yytext,"float") )     return KEYWORD;
-                    else if ( !strcmp(yytext,"for") )       return KEYWORD;
-                    else if ( !strcmp(yytext,"if") )        return KEYWORD;
-                    else if ( !strcmp(yytext,"int") )       return KEYWORD;
-                    else if ( !strcmp(yytext,"long") )      return KEYWORD;
-                    else if ( !strcmp(yytext,"return") )    return KEYWORD;
-                    else if ( !strcmp(yytext,"short") )     return KEYWORD;
-                    else if ( !strcmp(yytext,"sizeof") )    return KEYWORD;
-                    else if ( !strcmp(yytext,"struct") )    return KEYWORD;
-                    else if ( !strcmp(yytext,"switch") )    return KEYWORD;
-                    else if ( !strcmp(yytext,"void") )      return KEYWORD;
-                    else if ( !strcmp(yytext,"while") )     return KEYWORD;
-                    else return VARIABLE;
+                    if      ( !strcmp(yytext,"break"   ) )    return KEYWORD;
+                    else if ( !strcmp(yytext,"case"    ) )    return KEYWORD;
+                    else if ( !strcmp(yytext,"func"    ) )    return KEYWORD;
+                    else if ( !strcmp(yytext,"const"   ) )    return KEYWORD;
+                    else if ( !strcmp(yytext,"continue") )    return KEYWORD;
+                    else if ( !strcmp(yytext,"do"      ) )    return KEYWORD;
+                    else if ( !strcmp(yytext,"double"  ) )    return KEYWORD;
+                    else if ( !strcmp(yytext,"else"    ) )    return KEYWORD;
+                    else if ( !strcmp(yytext,"float"   ) )    return KEYWORD;
+                    else if ( !strcmp(yytext,"for"     ) )    return KEYWORD;
+                    else if ( !strcmp(yytext,"if"      ) )    return KEYWORD;
+                    else if ( !strcmp(yytext,"int"     ) )    return KEYWORD;
+                    else if ( !strcmp(yytext,"long"    ) )    return KEYWORD;
+                    else if ( !strcmp(yytext,"return"  ) )    return KEYWORD;
+                    else if ( !strcmp(yytext,"short"   ) )    return KEYWORD;
+                    else if ( !strcmp(yytext,"sizeof"  ) )    return KEYWORD;
+                    else if ( !strcmp(yytext,"struct"  ) )    return KEYWORD;
+                    else if ( !strcmp(yytext,"switch"  ) )    return KEYWORD;
+                    else if ( !strcmp(yytext,"void"    ) )    return KEYWORD;
+                    else if ( !strcmp(yytext,"while"   ) )    return KEYWORD;
+                    else return IDENTIFIER;
                 }
 
-{OPERATOR}      { return OPERATOR;  }
-{WHITE_SPACES}  { /*Do nothing, white space(s)*/   }
-{COMMENT}       { /*Do nothing, comment detected*/  }
-\n              { line++; printf("\n"); }
-<<EOF>>         { printf("#END-OF-FILE#\n"); exit(0); }
+{OPERATOR}           { return OPERATOR;                     }
+{WHITE_SPACES}       { /*Do nothing, white space(s)*/       }
+{COMMENT}            { /*Do nothing, comment detected*/     }
+{OPEN_BRACKETS}      { return OPEN_BRACKETS;                }
+{CLOSE_BRACKETS}     { return CLOSE_BRACKETS;               }
+{OPEN_BRACES}        { return OPEN_BRACES;                  }
+{CLOSE_BRACES}       { return CLOSE_BRACES;                 }
+{OPEN_PARENTHESES}   { return OPEN_PARENTHESES;             }
+{CLOSE_PARENTHESES}  { return CLOSE_PARENTHESES;            }
+{UNKNOWN}            { return UNKNOWN;                      }
+\n                   { line++; printf("\n");                }
+<<EOF>>              { printf("#END-OF-FILE#\n"); exit(0);  }
 
 %%
 
 /* Pinakas me ola ta tokens se antistoixia me tous orismous sto token.h */
-char *tname[10] = {"DELIMITER","INTCONST","FLOAT", "STRING", "IDENTIFIER" ,"VARIABLE", "COMMENT", "WHITE_SPACES", "OPERATOR", "KEYWORD" /*, FILL ME */};
+char *tname[16] = {"DELIMITER","INTCONST","FLOAT", "STRING", "IDENTIFIER" , "COMMENT", "WHITE_SPACES", "OPERATOR", "KEYWORD", "OPEN_BRACKETS", "CLOSE_BRACKETS", "OPEN_BRACES", "CLOSE_BRACES", "OPEN_PARENTHESES", "CLOSE_PARENTHESES", "UNKNOWN" /*, FILL ME */};
 
 
 /* H synarthsh main: O kwdikas autos tha topotheththei autousios sto
