@@ -1,18 +1,17 @@
-/* Onoma arxeiou:       simple-flex-code.l
-   Perigrafh:           Ypodeigma gia anaptyksh lektikou analyth me xrhsh tou ergaleiou Flex
-   Syggrafeas:          Ergasthrio Metaglwttistwn, Tmhma Mhxanikwn Plhroforikhs kai Ypologistwn,
-                        Panepisthmio Dytikhs Attikhs
-   Sxolia:              To paron programma ylopoiei (me th xrhsh flex) enan aplo lektiko analyth
-			pou anagnwrizei kena (space kai tab) kai akeraious (dekadikou systhmatos
-			mono!) gia th glwssa Uni-C enw diaxeirizetai tous eidikous xarakthres
-			neas grammhs '\n' (new line) kai 'EOF' (end of file). Yparxoun anafores
-			gia thn anagnwrish metablhtwn, me ton pragmatiko kwdika na exei antikatastathei
-			apo to lektiko FILL ME wste na symplhrwthei apo esas. Proairetika o lektikos
-			analyths dexetai orismata arxeiwn gia eisodo kai eksodo.
-   Odhgies ekteleshs:   Dinete "make" xwris ta eisagwgika ston trexonta katalogo. Enallaktika:
-			flex -o simple-flex-code.c simple-flex-code.l
-                        gcc -o simple-flex-code simple-flex-code.c
-                        ./simple-flex-code
+/*
+    Ομάδα 15
+
+    Όνομα αρχείου:      uni_c_analyser.c
+    Περιγραφή:          Λεκτικός Αναλυτής για την γλώσσα προγραμματισμού Uni-C 
+    Συγγραφείς:         Διονύσης Νικολόπουλος
+                        Αθανάσιος Αναγνωστόπουλος
+                        Άριστείδης Αναγνωστόπουλος
+                        Σπυρίδων Φλώρος
+    Σχόλια:             Κάποια σχόλια έχουν γίνει πάνω στον κώδικα, αλλά ο κώδικας επίσης εξηγήται στο PDF της εργασίας.
+    Οδηγίες Εκτέλεσης:  Λόγω της υλοποίησης makefile, τρέχετε απλά την εντολή make στον τρέχοντα κατάλογο που βρίσκεται το αρχέιο. Εναλλακτικά:
+                        flex -o uni-c-analyser.c uni-c-analyser.l
+                        gcc -o uni-c-analyser uni-c-analyser.c
+                        ./uni-c-analyser
 */
 
 /* H anagnwsh periorizetai se ena mono arxeio kai termatizei sto prwto EOF */
@@ -47,7 +46,7 @@ FLOAT                [0-9]+\.[0-9]+|[0-9]+\.[0-9]+e[0-9]+
 INTCONST             0|[1-9]+[0-9]*
 STRING               '.*'|\".*\"
 IDENTIFIER           [a-zA-Z_]+[0-9]*
-COMMENT              \/\/.*|\/\*.*\*\/
+COMMENT              \/\*(.|\n)*?\*\/|\/\/.*
 OPERATOR             \+|\-|==|!=|\+\+|\*|\|\||\!|\&|\/|\%|=|\*=|\/=|\&\&|\-\-|\<|\>|\<=|\>=|\+=|\-=
 WHITE_SPACES         [ \t]+
 OPEN_BRACKETS        \[
@@ -56,12 +55,30 @@ OPEN_BRACES          \{
 CLOSE_BRACES         \}
 OPEN_PARENTHESES     \(
 CLOSE_PARENTHESES    \)
-UNKNOWN              \$
+PUNCTUATOR           #|\:|\~|\&|\^|\,
 
 /* Gia kathe pattern (aristera) pou tairiazei ekteleitai o antistoixos
    kwdikas mesa sta agkistra. H entolh return epitrepei thn epistrofh
    mias arithmhtikhs timhs mesw ths synarthshs yylex() */
 
+/* Σχόλιο Ομάδας 15
+    Σημείωσεις για:
+    - {IDENTIFIER} : Ο λεκτικός μας αναλυτής, πρώτα ανιχνεύει την συμβολοσειρά ως
+                     identifier, και μετά ξεκαθαρίζει άμα είναι keyword ή απλά το
+                     όνομα μιας μεταβλητής ή συνάρτησης.
+    - {.} :          Ο λεκτικός μας αναλυτής, εφόσον ανιχνεύσει τα στοιχεία τα
+                     οποία είναι άγνωστα, τα αναφέρει, και παρακάτω αναμένουμε
+                     τον συντακτικό αναλυτή να αναφέρει ολοκληρωμένες συμβολοσειρές
+                     που είναι λανθασμένες λόγω άγνωστου χαρακτήρα.
+    - Σημεία Στίξης: Ο λεκτικός μας αναλυτής, ανιχνεύει επίσης και τα στοιχεία στίξης,
+                     αυτά που είναι σημαντικότερα (παρενθέσεις, αγκύλες κτλ.) τα επιτρέφει
+                     ως συγκεκριμένα token για ευκολία του συντακτικού αναλυτή.
+                     Τα υπόλοιπα τα αναφέρει απλά σαν σημεία στίξης γιατί η κατανόηση
+                     της ορθότητας τους είναι δουλειά που αναλαμβάνει ο συντακτικός αναλυτής,
+                     καθώς απαιτεί συντακτική ανάλυση (επεξεργασία προηγούμενων και επόμενων
+                     λέξεων, κτλ.) 
+    - Κενά:          Ο λεκτικός μας αναλυτής αγνοεί τα κενά και τις κενές γραμμές, δεν
+                     επιτρέφει token για αυτά για το συντακτικό αναλυτή. */
 %%
 
 {DELIMITER}     { return DELIMITER; }
@@ -102,14 +119,16 @@ UNKNOWN              \$
 {CLOSE_BRACES}       { return CLOSE_BRACES;                 }
 {OPEN_PARENTHESES}   { return OPEN_PARENTHESES;             }
 {CLOSE_PARENTHESES}  { return CLOSE_PARENTHESES;            }
-{UNKNOWN}            { return UNKNOWN;                      }
-\n                   { line++; printf("\n");                }
+{PUNCTUATOR}         { return PUNCTUATOR;                   }
+\n                   { line++;                              }
 <<EOF>>              { printf("#END-OF-FILE#\n"); exit(0);  }
-
+.                    { 
+                     fprintf(yyout, "Line=%d, UNKNOWN TOKEN, value=\"%s\"\n", line, yytext);
+                     }
 %%
 
 /* Pinakas me ola ta tokens se antistoixia me tous orismous sto token.h */
-char *tname[16] = {"DELIMITER","INTCONST","FLOAT", "STRING", "IDENTIFIER" , "COMMENT", "WHITE_SPACES", "OPERATOR", "KEYWORD", "OPEN_BRACKETS", "CLOSE_BRACKETS", "OPEN_BRACES", "CLOSE_BRACES", "OPEN_PARENTHESES", "CLOSE_PARENTHESES", "UNKNOWN" /*, FILL ME */};
+char *tname[16] = {"DELIMITER","INTCONST","FLOAT", "STRING", "IDENTIFIER" , "COMMENT", "WHITE_SPACES", "OPERATOR", "KEYWORD", "OPEN_BRACKETS", "CLOSE_BRACKETS", "OPEN_BRACES", "CLOSE_BRACES", "OPEN_PARENTHESES", "CLOSE_PARENTHESES", "PUNCTUATOR"};
 
 
 /* H synarthsh main: O kwdikas autos tha topotheththei autousios sto
@@ -153,7 +172,7 @@ int main(int argc, char **argv){
         while( (token=yylex()) >= 0){
                 /* Gia kathe token pou anagnwristhke, ektypwnetai h grammh pou auto
                    brethhke kathws kai to onoma tou mazi me thn timh tou. */
-                fprintf(yyout, "\tLine=%d, token=%s, value=\"%s\"\n", line, tname[token-1], yytext);
+                fprintf(yyout, "Line=%d, token=%s, value=\"%s\"\n", line, tname[token-1], yytext);
         }
         return 0;
 }

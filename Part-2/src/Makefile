@@ -1,6 +1,6 @@
 all:
-	flex -o simple-flex-code.c simple-flex-code.l
-	gcc -o simple-flex-code simple-flex-code.c
-	./simple-flex-code input.txt
+	flex -o uni-c-analyser.c uni-c-analyser.l
+	gcc -o uni-c-analyser uni-c-analyser.c
+	./uni-c-analyser input.txt
 clean:
-	rm simple-flex-code simple-flex-code.c
+	rm uni-c-analyser uni-c-analyser.c

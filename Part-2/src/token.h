@@ -13,5 +13,5 @@
 #define CLOSE_BRACES        13
 #define OPEN_PARENTHESES    14
 #define CLOSE_PARENTHESES   15
-#define UNKNOWN             16
+#define PUNCTUATOR          16
 /*#define FILL ME */
