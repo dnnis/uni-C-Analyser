@@ -9,6 +9,5 @@ int main (int argc*, int argv**) {
     if ( metavliti == 12 ) {
         printf("A string");
     }
-    $$Awrongtoken$
     return 0;
 }
