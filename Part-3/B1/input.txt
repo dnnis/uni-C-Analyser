@@ -1,0 +1,12 @@
+int main () {
+    int metavliti = 1;
+    int variable = 0;
+    int res  = variable + 1;
+    int res2 = variable * 8;
+    int res3 = variable + metavliti;
+    int res4 = variable - 1;
+    int res5 = 5 + 5;
+    int res6 = 100/5;
+    int res7 = 700-800;
+    int res8 = 1 / 1;
+}
