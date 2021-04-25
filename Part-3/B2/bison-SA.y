@@ -27,7 +27,7 @@
 %}
 
 /* Orismos twn anagnwrisimwn lektikwn monadwn. */
-%token INTCONST VARIABLE PLUS MINUS DIV MULTI EQ SEMI NEWLINE PAR_START PAR_END BRA_START BRA_END KEYWORD_VAR_TYPE
+%token INTCONST ID PLUS MINUS DIV MULTI EQ SEMI COMMA NEWLINE PAR_START PAR_END BRA_START BRA_END KEYWORD_VAR_TYPE KEYWORD_FUNC
 
 /* Orismos proteraiothtwn sta tokens */
 %left PLUS MINUS
@@ -40,25 +40,76 @@
    kanonas me ta dedomena eisodou, ekteleitai o kwdikas C pou brisketai anamesa sta
    agkistra. H anamenomenh syntaksh einai: onoma : kanonas { kwdikas C } */
 program:
-        program expr_valid { printf("\t* Result: %d\n", $2); }
+        program valid
         |
         ;
-expr_proc:
-          INTCONST                         { $$ = $1;}
-        | KEYWORD_VAR_TYPE VARIABLE        { $$ = $1;}
-        | PAR_START expr_proc PAR_END      { $$ = $1;}
-        | BRA_START expr_proc BRA_END      { $$ = $1;}
-        | expr_proc PLUS expr_proc         { $$ = $1 + $3;}
-        | expr_proc MINUS expr_proc        { $$ = $1 - $3;}
-        | expr_proc MULTI expr_proc        { $$ = $1 * $3;}
-        | expr_proc DIV expr_proc          { $$ = $1 / $3;}
-        | expr_proc expr_proc EQ expr_proc { $$ = $1 = $3;}
-        | expr_proc EQ expr_proc           { $$ = $1 = $3;}
+
+// Εδώ ορίζεται το τι μπορεί να είναι κομμάτι μίας έκφρασης. Ένας χαρακτήρας ή ένας αριθμός
+expr_part:
+          INTCONST
+        | ID
         ;
 
-expr_valid: expr_proc SEMI
+// Εδώ ορίζονται ποιές είναι οι εκφράσεις υπο επεξεργασία
+expr_proc:
+          expr_part expr_part EQ expr_part { $$ = $1 = $3; }
+        | expr_part PLUS expr_part         { $$ = $1 + $3; }
+        | expr_part MINUS expr_part        { $$ = $1 - $3; }
+        | expr_part MULTI expr_part        { $$ = $1 * $3; }
+        | expr_part DIV expr_part          { $$ = $1 / $3; }
+        | expr_part EQ expr_part           { $$ = $1 = $3; }
+        ;
+
+// Εδώ ορίζεται το "σώμα" του κώδικα, δηλαδή ένας αριθμός συντακτικά σωστών εκφράσεων.
+body:
+        body valid
+        | valid
+        ;
+
+// Εδώ ορίζεται τι μπορεί να βρίσκεται μέσα σε αγκύλες
+in_bra:
+        BRA_START body BRA_END      { $$ = $1; }
+        ;
+
+// Εδώ ορίζεται τι μπορεί να είναι ορίσματα μιας συνάρτησης
+arguments:
+           arguments expr_part COMMA expr_part
+         | expr_part COMMA expr_part
+         |
+         ;
+
+// Εδώ ορίζεται τι θεωρείται ορισμός μιας συνάρτησης
+func_par: 
+          KEYWORD_FUNC ID PAR_START arguments PAR_END      { printf("Valid arguments\n"); }
+        | KEYWORD_FUNC ID PAR_START expr_part PAR_END      { printf("Valid argument\n");  }
+        ;
+
+// Εδώ ορίζεται τι θεωρείται ορισμός μιας μεταβλητής
+declaration: 
+          KEYWORD_VAR_TYPE ID                { $$ = $1; }
+        | KEYWORD_VAR_TYPE ID EQ expr_proc   { $$ = $1; }
+        ;
+
+// Εδώ ορίζεται τι θεωρείται ανάθεση σε μεταβλητή
+assignment:
+          ID EQ expr_proc { $$ = $1; };
+
+// Εδώ ορίζεται τι θεωρείται συντακτικά σώστο
+valid:
+          expr_proc SEMI   { printf("Valid expression!\n"); }
+        | declaration SEMI { printf("Valid declaration\n"); }
+        | assignment SEMI  { printf("Valid assignment\n");  }
+        | func_par         { printf("Valid function declaration\n"); }
+        | NEWLINE
+        | in_bra
+        ;
 
 %%
+
+void print_scanner_ret(int line) {
+    printf("Line %d: Scanner returned token: ",line);
+}
+
 
 /* H synarthsh yylex ylopoiei enan autonomo lektiko analyth. Edw anagnwrizontai
    oi lektikes monades ths glwssas Uni-C */
@@ -74,13 +125,7 @@ int yylex() {
     char c;
     // Για τον αριθμό γραμμών
     int line = 1;
-    int first_line = 1;
 
-    //Για να βγάλει την έξοδο για τον αριθμό γραμμών και στην πρώτη γραμμή.
-    if (first_line) {
-        printf("* Line %d:\n", line);
-        first_line = 0;
-    }
     // Diabase enan xarakthra apo thn eisodo
     c = getchar();
 
@@ -135,13 +180,19 @@ int yylex() {
              !strcmp(buf,"long")   ||
              !strcmp(buf,"short"))
         {
-            printf("\tScanner returned token: KEYWORD_VAR_TYPE (%s)\n", buf);
+            print_scanner_ret(line);
+            printf("KEYWORD_VAR_TYPE (%s)\n", buf);
             return KEYWORD_VAR_TYPE;
+        } else if ( !strcmp(buf,"func") ) {
+            print_scanner_ret(line);
+            printf("KEYWORD_FUNC (%s)\n", buf);
+            return KEYWORD_FUNC;
         } else {
-            printf("\tScanner returned token: VARIABLE (%s)\n", buf);
-            return VARIABLE;
+            print_scanner_ret(line);
+            printf("ID (%s)\n", buf);
+            return ID;
         }
-    }
+    } 
 
     // Gia kathe xarakthra pou einai arithmos ginetai h topothethsh tou sthn yylval
     while (c >= '0' && c <= '9')
@@ -163,55 +214,73 @@ int yylex() {
     if (num)
     {
         ungetc(c, stdin);
-        printf("\tScanner returned token: INTCONST (%d)\n", yylval);
+        print_scanner_ret(line);
+        printf("INTCONST (%d)\n", yylval);
         return INTCONST;
     } else {
         switch (c)
         {
-            // Ομάδα 15: αν ο χαρακτήρας είναι το σύμβολο - πρόκειται για αφαίρεση.
+            // Ομάδα 15: αν ο χαρακτήρας είναι το σύμβολο ',' πρόκειται για κόμμα.
+            case ',':
+                print_scanner_ret(line);
+                printf("COMMA (%c)\n", c);
+                return COMMA;
+            // Ομάδα 15: αν ο χαρακτήρας είναι το σύμβολο '-' πρόκειται για αφαίρεση.
             case '-':
-                printf("\tScanner returned token: MINUS (%c)\n", c);
+                print_scanner_ret(line);
+                printf("MINUS (%c)\n", c);
                 return MINUS;
             // Ean o xarakthras einai to symbolo + prokeitai gia prosthesh
             case '+':
-                printf("\tScanner returned token: PLUS + (%c)\n", c);
+                print_scanner_ret(line);
+                printf("PLUS + (%c)\n", c);
                 return PLUS;
             // Ean prokeitai gia ton eidiko xarakthra neas grammhs
             case '\n':
                 yylval = 0;
                 //Αυξάνουμε τον μετρητή γραμμής
                 line++;
-                printf("* Line %d:\n\tScanner returned token: NEWLINE (\\n)\n",line);
+                print_scanner_ret(line);
+                printf("NEWLINE (\\n)\n",line);
                 return NEWLINE;
             // Ean prokeitai gia ton eidiko xarakthra telous arxeiou
             case EOF:
-                printf("\tScanner returned token: EOF (EOF)\n");
+                print_scanner_ret(line);
+                printf("EOF (EOF)\n");
                 exit(0);
             // Ομάδα 15: αν ο χαρακτήρας είναι το σύμβολο / πρόκειται για διαίρεση
             case '/':
-                printf("\tScanner returned token: DIVISION (DIV)\n");
+                print_scanner_ret(line);
+                printf("DIVISION (DIV)\n");
                 return DIV;
             // Ομάδα 15: αν ο χαρακτήρας είναι το σύμβολο * πρόκειται για πολλαπλασιασμό
             case '*':
-                printf("\tScanner returned token: MULTI (*)\n");
+                print_scanner_ret(line);
+                printf("MULTI (*)\n");
                 return MULTI;
             case '=':
-                printf("\tScanner returned token: EQ (=)\n");
+                print_scanner_ret(line);
+                printf("EQ (=)\n");
                 return EQ;
             case ';':
-                printf("\tScanner returned token: SEMI (;)\n");
+                print_scanner_ret(line);
+                printf("SEMI (;)\n");
                 return SEMI;
             case '(':
-                printf("\tScanner returned token: PAR_START ( ( )\n");
+                print_scanner_ret(line);
+                printf("PAR_START ( ( )\n");
                 return PAR_START;
-            case ':':
-                printf("\tScanner returned token: PAR_END ( ) )\n");
+            case ')':
+                print_scanner_ret(line);
+                printf("PAR_END ( ) )\n");
                 return PAR_END;
             case '{':
-                printf("\tScanner returned token: BRA_START ( { )\n");
+                print_scanner_ret(line);
+                printf("BRA_START ( { )\n");
                 return BRA_START;
             case '}':
-                printf("\tScanner returned token: BRA_END ( } )\n");
+                print_scanner_ret(line);
+                printf("BRA_END ( } )\n");
                 return BRA_END;
             default:
                 // Gia otidhpote allo kalese thn yyerror me mhnyma lathous

@@ -1,4 +1,4 @@
-int main () {
+func main (argc, argv) {
     int metavliti = 1;
     int variable = 0;
     int res  = variable + 1;
