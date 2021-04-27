@@ -41,7 +41,7 @@
    kanonas me ta dedomena eisodou, ekteleitai o kwdikas C pou brisketai anamesa sta
    agkistra. H anamenomenh syntaksh einai: onoma : kanonas { kwdikas C } */
 program:
-        program expression NEWLINE { printf("\t* Result: %d\n", $3); }
+        program expressions NEWLINE {}
         |
         ;
 expression:
@@ -57,10 +57,8 @@ expression:
         | expression EQ expression SEMI            { $$ = $1 = $3;    }
         ;
 
-expr: expression '\n'
-
-expressions: expressions expr
-             | expr
+expressions: expressions expression
+             | expression
              ;
 
 %%
