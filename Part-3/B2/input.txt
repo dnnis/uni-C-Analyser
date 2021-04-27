@@ -9,4 +9,6 @@ func main (argc, argv) {
     int res6 = 100/5;
     int res7 = 700-800;
     int res8 = 1 / 1;
+    int res9 = 1 ^ 100;
+    int res9 = 10 ^ variable;
 }

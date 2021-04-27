@@ -71,13 +71,14 @@
 
 /* Orismoi kai dhlwseis glwssas C. Otidhpote exei na kanei me orismo h arxikopoihsh
    metablhtwn & synarthsewn, arxeia header kai dhlwseis #define mpainei se auto to shmeio */
+        #include <math.h>
         #include <stdio.h>
         #include <stdlib.h>
         #include <string.h>
         int yylex(void);
         void yyerror(char *);
 
-#line 81 "bison-SA.c"
+#line 82 "bison-SA.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -133,7 +134,8 @@ extern int yydebug;
     BRA_START = 270,               /* BRA_START  */
     BRA_END = 271,                 /* BRA_END  */
     KEYWORD_VAR_TYPE = 272,        /* KEYWORD_VAR_TYPE  */
-    KEYWORD_FUNC = 273             /* KEYWORD_FUNC  */
+    KEYWORD_FUNC = 273,            /* KEYWORD_FUNC  */
+    POW = 274                      /* POW  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -174,17 +176,18 @@ enum yysymbol_kind_t
   YYSYMBOL_BRA_END = 16,                   /* BRA_END  */
   YYSYMBOL_KEYWORD_VAR_TYPE = 17,          /* KEYWORD_VAR_TYPE  */
   YYSYMBOL_KEYWORD_FUNC = 18,              /* KEYWORD_FUNC  */
-  YYSYMBOL_YYACCEPT = 19,                  /* $accept  */
-  YYSYMBOL_program = 20,                   /* program  */
-  YYSYMBOL_expr_part = 21,                 /* expr_part  */
-  YYSYMBOL_expr_proc = 22,                 /* expr_proc  */
-  YYSYMBOL_body = 23,                      /* body  */
-  YYSYMBOL_in_bra = 24,                    /* in_bra  */
-  YYSYMBOL_arguments = 25,                 /* arguments  */
-  YYSYMBOL_func_par = 26,                  /* func_par  */
-  YYSYMBOL_declaration = 27,               /* declaration  */
-  YYSYMBOL_assignment = 28,                /* assignment  */
-  YYSYMBOL_valid = 29                      /* valid  */
+  YYSYMBOL_POW = 19,                       /* POW  */
+  YYSYMBOL_YYACCEPT = 20,                  /* $accept  */
+  YYSYMBOL_program = 21,                   /* program  */
+  YYSYMBOL_expr_part = 22,                 /* expr_part  */
+  YYSYMBOL_expr_proc = 23,                 /* expr_proc  */
+  YYSYMBOL_body = 24,                      /* body  */
+  YYSYMBOL_in_bra = 25,                    /* in_bra  */
+  YYSYMBOL_arguments = 26,                 /* arguments  */
+  YYSYMBOL_func_par = 27,                  /* func_par  */
+  YYSYMBOL_declaration = 28,               /* declaration  */
+  YYSYMBOL_assignment = 29,                /* assignment  */
+  YYSYMBOL_valid = 30                      /* valid  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -506,19 +509,19 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  2
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   67
+#define YYLAST   79
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  19
+#define YYNTOKENS  20
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  11
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  28
+#define YYNRULES  30
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  53
+#define YYNSTATES  56
 
 /* YYMAXUTOK -- Last valid token kind.  */
-#define YYMAXUTOK   273
+#define YYMAXUTOK   274
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
@@ -559,16 +562,17 @@ static const yytype_int8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
        5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
-      15,    16,    17,    18
+      15,    16,    17,    18,    19
 };
 
 #if YYDEBUG
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    43,    43,    44,    49,    50,    55,    56,    57,    58,
-      59,    60,    65,    66,    71,    76,    77,    78,    83,    84,
-      89,    90,    95,    99,   100,   101,   102,   103,   104
+       0,    45,    45,    46,    51,    52,    57,    58,    59,    60,
+      61,    62,    63,    68,    69,    74,    78,    79,    80,    85,
+      86,    91,    92,    93,    98,   102,   103,   104,   105,   106,
+     107
 };
 #endif
 
@@ -587,8 +591,9 @@ static const char *const yytname[] =
   "\"end of file\"", "error", "\"invalid token\"", "INTCONST", "ID",
   "PLUS", "MINUS", "DIV", "MULTI", "EQ", "SEMI", "COMMA", "NEWLINE",
   "PAR_START", "PAR_END", "BRA_START", "BRA_END", "KEYWORD_VAR_TYPE",
-  "KEYWORD_FUNC", "$accept", "program", "expr_part", "expr_proc", "body",
-  "in_bra", "arguments", "func_par", "declaration", "assignment", "valid", YY_NULLPTR
+  "KEYWORD_FUNC", "POW", "$accept", "program", "expr_part", "expr_proc",
+  "body", "in_bra", "arguments", "func_par", "declaration", "assignment",
+  "valid", YY_NULLPTR
 };
 
 static const char *
@@ -604,7 +609,7 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 static const yytype_int16 yytoknum[] =
 {
        0,   256,   257,   258,   259,   260,   261,   262,   263,   264,
-     265,   266,   267,   268,   269,   270,   271,   272,   273
+     265,   266,   267,   268,   269,   270,   271,   272,   273,   274
 };
 #endif
 
@@ -622,12 +627,12 @@ static const yytype_int16 yytoknum[] =
      STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-     -16,     6,   -16,   -16,    -4,   -16,    42,     4,    21,    58,
-      17,   -16,   -16,    18,    19,   -16,    -1,    35,   -16,    24,
-      23,   -16,    -1,    -1,    -1,    -1,    -1,    25,   -16,   -16,
-     -16,   -16,   -16,   -16,    -1,    -1,   -16,   -16,   -16,   -16,
-     -16,    -1,   -16,    -7,     8,   -16,    -1,   -16,   -16,    29,
-     -16,    -1,   -16
+     -16,     7,   -16,   -16,    -7,   -16,    61,     4,     5,    43,
+      11,   -16,   -16,    20,    21,   -16,     1,    51,   -16,    23,
+      24,   -16,     1,     1,     1,     1,     1,     1,    27,   -16,
+     -16,   -16,   -16,   -16,   -16,     1,     1,   -16,   -16,   -16,
+     -16,   -16,   -16,     1,    43,   -16,    -8,    25,   -16,     1,
+     -16,   -16,    22,   -16,     1,   -16
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -635,25 +640,25 @@ static const yytype_int8 yypact[] =
      means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       3,     0,     1,     4,     5,    27,     0,     0,     0,     0,
-       0,    28,    26,     0,     0,     2,     0,     0,    13,    20,
-       0,     5,     0,     0,     0,     0,     0,     0,    23,    24,
-      25,    22,    14,    12,     0,    17,     7,     8,    10,     9,
-      11,     0,    21,     0,     0,     6,     0,    19,    18,     0,
-      16,     0,    15
+       3,     0,     1,     4,     5,    30,     0,     0,     0,     0,
+       0,    29,    28,     0,     0,     2,     0,     0,    14,    21,
+       0,     5,     0,     0,     0,     0,     0,     0,     0,    25,
+      26,    27,    24,    15,    13,     0,    18,     7,     8,    10,
+       9,    11,    12,     0,    22,    23,     0,     0,     6,     0,
+      20,    19,     0,    17,     0,    16
 };
 
   /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
      -16,   -16,    -9,   -15,   -16,   -16,   -16,   -16,   -16,   -16,
-      14
+       6
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-       0,     1,     9,    10,    17,    11,    44,    12,    13,    14,
+       0,     1,     9,    10,    17,    11,    47,    12,    13,    14,
       15
 };
 
@@ -662,52 +667,56 @@ static const yytype_int8 yydefgoto[] =
      number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-      27,    31,     3,    21,    46,    16,     2,    47,    19,     3,
-       4,     3,    21,    36,    37,    38,    39,    40,     5,    42,
-      18,     6,    48,     7,     8,    20,    43,    28,    29,    30,
-       0,    33,    45,    34,    41,    49,    35,    50,     3,     4,
-      51,     0,    52,     0,     0,     3,     4,     5,     0,     0,
-       6,    32,     7,     8,     5,     0,     0,     6,     0,     7,
-       8,     3,    21,    22,    23,    24,    25,    26
+      28,    32,    16,    49,     3,    21,    50,     2,    19,    20,
+       3,     4,    18,    37,    38,    39,    40,    41,    42,     5,
+      45,    29,     6,    34,     7,     8,    44,    46,     3,    21,
+      30,    31,    35,    54,    48,    28,    43,    36,    52,    51,
+      53,     0,     0,     0,     0,    55,     3,    21,    22,    23,
+      24,    25,    26,     0,     3,     4,     0,     0,     0,     0,
+       0,     0,    27,     5,     3,     4,     6,    33,     7,     8,
+       0,     0,     0,     5,     0,     0,     6,     0,     7,     8
 };
 
 static const yytype_int8 yycheck[] =
 {
-       9,    16,     3,     4,    11,     9,     0,    14,     4,     3,
-       4,     3,     4,    22,    23,    24,    25,    26,    12,    34,
-       6,    15,    14,    17,    18,     4,    35,    10,    10,    10,
-      -1,    17,    41,     9,     9,    44,    13,    46,     3,     4,
-      11,    -1,    51,    -1,    -1,     3,     4,    12,    -1,    -1,
-      15,    16,    17,    18,    12,    -1,    -1,    15,    -1,    17,
-      18,     3,     4,     5,     6,     7,     8,     9
+       9,    16,     9,    11,     3,     4,    14,     0,     4,     4,
+       3,     4,     6,    22,    23,    24,    25,    26,    27,    12,
+      35,    10,    15,    17,    17,    18,    35,    36,     3,     4,
+      10,    10,     9,    11,    43,    44,     9,    13,    47,    14,
+      49,    -1,    -1,    -1,    -1,    54,     3,     4,     5,     6,
+       7,     8,     9,    -1,     3,     4,    -1,    -1,    -1,    -1,
+      -1,    -1,    19,    12,     3,     4,    15,    16,    17,    18,
+      -1,    -1,    -1,    12,    -1,    -1,    15,    -1,    17,    18
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
      symbol of state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,    20,     0,     3,     4,    12,    15,    17,    18,    21,
-      22,    24,    26,    27,    28,    29,     9,    23,    29,     4,
-       4,     4,     5,     6,     7,     8,     9,    21,    10,    10,
-      10,    22,    16,    29,     9,    13,    21,    21,    21,    21,
-      21,     9,    22,    21,    25,    21,    11,    14,    14,    21,
-      21,    11,    21
+       0,    21,     0,     3,     4,    12,    15,    17,    18,    22,
+      23,    25,    27,    28,    29,    30,     9,    24,    30,     4,
+       4,     4,     5,     6,     7,     8,     9,    19,    22,    10,
+      10,    10,    23,    16,    30,     9,    13,    22,    22,    22,
+      22,    22,    22,     9,    22,    23,    22,    26,    22,    11,
+      14,    14,    22,    22,    11,    22
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    19,    20,    20,    21,    21,    22,    22,    22,    22,
-      22,    22,    23,    23,    24,    25,    25,    25,    26,    26,
-      27,    27,    28,    29,    29,    29,    29,    29,    29
+       0,    20,    21,    21,    22,    22,    23,    23,    23,    23,
+      23,    23,    23,    24,    24,    25,    26,    26,    26,    27,
+      27,    28,    28,    28,    29,    30,    30,    30,    30,    30,
+      30
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
 static const yytype_int8 yyr2[] =
 {
        0,     2,     2,     0,     1,     1,     4,     3,     3,     3,
-       3,     3,     2,     1,     3,     4,     3,     0,     5,     5,
-       2,     4,     3,     2,     2,     2,     1,     1,     1
+       3,     3,     3,     2,     1,     3,     4,     3,     0,     5,
+       5,     2,     4,     4,     3,     2,     2,     2,     1,     1,
+       1
 };
 
 
@@ -1175,103 +1184,115 @@ yyreduce:
   switch (yyn)
     {
   case 6: /* expr_proc: expr_part expr_part EQ expr_part  */
-#line 55 "bison-SA.y"
-                                           { yyval = yyvsp[-3] = yyvsp[-1]; }
-#line 1181 "bison-SA.c"
+#line 57 "bison-SA.y"
+                                           { yyval = yyvsp[-3] = yyvsp[-1];    }
+#line 1190 "bison-SA.c"
     break;
 
   case 7: /* expr_proc: expr_part PLUS expr_part  */
-#line 56 "bison-SA.y"
-                                           { yyval = yyvsp[-2] + yyvsp[0]; }
-#line 1187 "bison-SA.c"
+#line 58 "bison-SA.y"
+                                           { yyval = yyvsp[-2] + yyvsp[0];    }
+#line 1196 "bison-SA.c"
     break;
 
   case 8: /* expr_proc: expr_part MINUS expr_part  */
-#line 57 "bison-SA.y"
-                                           { yyval = yyvsp[-2] - yyvsp[0]; }
-#line 1193 "bison-SA.c"
+#line 59 "bison-SA.y"
+                                           { yyval = yyvsp[-2] - yyvsp[0];    }
+#line 1202 "bison-SA.c"
     break;
 
   case 9: /* expr_proc: expr_part MULTI expr_part  */
-#line 58 "bison-SA.y"
-                                           { yyval = yyvsp[-2] * yyvsp[0]; }
-#line 1199 "bison-SA.c"
+#line 60 "bison-SA.y"
+                                           { yyval = yyvsp[-2] * yyvsp[0];    }
+#line 1208 "bison-SA.c"
     break;
 
   case 10: /* expr_proc: expr_part DIV expr_part  */
-#line 59 "bison-SA.y"
-                                           { yyval = yyvsp[-2] / yyvsp[0]; }
-#line 1205 "bison-SA.c"
+#line 61 "bison-SA.y"
+                                           { yyval = yyvsp[-2] / yyvsp[0];    }
+#line 1214 "bison-SA.c"
     break;
 
   case 11: /* expr_proc: expr_part EQ expr_part  */
-#line 60 "bison-SA.y"
-                                           { yyval = yyvsp[-2] = yyvsp[0]; }
-#line 1211 "bison-SA.c"
+#line 62 "bison-SA.y"
+                                           { yyval = yyvsp[-2] = yyvsp[0];    }
+#line 1220 "bison-SA.c"
     break;
 
-  case 14: /* in_bra: BRA_START body BRA_END  */
-#line 71 "bison-SA.y"
-                                    { yyval = yyvsp[-2]; }
-#line 1217 "bison-SA.c"
+  case 12: /* expr_proc: expr_part POW expr_part  */
+#line 63 "bison-SA.y"
+                                           { yyval = pow(yyvsp[-2],yyvsp[0]); }
+#line 1226 "bison-SA.c"
     break;
 
-  case 18: /* func_par: KEYWORD_FUNC ID PAR_START arguments PAR_END  */
-#line 83 "bison-SA.y"
+  case 19: /* func_par: KEYWORD_FUNC ID PAR_START arguments PAR_END  */
+#line 85 "bison-SA.y"
                                                            { printf("Valid arguments\n"); }
-#line 1223 "bison-SA.c"
+#line 1232 "bison-SA.c"
     break;
 
-  case 19: /* func_par: KEYWORD_FUNC ID PAR_START expr_part PAR_END  */
-#line 84 "bison-SA.y"
-                                                           { printf("Valid argument\n");  }
-#line 1229 "bison-SA.c"
+  case 20: /* func_par: KEYWORD_FUNC ID PAR_START expr_part PAR_END  */
+#line 86 "bison-SA.y"
+                                                           { printf("Valid argument\n" ); }
+#line 1238 "bison-SA.c"
     break;
 
-  case 20: /* declaration: KEYWORD_VAR_TYPE ID  */
-#line 89 "bison-SA.y"
+  case 21: /* declaration: KEYWORD_VAR_TYPE ID  */
+#line 91 "bison-SA.y"
                                              { yyval = yyvsp[-1]; }
-#line 1235 "bison-SA.c"
+#line 1244 "bison-SA.c"
     break;
 
-  case 21: /* declaration: KEYWORD_VAR_TYPE ID EQ expr_proc  */
-#line 90 "bison-SA.y"
+  case 22: /* declaration: KEYWORD_VAR_TYPE ID EQ expr_part  */
+#line 92 "bison-SA.y"
                                              { yyval = yyvsp[-3]; }
-#line 1241 "bison-SA.c"
+#line 1250 "bison-SA.c"
     break;
 
-  case 22: /* assignment: ID EQ expr_proc  */
-#line 95 "bison-SA.y"
+  case 23: /* declaration: KEYWORD_VAR_TYPE ID EQ expr_proc  */
+#line 93 "bison-SA.y"
+                                             { yyval = yyvsp[-3]; }
+#line 1256 "bison-SA.c"
+    break;
+
+  case 24: /* assignment: ID EQ expr_proc  */
+#line 98 "bison-SA.y"
                           { yyval = yyvsp[-2]; }
-#line 1247 "bison-SA.c"
+#line 1262 "bison-SA.c"
     break;
 
-  case 23: /* valid: expr_proc SEMI  */
-#line 99 "bison-SA.y"
-                           { printf("Valid expression!\n"); }
-#line 1253 "bison-SA.c"
-    break;
-
-  case 24: /* valid: declaration SEMI  */
-#line 100 "bison-SA.y"
-                           { printf("Valid declaration\n"); }
-#line 1259 "bison-SA.c"
-    break;
-
-  case 25: /* valid: assignment SEMI  */
-#line 101 "bison-SA.y"
-                           { printf("Valid assignment\n");  }
-#line 1265 "bison-SA.c"
-    break;
-
-  case 26: /* valid: func_par  */
+  case 25: /* valid: expr_proc SEMI  */
 #line 102 "bison-SA.y"
-                           { printf("Valid function declaration\n"); }
-#line 1271 "bison-SA.c"
+                           { printf("Valid expression!\n");           }
+#line 1268 "bison-SA.c"
+    break;
+
+  case 26: /* valid: declaration SEMI  */
+#line 103 "bison-SA.y"
+                           { printf("Valid declaration!\n");          }
+#line 1274 "bison-SA.c"
+    break;
+
+  case 27: /* valid: assignment SEMI  */
+#line 104 "bison-SA.y"
+                           { printf("Valid assignment!\n" );          }
+#line 1280 "bison-SA.c"
+    break;
+
+  case 28: /* valid: func_par  */
+#line 105 "bison-SA.y"
+                           { printf("Valid function declaration!\n"); }
+#line 1286 "bison-SA.c"
+    break;
+
+  case 29: /* valid: in_bra  */
+#line 106 "bison-SA.y"
+                           { printf("Valid function body!\n");        }
+#line 1292 "bison-SA.c"
     break;
 
 
-#line 1275 "bison-SA.c"
+#line 1296 "bison-SA.c"
 
       default: break;
     }
@@ -1465,7 +1486,7 @@ yyreturn:
   return yyresult;
 }
 
-#line 107 "bison-SA.y"
+#line 110 "bison-SA.y"
 
 
 void print_scanner_ret(int line) {
@@ -1644,6 +1665,10 @@ int yylex() {
                 print_scanner_ret(line);
                 printf("BRA_END ( } )\n");
                 return BRA_END;
+            case '^':
+                print_scanner_ret(line);
+                printf("POW ( ^ )\n");
+                return POW;
             default:
                 // Gia otidhpote allo kalese thn yyerror me mhnyma lathous
                 yyerror("invalid character");

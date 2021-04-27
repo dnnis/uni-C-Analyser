@@ -21,14 +21,16 @@
    metablhtwn & synarthsewn, arxeia header kai dhlwseis #define mpainei se auto to shmeio */
         #include <stdio.h>
         #include <stdlib.h>
+        #include <math.h>
         int yylex(void);
         void yyerror(char *);
 %}
 
 /* Orismos twn anagnwrisimwn lektikwn monadwn. */
-%token INTCONST VARIABLE PLUS MINUS DIV MULTI EQ SEMI NEWLINE
+%token INTCONST VARIABLE PLUS MINUS DIV MULTI EQ SEMI NEWLINE POW
 
 /* Orismos proteraiothtwn sta tokens */
+%left POW
 %left PLUS MINUS
 %left DIV MULTI
 %right EQ
@@ -39,19 +41,20 @@
    kanonas me ta dedomena eisodou, ekteleitai o kwdikas C pou brisketai anamesa sta
    agkistra. H anamenomenh syntaksh einai: onoma : kanonas { kwdikas C } */
 program:
-        program expression NEWLINE { printf("\t* Result: %d\n", $2); }
+        program expression NEWLINE { printf("\t* Result: %d\n", $3); }
         |
         ;
 expression:
-          INTCONST                                 { $$ = $1; }
-        | VARIABLE                                 { $$ = $1; }
-        | VARIABLE VARIABLE                        { $$ = $1; }
-        | expression PLUS expression               { $$ = $1 + $3;}
-        | expression MINUS expression              { $$ = $1 - $3;}
-        | expression MULTI expression              { $$ = $1 * $3;}
-        | expression DIV expression                { $$ = $1 / $3;}
-        | expression expression EQ expression SEMI { $$ = $1 = $3;}
-        | expression EQ expression SEMI            { $$ = $1 = $3;}
+          INTCONST                                 { $$ = $1;         }
+        | VARIABLE                                 { $$ = $1;         }
+        | VARIABLE VARIABLE                        { $$ = $1;         }
+        | expression PLUS expression               { $$ = $1 + $3;    }
+        | expression MINUS expression              { $$ = $1 - $3;    }
+        | expression MULTI expression              { $$ = $1 * $3;    }
+        | expression DIV expression                { $$ = $1 / $3;    }
+        | expression POW expression                { $$ = pow($1,$3); }
+        | expression expression EQ expression SEMI { $$ = $1 = $3;    }
+        | expression EQ expression SEMI            { $$ = $1 = $3;    }
         ;
 
 expr: expression '\n'
@@ -169,6 +172,12 @@ int yylex() {
     {
         printf("\tScanner returned: MULTIPLY (MULTI)\n");
         return MULTI;
+    }
+
+    else if (c == '^')
+    {
+        printf("\tScanner returned: POWER (POW)\n");
+        return POW;
     }
 
     else if (c == '=')

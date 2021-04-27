@@ -19,6 +19,7 @@
 %{
 /* Orismoi kai dhlwseis glwssas C. Otidhpote exei na kanei me orismo h arxikopoihsh
    metablhtwn & synarthsewn, arxeia header kai dhlwseis #define mpainei se auto to shmeio */
+        #include <math.h>
         #include <stdio.h>
         #include <stdlib.h>
         #include <string.h>
@@ -27,9 +28,10 @@
 %}
 
 /* Orismos twn anagnwrisimwn lektikwn monadwn. */
-%token INTCONST ID PLUS MINUS DIV MULTI EQ SEMI COMMA NEWLINE PAR_START PAR_END BRA_START BRA_END KEYWORD_VAR_TYPE KEYWORD_FUNC
+%token INTCONST ID PLUS MINUS DIV MULTI EQ SEMI COMMA NEWLINE PAR_START PAR_END BRA_START BRA_END KEYWORD_VAR_TYPE KEYWORD_FUNC POW
 
 /* Orismos proteraiothtwn sta tokens */
+%left POW
 %left PLUS MINUS
 %left DIV MULTI
 %right EQ
@@ -52,12 +54,13 @@ expr_part:
 
 // Εδώ ορίζονται ποιές είναι οι εκφράσεις υπο επεξεργασία
 expr_proc:
-          expr_part expr_part EQ expr_part { $$ = $1 = $3; }
-        | expr_part PLUS expr_part         { $$ = $1 + $3; }
-        | expr_part MINUS expr_part        { $$ = $1 - $3; }
-        | expr_part MULTI expr_part        { $$ = $1 * $3; }
-        | expr_part DIV expr_part          { $$ = $1 / $3; }
-        | expr_part EQ expr_part           { $$ = $1 = $3; }
+          expr_part expr_part EQ expr_part { $$ = $1 = $3;    }
+        | expr_part PLUS expr_part         { $$ = $1 + $3;    }
+        | expr_part MINUS expr_part        { $$ = $1 - $3;    }
+        | expr_part MULTI expr_part        { $$ = $1 * $3;    }
+        | expr_part DIV expr_part          { $$ = $1 / $3;    }
+        | expr_part EQ expr_part           { $$ = $1 = $3;    }
+        | expr_part POW expr_part          { $$ = pow($1,$3); }
         ;
 
 // Εδώ ορίζεται το "σώμα" του κώδικα, δηλαδή ένας αριθμός συντακτικά σωστών εκφράσεων.
@@ -68,8 +71,7 @@ body:
 
 // Εδώ ορίζεται τι μπορεί να βρίσκεται μέσα σε αγκύλες
 in_bra:
-        BRA_START body BRA_END      { $$ = $1; }
-        ;
+        BRA_START body BRA_END
 
 // Εδώ ορίζεται τι μπορεί να είναι ορίσματα μιας συνάρτησης
 arguments:
@@ -81,12 +83,13 @@ arguments:
 // Εδώ ορίζεται τι θεωρείται ορισμός μιας συνάρτησης
 func_par: 
           KEYWORD_FUNC ID PAR_START arguments PAR_END      { printf("Valid arguments\n"); }
-        | KEYWORD_FUNC ID PAR_START expr_part PAR_END      { printf("Valid argument\n");  }
+        | KEYWORD_FUNC ID PAR_START expr_part PAR_END      { printf("Valid argument\n" ); }
         ;
 
 // Εδώ ορίζεται τι θεωρείται ορισμός μιας μεταβλητής
 declaration: 
           KEYWORD_VAR_TYPE ID                { $$ = $1; }
+        | KEYWORD_VAR_TYPE ID EQ expr_part   { $$ = $1; }
         | KEYWORD_VAR_TYPE ID EQ expr_proc   { $$ = $1; }
         ;
 
@@ -96,12 +99,12 @@ assignment:
 
 // Εδώ ορίζεται τι θεωρείται συντακτικά σώστο
 valid:
-          expr_proc SEMI   { printf("Valid expression!\n"); }
-        | declaration SEMI { printf("Valid declaration\n"); }
-        | assignment SEMI  { printf("Valid assignment\n");  }
-        | func_par         { printf("Valid function declaration\n"); }
+          expr_proc   SEMI { printf("Valid expression!\n");           }
+        | declaration SEMI { printf("Valid declaration!\n");          }
+        | assignment  SEMI { printf("Valid assignment!\n" );          }
+        | func_par         { printf("Valid function declaration!\n"); }
+        | in_bra           { printf("Valid function body!\n");        }
         | NEWLINE
-        | in_bra
         ;
 
 %%
@@ -282,6 +285,10 @@ int yylex() {
                 print_scanner_ret(line);
                 printf("BRA_END ( } )\n");
                 return BRA_END;
+            case '^':
+                print_scanner_ret(line);
+                printf("POW ( ^ )\n");
+                return POW;
             default:
                 // Gia otidhpote allo kalese thn yyerror me mhnyma lathous
                 yyerror("invalid character");
