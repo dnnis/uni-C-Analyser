@@ -37,25 +37,25 @@ int line = 1;
    synhthws idiaiterws makroskelwn kai dysnohtwn, kanonikwn ekfrasewn */
 
 SEMI                 ;
-NEQ                  !=
-MOD                  \%
 PAR_END              \)
 PAR_START            \(
 BRACE_END            \}
 BRACE_START          \{
 BRACKET_END          \]
 BRACKET_START        \[
-LOGICAL_OR           \|\|
+NEQ                  !=
+MOD                  \%
 TYPE_EQ              ==?
 TYPE_DIV             \/=?
+LOGICAL_OR           \|\|
 TYPE_MULTI           \*=?
 TYPE_EXCLA           \!=?
 TYPE_AMPER           \&\&
 TYPE_LESSER          \<=?
 TYPE_GREATER         \>=?
-WHITESPACE           [ \t]+
 TYPE_PLUS            \+[\+=]?
 TYPE_MINUS           \-[\-=]?
+WHITESPACE           [ \t]+
 STRING               '.*'|\".*\"
 INTCONST             0|[1-9]+[0-9]*
 PUNCTUATOR           #|\:|\~|\&|\^|\,
@@ -86,25 +86,14 @@ FLOAT                [0-9]+\.[0-9]+|[0-9]+\.[0-9]+e[0-9]+
     -Κενά:          Ο λεκτικός μας αναλυτής αγνοεί τα κενά και τις κενές γραμμές, δεν
                     επιτρέφει token για αυτά για το συντακτικό αναλυτή. */
 %%
-{MOD}           {   return MOD;            }
-{SEMI}          {   return SEMI;           }
-{FLOAT}         {   return FLOAT;          }
-{STRING}        {   return STRING;         }
-{PAR_END}       {   return PAR_END;        }
-{INTCONST}      {   return INTCONST;       }
-{PAR_START}     {   return PAR_START;      }
-{BRACE_END}     {   return BRACE_END;      }
-{LOGICAL_OR}    {   return LOGICAL_OR;     }
-{PUNCTUATOR}    {   return PUNCTUATOR;     }
-{BRACE_START}   {   return BRACE_START;    }
-{BRACKET_END}   {   return BRACKET_END;    }
-{BRACKET_START} {   return BRACKET_START;  }
 {IDENTIFIER}    {
                     if      ( !strcmp(yytext,"if"      ) ) return KEYWORD;
                     else if ( !strcmp(yytext,"do"      ) ) return KEYWORD;
                     else if ( !strcmp(yytext,"for"     ) ) return KEYWORD;
                     else if ( !strcmp(yytext,"int"     ) ) return KEYWORD;
                     else if ( !strcmp(yytext,"case"    ) ) return KEYWORD;
+                    else if ( !strcmp(yytext,"func"    ) ) return KEYWORD;
+                    else if ( !strcmp(yytext,"else"    ) ) return KEYWORD;
                     else if ( !strcmp(yytext,"long"    ) ) return KEYWORD;
                     else if ( !strcmp(yytext,"void"    ) ) return KEYWORD;
                     else if ( !strcmp(yytext,"while"   ) ) return KEYWORD;
@@ -118,47 +107,118 @@ FLOAT                [0-9]+\.[0-9]+|[0-9]+\.[0-9]+e[0-9]+
                     else if ( !strcmp(yytext,"struct"  ) ) return KEYWORD;
                     else if ( !strcmp(yytext,"switch"  ) ) return KEYWORD;
                     else if ( !strcmp(yytext,"continue") ) return KEYWORD;
-                    else if ( !strcmp(yytext,"func"    ) ) return KEYWORD_FUNC;
                     else return IDENTIFIER;
                 }
-{TYPE_EXCLA}    {
-                    if (!strcmp(yytext, "!=")) return NEQ;
-                    else return EXCLA;
-                }
-{TYPE_EQ}       {
-                    if (!strcmp(yytext, "==")) return EQQ;
-                    else return EQ;
-                }
-{TYPE_DIV}      {
-                    if (!strcmp(yytext, "/=")) return EQ_DIV;
-                    else return DIV;
-                }
-{TYPE_MULTI}    {
-                    if (!strcmp(yytext, "*=")) return EQ_MULTI;
-                    else return MULTI;
+{TYPE_GREATER}  {
+                   if (!strcmp(yytext, ">="))
+                   {
+                       printf("GREATER_EQ!");
+                       return GREATER_EQ;
+                   } else if (!strcmp(yytext, ">")) {
+                       printf("GREATER!"); 
+                       return GREATER;
+                   }
                 }
 {TYPE_LESSER}   {
-                    if (!strcmp(yytext, "<=")) return LESSER_EQ;
-                    else return LESSER;
+                   if (!strcmp(yytext, "<="))
+                   {
+                       printf("LESSER_EQ!");
+                       return EQQ;
+                   } else if (!strcmp(yytext, "<")) {
+                       printf("LESSER!"); 
+                       return EQ;
+                   }
                 }
-{TYPE_GREATER}  {
-                    if (!strcmp(yytext, ">=")) return GREATER_EQ;
-                    else return GREATER;
-                }
-{TYPE_AMPER}    {
-                    if (!strcmp(yytext, "&&")) return LOGICAL_AND;
-                    else return AMPER;
+{TYPE_EQ}       {
+                   if (!strcmp(yytext, "=="))
+                   {
+                       printf("EQQ!");
+                       return EQQ;
+                   } else if (!strcmp(yytext, "=")) {
+                       printf("EQ!"); 
+                       return EQ;
+                   }
                 }
 {TYPE_MINUS}    {
-                    if      (!strcmp(yytext, "--")) return MINUSMINUS;
-                    else if (!strcmp(yytext, "-=")) return EQ_MINUS;
-                    else return MINUS;
+                   if (!strcmp(yytext, "--"))
+                   {
+                       printf("MINUSMINUS!");
+                       return MINUSMINUS;
+                   } else if (!strcmp(yytext, "-=")) {
+                       printf("EQ_MINUS!");
+                       return EQ_MINUS;
+                   } else if (!strcmp(yytext, "-")) {
+                       printf("MINUS!");
+                       printf(" yytext=%s",yytext);
+                       return MINUS;
+                   }
                 }
 {TYPE_PLUS}     {
-                    if      (!strcmp(yytext, "++")) return PLUSPLUS;
-                    else if (!strcmp(yytext, "+=")) return EQ_PLUS;
-                    else return EQ_PLUS;
+                   if (!strcmp(yytext, "++"))
+                   {
+                       printf("PLUSPLUS!");
+                       return PLUSPLUS;
+                   } else if (!strcmp(yytext, "+=")) {
+                       printf("EQ_PLUS!");
+                       return EQ_PLUS;
+                   } else if (!strcmp(yytext, "+")) {
+                       printf("PLUS!");
+                       return EQ_PLUS;
+                   }
                 }
+{TYPE_DIV}      {
+                  if (!strcmp(yytext, "/="))
+                  {
+                      printf("EQ_DIV");
+                      return EQ_DIV;
+                  } else if (!strcmp(yytext, "/")) {
+                      printf("DIV!");
+                      return DIV;
+                  }
+                }
+{TYPE_MULTI}    {
+                  if (!strcmp(yytext, "*="))
+                  {
+                      printf("EQ_MULTI");
+                      return EQ_MULTI;
+                  } else if (!strcmp(yytext, "*")) {
+                      printf("MULTI!");
+                      return MULTI;
+                  }
+                }
+{TYPE_EXCLA}    {
+                  if (!strcmp(yytext, "!="))
+                  {
+                      printf("NEQ");
+                      return NEQ;
+                  } else {
+                      printf("EXCLA!");
+                      return EXCLA;
+                  }
+                }
+{TYPE_AMPER}    {
+                  if (!strcmp(yytext, "&&"))
+                  {
+                      printf("LOGICAL_AND!");
+                      return LOGICAL_AND;
+                  } else if (!strcmp(yytext, "&")) {
+                      printf("AMPER!");
+                      return AMPER;
+                  }
+                }
+{MOD}           { return MOD;                }
+{SEMI}          { return SEMI;               }
+{FLOAT}         { return FLOAT;              }
+{STRING}        { return STRING;             }
+{INTCONST}      { return INTCONST;           }
+{PAR_END}       { return PAR_END;            }
+{PAR_START}     { return PAR_START;          }
+{BRACE_END}     { return BRACE_END;          }
+{BRACE_START}   { return BRACE_START;        }
+{BRACKET_END}   { return BRACKET_END;        }
+{BRACKET_START} { return BRACKET_START;      }
+{LOGICAL_OR}    { return LOGICAL_OR;         }
+{PUNCTUATOR}    { return PUNCTUATOR;         }
 {WHITESPACE}    { /*Do nothing, whitespace*/ }
 {COMMENT}       { /*Do nothing, comment*/    }
 \n              { line++;                    }
@@ -168,14 +228,21 @@ FLOAT                [0-9]+\.[0-9]+|[0-9]+\.[0-9]+e[0-9]+
 
 /* H synarthsh main: O kwdikas autos tha topotheththei autousios sto
    programma C pou tha dhmiourghsei to Flex kai tha apotelesei to arxiko
-   shmeio ekteleshs ths efarmoghs tou lektikou analyth. 
+   shmeio ekteleshs ths efarmoghs tou lektikou analyth. */
 int main (int argc, char **argv)
 {
     int token;
+    /* H synarthsh yylex diabazei xarakthres apo thn eisodo kai prospathei
+       na angnwrisei tokens. Ta tokens pou anagnwrizei einai auta pou exoun
+       oristei sto paron arxeio, anamesa sta %% kai %%. An o kwdikas pou
+       antistoixei se kapoio pattern periexei thn entolh 'return TIMH', h
+       yylex() epistrefei thn timh auth h opoia kai apothhkeyetai sth
+       metablhth token. */
     while( (token=yylex()) >= 0 )
     {
+        /* Gia kathe token pou anagnwristhke, ektypwnetai h grammh pou auto
+           brethhke kathws kai to onoma tou mazi me thn timh tou. */
         fprintf(yyout, "* From FLEX: Line=%d, value=\"%s\"\n", line, yytext);
     }
     return 0;
 }
-*/

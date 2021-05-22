@@ -25,6 +25,7 @@
         #include <string.h>
         extern int yylex(void);
         extern int yyparse(void);
+        extern FILE *yyin;
         void yyerror(char *);
 %}
 
@@ -32,12 +33,13 @@
     1. WRITE LOGIC FOR BRACKETS ( "[" and "]" )
     2. MAKE DEBUG MODE
     3. FLEX ANALYSES CHAR BY CHAR. MAKE CHANGES ON SA LOGIC (EQ_MINUS etc)
+    4. DOCUMENTATION AND COMMENTS
 */ 
 
 /* Orismos twn anagnwrisimwn lektikwn monadwn. */
 %token SEMI
        COMMA
-       FLOAT 
+       FLOAT
        STRING
        NEWLINE
        KEYWORD
@@ -46,19 +48,18 @@
        IDENTIFIER
        AMPER EXCLA
        KEYWORD_FUNC
-       LOG_OR LOG_AND
        KEYWORD_VAR_TYPE
        PAR_START PAR_END
-       BRACES_START BRACES_END
-       BRACKETS_START BRACKETS_END
+       BRACE_START BRACE_END
+       LOGICAL_OR LOGICAL_AND
+       BRACKET_START BRACKET_END
        GREATER LESSER GREATER_EQ LESSER_EQ
        EQQ EQ NEQ EQ_MULTI EQ_DIV EQ_PLUS EQ_MINUS
        PLUS PLUSPLUS MINUS MINUSMINUS DIV MOD MULTI POW
 /* Orismos proteraiothtwn sta tokens */
-%left POW
-%left PLUS MINUS
-%left DIV MULTI
-%right EQ
+%left  POW
+%left  PLUS MINUS
+%left  DIV MULTI
 
 %%
 
@@ -72,19 +73,38 @@ program:
 
 // Εδώ ορίζεται το τι μπορεί να είναι κομμάτι μίας έκφρασης. Ένας χαρακτήρας ή ένας αριθμός
 expr_part:
-          INTCONST
+          STRING
+        | KEYWORD
+        | INTCONST
         | IDENTIFIER
+        ;
+
+operator:
+          EQ
+        | EQQ
+        | NEQ
+        | DIV
+        | POW
+        | PLUS
+        | MINUS
+        | MULTI
+        | EQ_DIV
+        | EQ_PLUS
+        | EQ_MULTI
+        | EQ_MINUS
+        ;
+
+in_de_crement_operator:
+        | MINUSMINUS
+        | PLUSPLUS
         ;
 
 // Εδώ ορίζονται ποιές είναι οι εκφράσεις υπο επεξεργασία
 expr_proc:
-          expr_part expr_part EQ expr_part { $$ = $1 = $3;    }
-        | expr_part PLUS expr_part         { $$ = $1 + $3;    }
-        | expr_part MINUS expr_part        { $$ = $1 - $3;    }
-        | expr_part MULTI expr_part        { $$ = $1 * $3;    }
-        | expr_part DIV expr_part          { $$ = $1 / $3;    }
-        | expr_part EQ expr_part           { $$ = $1 = $3;    }
-        | expr_part POW expr_part          { $$ = pow($1,$3); }
+          expr_part operator expr_part EQ expr_part
+        | expr_part operator expr_part
+        | expr_part in_de_crement_operator
+        | in_de_crement_operator expr_part
         ;
 
 // Εδώ ορίζεται το "σώμα" του κώδικα, δηλαδή ένας αριθμός συντακτικά σωστών εκφράσεων.
@@ -95,7 +115,7 @@ body:
 
 // Εδώ ορίζεται τι μπορεί να βρίσκεται μέσα σε αγκύλες
 in_bra:
-        BRACES_START body BRACES_END
+        BRACE_START body BRACE_END
 
 // Εδώ ορίζεται τι μπορεί να είναι ορίσματα μιας συνάρτησης
 arguments:
@@ -126,8 +146,8 @@ valid:
           expr_proc   SEMI { printf("Valid expression!\n");           }
         | declaration SEMI { printf("Valid declaration!\n");          }
         | assignment  SEMI { printf("Valid assignment!\n" );          }
-        | func_par         { printf("Valid function declaration!\n"); }
         | in_bra           { printf("Valid function body!\n");        }
+        | func_par         { printf("Valid function declaration!\n"); }
         | NEWLINE
         ;
 
@@ -151,6 +171,15 @@ void yyerror(char *s) {
    Sthn sygkekrimenh periptwsh apla kalei thn synarthsh yyparse tou Bison
    gia na ksekinhsei h syntaktikh analysh. */
 int main(void)  {
-        yyparse();
-        return 0;
+    // Open a file handle to a particular file:
+    FILE *myfile = fopen("input.txt", "r");
+    // Make sure it is valid:
+    if (!myfile) {
+      printf("* Error: cannot open the \"input.txt\" file!");
+      return -1;
+    }
+    // Set Flex to read from it instead of defaulting to STDIN:
+  //  yyin = myfile;
+    yyparse();
+    return 0;
 }
