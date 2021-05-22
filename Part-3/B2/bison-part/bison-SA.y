@@ -111,6 +111,7 @@ expr_proc:
 body:
         body valid
         | valid
+        |
         ;
 
 // Εδώ ορίζεται τι μπορεί να βρίσκεται μέσα σε αγκύλες
@@ -126,15 +127,14 @@ arguments:
 
 // Εδώ ορίζεται τι θεωρείται ορισμός μιας συνάρτησης
 func_par: 
-          KEYWORD_FUNC IDENTIFIER PAR_START arguments PAR_END      { printf("Valid arguments\n"); }
-        | KEYWORD_FUNC IDENTIFIER PAR_START expr_part PAR_END      { printf("Valid argument\n" ); }
+          KEYWORD_FUNC IDENTIFIER PAR_START arguments PAR_END { printf("Valid arguments\n"); }
+        | KEYWORD_FUNC IDENTIFIER PAR_START expr_part PAR_END { printf("Valid argument\n" ); }
         ;
 
 // Εδώ ορίζεται τι θεωρείται ορισμός μιας μεταβλητής
-declaration: 
-          KEYWORD_VAR_TYPE IDENTIFIER                { $$ = $1; }
-        | KEYWORD_VAR_TYPE IDENTIFIER EQ expr_part   { $$ = $1; }
-        | KEYWORD_VAR_TYPE IDENTIFIER EQ expr_proc   { $$ = $1; }
+declaration:
+          KEYWORD_VAR_TYPE IDENTIFIER
+        | KEYWORD_VAR_TYPE IDENTIFIER EQ expr_proc
         ;
 
 // Εδώ ορίζεται τι θεωρείται ανάθεση σε μεταβλητή
@@ -179,7 +179,6 @@ int main(void)  {
       return -1;
     }
     // Set Flex to read from it instead of defaulting to STDIN:
-  //  yyin = myfile;
+ //   yyin = myfile;
     yyparse();
-    return 0;
 }

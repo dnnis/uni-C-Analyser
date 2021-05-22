@@ -103,22 +103,22 @@ FLOAT                [0-9]+\.[0-9]+|[0-9]+\.[0-9]+e[0-9]+
                     if      ( !strcmp(yytext,"if"      ) ) return KEYWORD;
                     else if ( !strcmp(yytext,"do"      ) ) return KEYWORD;
                     else if ( !strcmp(yytext,"for"     ) ) return KEYWORD;
-                    else if ( !strcmp(yytext,"int"     ) ) return KEYWORD;
                     else if ( !strcmp(yytext,"case"    ) ) return KEYWORD;
-                    else if ( !strcmp(yytext,"long"    ) ) return KEYWORD;
                     else if ( !strcmp(yytext,"void"    ) ) return KEYWORD;
                     else if ( !strcmp(yytext,"while"   ) ) return KEYWORD;
                     else if ( !strcmp(yytext,"break"   ) ) return KEYWORD;
-                    else if ( !strcmp(yytext,"float"   ) ) return KEYWORD;
-                    else if ( !strcmp(yytext,"const"   ) ) return KEYWORD;
-                    else if ( !strcmp(yytext,"short"   ) ) return KEYWORD;
-                    else if ( !strcmp(yytext,"double"  ) ) return KEYWORD;
                     else if ( !strcmp(yytext,"return"  ) ) return KEYWORD;
                     else if ( !strcmp(yytext,"sizeof"  ) ) return KEYWORD;
                     else if ( !strcmp(yytext,"struct"  ) ) return KEYWORD;
                     else if ( !strcmp(yytext,"switch"  ) ) return KEYWORD;
                     else if ( !strcmp(yytext,"continue") ) return KEYWORD;
                     else if ( !strcmp(yytext,"func"    ) ) return KEYWORD_FUNC;
+                    else if ( !strcmp(yytext,"int"     ) ) return KEYWORD_VAR_TYPE;
+                    else if ( !strcmp(yytext,"long"    ) ) return KEYWORD_VAR_TYPE;
+                    else if ( !strcmp(yytext,"short"   ) ) return KEYWORD_VAR_TYPE;
+                    else if ( !strcmp(yytext,"float"   ) ) return KEYWORD_VAR_TYPE;
+                    else if ( !strcmp(yytext,"const"   ) ) return KEYWORD_VAR_TYPE;
+                    else if ( !strcmp(yytext,"double"  ) ) return KEYWORD_VAR_TYPE;
                     else return IDENTIFIER;
                 }
 {TYPE_EXCLA}    {
