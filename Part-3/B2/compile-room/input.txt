@@ -6,6 +6,8 @@ func main (argc, argv) {
     int res3 = variable + metavliti;
     int res4 = variable - 1;
     int res5 = 5 + 5;
+    lathos
+    $$$
     int res6 = 100/5;
     int res7 = 700-800;
     int res8 = 1 / 1;

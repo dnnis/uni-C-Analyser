@@ -1,8 +1,14 @@
-/* Όνομα αρχείου:       bison-SA.y
-   Περιγραφή:           Αυτό είναι το αρχείο με το οποίο ορίζουμε τις λειτουργίες
-                        του συντακτικού μας αναλυτή, υλοποιημένο σε GNU Bison.
-   Συγγραφείς:          Ομάδα 15
-   Σχόλια:
+/* Όνομα αρχείου:      bison-SA.y
+   Περιγραφή:          Αυτό είναι το αρχείο με το οποίο ορίζουμε τις
+                       λειτουργίες του συντακτικού μας αναλυτή,
+                       υλοποιημένο σε GNU Bison.
+   Συγγραφείς:         ΟΜΑΔΑ 15:
+                        Διονύσης Νικολόπουλος
+                        Αθανάσιος Αναγνωστόπουλος
+                        Άριστείδης Αναγνωστόπουλος
+                        Σπυρίδων Φλώρος
+   Σχόλια:             Κάποια σχόλια έχουν γίνει πάνω στον κώδικα, αλλά ο
+                       κώδικας επίσης εξηγήται στο PDF της εργασίας.
    Οδηγίες Εκτέλεσης:
 */
 
@@ -16,7 +22,8 @@
 extern int yylex(void);
 extern int yyparse(void);
 void yyerror(char *);
-// Αρχικοποιούμε τον pointer για τη εισαγωγή δεδομένων με αρχείο και όχι απο το 
+void print_report(int,int,int,int);
+// Αρχικοποιούμε τον pointer για τη εισαγωγή δεδομένων με αρχείο και όχι απο το
 // stdin
 extern FILE *yyin;
 // Αρχικοποιούμε τις μεταβλητές για το άθροισμα των σωστών και λάθος εκφράσεων
@@ -25,12 +32,12 @@ int cor_words = 0;
 int cor_expr = 0;
 int inc_words = 0;
 int inc_expr = 0;
-
 %}
 
 /*TODO:
     1. WRITE LOGIC FOR BRACKETS ( "[" and "]" )
     2. DOCUMENTATION AND COMMENTS
+    3. line counting etc?
 */
 
 %union
@@ -43,6 +50,7 @@ int inc_expr = 0;
 
 // Ορισμός των λεκτικών μονάδων
 %token EOP
+       UNKNOWN
        <sval> SEMI
        <sval> COMMA
        <sval> FLOAT
@@ -88,6 +96,7 @@ expr_part:
         | KEYWORD     { cor_words++; }
         | INTCONST    { cor_words++; }
         | IDENTIFIER  { cor_words++; }
+        | UNKNOWN     { inc_words++; }
         ;
 
 operator:
@@ -161,19 +170,23 @@ valid:
         | in_bra           { cor_expr++; printf("Valid function body!\n");        }
         | func_par         { cor_expr++; printf("Valid function declaration!\n"); }
         | NEWLINE
-        | EOP { print_report(cor_words,cor_expr); }
+        | EOP { print_report(cor_words,cor_expr,inc_words,inc_expr); }
+        | error { inc_expr++; }
         ;
 
 %%
 
-// Αυτή η συνάρτηση τυπώνει το πλήθος των σωστών και λάθος λέξεων και εκφράσεων 
-// Ενεργοποιήται μόλις ο bison δεχθεί token EOP (End of Parse, δίνεται στο τέλος του αρχείου)
-void print_report (int cor_words, int cor_expr) {
-    printf(" /------- RUN REPORT: ------/\n"
-           "* Number of correct words: %d\n"
-           "* Number of correct expressions: %d\n"
-           "* Number of incorrect words: %d\n"
-           "* Number of incorrect expressions: %d\n"
+// Αυτή η συνάρτηση τυπώνει το πλήθος των σωστών και λάθος λέξεων και εκφράσεων
+// Ενεργοποιήται μόλις ο bison δεχθεί token EOP
+// (End of Parse, δίνεται στο τέλος του αρχείου)
+void print_report (int cor_words, int cor_expr,int inc_words,int inc_expr) {
+    printf("*---- RUN REPORT: ---------------------*\n"
+           "| Number of  correct  words       : %d\n"
+           "| Number of  correct  expressions : %d\n"
+           "*--------------------------------------*\n"
+           "| Number of incorrect words       : %d\n"
+           "| Number of incorrect expressions : %d\n"
+           "*--------------------------------------*\n"
            , cor_words, cor_expr, inc_words, inc_expr);
 }
 
@@ -181,7 +194,6 @@ void print_report (int cor_words, int cor_expr) {
    apo thn yyparse otan yparksei kapoio syntaktiko lathos. Sthn parakatw periptwsh h
    synarthsh epi ths ousias typwnei mhnyma lathous sthn othonh. */
 void yyerror(char *s) {
-    inc_words++;
     fprintf(stderr, "Error: %s\n", s);
 }
 

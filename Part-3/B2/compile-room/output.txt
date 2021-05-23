@@ -14,8 +14,10 @@ Valid declaration!
 Valid declaration!
 Valid function body!
 #END-OF-FILE#
- /------- RUN REPORT: ------/
-* Number of correct words: 34
-* Number of correct expressions: 15
-* Number of incorrect words: 0
-* Number of incorrect expressions: 0
+*---- RUN REPORT: ---------------------*
+| Number of  correct  words       : 35
+| Number of  correct  expressions : 15
+*--------------------------------------*
+| Number of incorrect words       : 3
+| Number of incorrect expressions : 4
+*--------------------------------------*

@@ -490,19 +490,19 @@ int yy_flex_debug = 0;
 char *yytext;
 #line 1 "flex-LA.l"
 /*
-    Ομάδα 15
+    * Ομάδα 15
 
     Όνομα αρχείου:      uni_c_analyser.c
-    Περιγραφή:          Λεκτικός Αναλυτής για την γλώσσα προγραμματισμού Uni-C 
-    Συγγραφείς:         Διονύσης Νικολόπουλος
+    Περιγραφή:          Λεκτικός Αναλυτής για την γλώσσα προγραμματισμού Uni-C
+    Συγγραφείς:         ΟΜΑΔΑ 15:
+                        Διονύσης Νικολόπουλος
                         Αθανάσιος Αναγνωστόπουλος
                         Άριστείδης Αναγνωστόπουλος
                         Σπυρίδων Φλώρος
-    Σχόλια:             Κάποια σχόλια έχουν γίνει πάνω στον κώδικα, αλλά ο κώδικας επίσης εξηγήται στο PDF της εργασίας.
-    Οδηγίες Εκτέλεσης:  Λόγω της υλοποίησης makefile, τρέχετε απλά την εντολή make στον τρέχοντα κατάλογο που βρίσκεται το αρχέιο. Εναλλακτικά:
-                        flex -o uni-c-analyser.c uni-c-analyser.l
-                        gcc -o uni-c-analyser uni-c-analyser.c
-                        ./uni-c-analyser
+    Σχόλια:             Κάποια σχόλια έχουν γίνει πάνω στον κώδικα, αλλά ο
+                        κώδικας επίσης εξηγήται στο PDF της εργασίας.
+    Οδηγίες Εκτέλεσης:  Λόγω της υλοποίησης makefile, τρέχετε απλά την εντολή
+                        make στον τρέχοντα κατάλογο που βρίσκεται το αρχέιο.
 */
 /* H anagnwsh periorizetai se ena mono arxeio kai termatizei sto prwto EOF */
 /* Kwdikas C gia orismo twn apaitoumenwn header files kai twn metablhtwn.
@@ -516,7 +516,7 @@ char *yytext;
 #include "bison-SA.tab.h"
 
 /* Orismos metrhth trexousas grammhs */
-//int line = 1;
+int line = 1;
 
 #line 521 "lex.yy.c"
 /* Onomata kai antistoixoi orismoi (ypo morfh kanonikhs ekfrashs).
@@ -1018,7 +1018,7 @@ YY_RULE_SETUP
 case 29:
 YY_RULE_SETUP
 #line 173 "flex-LA.l"
-{ fprintf(yyout, "Line=%d, UNKNOWN TOKEN, value=\"%s\"\n", line, yytext); }
+{ return UNKNOWN; }
 	YY_BREAK
 /*Εδώ καλούμε ένα τμήμα κώδικα που μας βοηθά να δώσουμε ένα token στον bison
   για να δηλώσουμε το τέλος του αρχείου, αποτρέποντας όμως τον bison να
