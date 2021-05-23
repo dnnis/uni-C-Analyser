@@ -54,48 +54,49 @@ extern int yydebug;
     YYEOF = 0,                     /* "end of file"  */
     YYerror = 256,                 /* error  */
     YYUNDEF = 257,                 /* "invalid token"  */
-    SEMI = 258,                    /* SEMI  */
-    COMMA = 259,                   /* COMMA  */
-    FLOAT = 260,                   /* FLOAT  */
-    DOUBLE = 261,                  /* DOUBLE  */
-    STRING = 262,                  /* STRING  */
-    NEWLINE = 263,                 /* NEWLINE  */
-    KEYWORD = 264,                 /* KEYWORD  */
-    INTCONST = 265,                /* INTCONST  */
-    PUNCTUATOR = 266,              /* PUNCTUATOR  */
-    IDENTIFIER = 267,              /* IDENTIFIER  */
-    AMPER = 268,                   /* AMPER  */
-    EXCLA = 269,                   /* EXCLA  */
-    KEYWORD_RET = 270,             /* KEYWORD_RET  */
-    KEYWORD_FUNC = 271,            /* KEYWORD_FUNC  */
-    KEYWORD_VAR_TYPE = 272,        /* KEYWORD_VAR_TYPE  */
-    PAR_START = 273,               /* PAR_START  */
-    PAR_END = 274,                 /* PAR_END  */
-    BRACE_START = 275,             /* BRACE_START  */
-    BRACE_END = 276,               /* BRACE_END  */
-    LOGICAL_OR = 277,              /* LOGICAL_OR  */
-    LOGICAL_AND = 278,             /* LOGICAL_AND  */
-    BRACKET_START = 279,           /* BRACKET_START  */
-    BRACKET_END = 280,             /* BRACKET_END  */
-    GREATER = 281,                 /* GREATER  */
-    LESSER = 282,                  /* LESSER  */
-    GREATER_EQ = 283,              /* GREATER_EQ  */
-    LESSER_EQ = 284,               /* LESSER_EQ  */
-    EQQ = 285,                     /* EQQ  */
-    EQ = 286,                      /* EQ  */
-    NEQ = 287,                     /* NEQ  */
-    EQ_MULTI = 288,                /* EQ_MULTI  */
-    EQ_DIV = 289,                  /* EQ_DIV  */
-    EQ_PLUS = 290,                 /* EQ_PLUS  */
-    EQ_MINUS = 291,                /* EQ_MINUS  */
-    PLUS = 292,                    /* PLUS  */
-    PLUSPLUS = 293,                /* PLUSPLUS  */
-    MINUS = 294,                   /* MINUS  */
-    MINUSMINUS = 295,              /* MINUSMINUS  */
-    DIV = 296,                     /* DIV  */
-    MOD = 297,                     /* MOD  */
-    MULTI = 298,                   /* MULTI  */
-    POW = 299                      /* POW  */
+    EOP = 258,                     /* EOP  */
+    SEMI = 259,                    /* SEMI  */
+    COMMA = 260,                   /* COMMA  */
+    FLOAT = 261,                   /* FLOAT  */
+    DOUBLE = 262,                  /* DOUBLE  */
+    STRING = 263,                  /* STRING  */
+    NEWLINE = 264,                 /* NEWLINE  */
+    KEYWORD = 265,                 /* KEYWORD  */
+    INTCONST = 266,                /* INTCONST  */
+    PUNCTUATOR = 267,              /* PUNCTUATOR  */
+    IDENTIFIER = 268,              /* IDENTIFIER  */
+    AMPER = 269,                   /* AMPER  */
+    EXCLA = 270,                   /* EXCLA  */
+    KEYWORD_RET = 271,             /* KEYWORD_RET  */
+    KEYWORD_FUNC = 272,            /* KEYWORD_FUNC  */
+    KEYWORD_VAR_TYPE = 273,        /* KEYWORD_VAR_TYPE  */
+    PAR_START = 274,               /* PAR_START  */
+    PAR_END = 275,                 /* PAR_END  */
+    BRACE_START = 276,             /* BRACE_START  */
+    BRACE_END = 277,               /* BRACE_END  */
+    LOGICAL_OR = 278,              /* LOGICAL_OR  */
+    LOGICAL_AND = 279,             /* LOGICAL_AND  */
+    BRACKET_START = 280,           /* BRACKET_START  */
+    BRACKET_END = 281,             /* BRACKET_END  */
+    GREATER = 282,                 /* GREATER  */
+    LESSER = 283,                  /* LESSER  */
+    GREATER_EQ = 284,              /* GREATER_EQ  */
+    LESSER_EQ = 285,               /* LESSER_EQ  */
+    EQQ = 286,                     /* EQQ  */
+    EQ = 287,                      /* EQ  */
+    NEQ = 288,                     /* NEQ  */
+    EQ_MULTI = 289,                /* EQ_MULTI  */
+    EQ_DIV = 290,                  /* EQ_DIV  */
+    EQ_PLUS = 291,                 /* EQ_PLUS  */
+    EQ_MINUS = 292,                /* EQ_MINUS  */
+    PLUS = 293,                    /* PLUS  */
+    PLUSPLUS = 294,                /* PLUSPLUS  */
+    MINUS = 295,                   /* MINUS  */
+    MINUSMINUS = 296,              /* MINUSMINUS  */
+    DIV = 297,                     /* DIV  */
+    MOD = 298,                     /* MOD  */
+    MULTI = 299,                   /* MULTI  */
+    POW = 300                      /* POW  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -104,14 +105,14 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 41 "bison-SA.y"
+#line 45 "bison-SA.y"
 
     int    ival;
     char*  sval;
     float  fval;
     double dval;
 
-#line 115 "bison-SA.tab.h"
+#line 116 "bison-SA.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

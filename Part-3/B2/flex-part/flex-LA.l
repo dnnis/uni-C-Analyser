@@ -65,6 +65,8 @@ COMMENT              \/\*(.|\n)*?\*\/|\/\/.*
 IDENTIFIER           [a-zA-Z_]([0-9_a-zA-Z]*)
 FLOAT                [0-9]+\.[0-9]+|[0-9]+\.[0-9]+e[0-9]+
 
+%x REALLYEND
+
 /* Gia kathe pattern (aristera) pou tairiazei ekteleitai o antistoixos
    kwdikas mesa sta agkistra. H entolh return epitrepei thn epistrofh
    mias arithmhtikhs timhs mesw ths synarthshs yylex() */
@@ -166,7 +168,8 @@ FLOAT                [0-9]+\.[0-9]+|[0-9]+\.[0-9]+e[0-9]+
 {WHITESPACE}    { /*Do nothing, whitespace*/ }
 {COMMENT}       { /*Do nothing, comment*/    }
 \n              { line++;                    }
-<<EOF>>         { printf("#END-OF-FILE#\n"); exit(0); }
+<INITIAL><<EOF>>         { BEGIN(REALLYEND); printf("#END-OF-FILE#\n"); return EOP; }
+<REALLYEND><<EOF>> {return 0;}
 .               { fprintf(yyout, "Line=%d, UNKNOWN TOKEN, value=\"%s\"\n", line, yytext); }
 %%
 

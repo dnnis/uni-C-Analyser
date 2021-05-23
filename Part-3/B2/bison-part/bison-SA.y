@@ -27,6 +27,10 @@ extern int yylex(void);
 extern int yyparse(void);
 extern FILE *yyin;
 void yyerror(char *);
+int cor_words = 0;
+int cor_expr = 0;
+int inc_words = 0;
+int inc_expr = 0;
 
 %}
 
@@ -46,7 +50,8 @@ void yyerror(char *);
 }
 
 /* Orismos twn anagnwrisimwn lektikwn monadwn. */
-%token <sval> SEMI
+%token EOP
+       <sval> SEMI
        <sval> COMMA
        <sval> FLOAT
        <dval> DOUBLE
@@ -84,32 +89,32 @@ program:
 
 // Εδώ ορίζεται το τι μπορεί να είναι κομμάτι μίας έκφρασης. Ένας χαρακτήρας ή ένας αριθμός
 expr_part:
-          FLOAT
-        | STRING
-        | DOUBLE
-        | KEYWORD
-        | INTCONST
-        | IDENTIFIER
+          FLOAT       { cor_words++; }
+        | STRING      { cor_words++; }
+        | DOUBLE      { cor_words++; }
+        | KEYWORD     { cor_words++; }
+        | INTCONST    { cor_words++; }
+        | IDENTIFIER  { cor_words++; }
         ;
 
 operator:
-          EQ
-        | EQQ
-        | NEQ
-        | DIV
-        | POW
-        | PLUS
-        | MINUS
-        | MULTI
-        | EQ_DIV
-        | EQ_PLUS
-        | EQ_MULTI
-        | EQ_MINUS
+          EQ          { cor_words++; }
+        | EQQ         { cor_words++; }
+        | NEQ         { cor_words++; }
+        | DIV         { cor_words++; }
+        | POW         { cor_words++; }
+        | PLUS        { cor_words++; }
+        | MINUS       { cor_words++; }
+        | MULTI       { cor_words++; }
+        | EQ_DIV      { cor_words++; }
+        | EQ_PLUS     { cor_words++; }
+        | EQ_MULTI    { cor_words++; }
+        | EQ_MINUS    { cor_words++; }
         ;
 
 in_de_crement_operator:
-        | MINUSMINUS
-        | PLUSPLUS
+        | MINUSMINUS  { cor_words++; }
+        | PLUSPLUS    { cor_words++; }
         ;
 
 // Εδώ ορίζονται ποιές είναι οι εκφράσεις υπο επεξεργασία
@@ -141,8 +146,8 @@ arguments:
 
 // Εδώ ορίζεται τι θεωρείται ορισμός μιας συνάρτησης
 func_par:
-          KEYWORD_FUNC IDENTIFIER PAR_START arguments PAR_END { printf("Valid arguments\n"); }
-        | KEYWORD_FUNC IDENTIFIER PAR_START expr_part PAR_END { printf("Valid argument\n" ); }
+          KEYWORD_FUNC IDENTIFIER PAR_START arguments PAR_END {cor_expr++; printf("Valid arguments\n"); }
+        | KEYWORD_FUNC IDENTIFIER PAR_START expr_part PAR_END {cor_expr++; printf("Valid argument\n" ); }
         ;
 
 // Εδώ ορίζεται τι θεωρείται ορισμός μιας μεταβλητής
@@ -157,12 +162,13 @@ assignment:
 
 // Εδώ ορίζεται τι θεωρείται συντακτικά σώστο
 valid:
-          expr_proc   SEMI { printf("Valid expression!\n");           }
-        | assignment  SEMI { printf("Valid assignment!\n");           }
-        | declaration SEMI { printf("Valid declaration!\n");          }
-        | in_bra           { printf("Valid function body!\n");        }
-        | func_par         { printf("Valid function declaration!\n"); }
+          expr_proc   SEMI { cor_expr++; printf("Valid expression!\n");           }
+        | assignment  SEMI { cor_expr++; printf("Valid assignment!\n");           }
+        | declaration SEMI { cor_expr++; printf("Valid declaration!\n");          }
+        | in_bra           { cor_expr++; printf("Valid function body!\n");        }
+        | func_par         { cor_expr++; printf("Valid function declaration!\n"); }
         | NEWLINE
+        | EOP { print_report(cor_words,cor_expr); }
         ;
 
 %%
@@ -173,13 +179,22 @@ void print_scanner_ret(int line) {
 }
 */
 
+void print_report (int cor_words, int cor_expr) {
+    printf(" /------- RUN REPORT: ------/\n"
+           "* Number of correct words: %d\n"
+           "* Number of correct expressions: %d\n"
+           "* Number of incorrect words: %d\n"
+           "* Number of incorrect expressions: %d\n"
+           , cor_words, cor_expr, inc_words, inc_expr);
+}
+
 /* H synarthsh yyerror xrhsimopoieitai gia thn anafora sfalmatwn. Sygkekrimena kaleitai
    apo thn yyparse otan yparksei kapoio syntaktiko lathos. Sthn parakatw periptwsh h
    synarthsh epi ths ousias typwnei mhnyma lathous sthn othonh. */
 void yyerror(char *s) {
-        fprintf(stderr, "Error: %s\n", s);
+    inc_words++;
+    fprintf(stderr, "Error: %s\n", s);
 }
-
 
 /* H synarthsh main pou apotelei kai to shmeio ekkinhshs tou programmatos.
    Sthn sygkekrimenh periptwsh apla kalei thn synarthsh yyparse tou Bison
@@ -199,6 +214,5 @@ int main(void)  {
     // Set Flex to read from it instead of defaulting to STDIN:
     yyin = myfile;
     yyparse();
-
     fclose(myfile);
 }
