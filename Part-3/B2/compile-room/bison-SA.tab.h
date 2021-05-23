@@ -57,50 +57,64 @@ extern int yydebug;
     SEMI = 258,                    /* SEMI  */
     COMMA = 259,                   /* COMMA  */
     FLOAT = 260,                   /* FLOAT  */
-    STRING = 261,                  /* STRING  */
-    NEWLINE = 262,                 /* NEWLINE  */
-    KEYWORD = 263,                 /* KEYWORD  */
-    INTCONST = 264,                /* INTCONST  */
-    PUNCTUATOR = 265,              /* PUNCTUATOR  */
-    IDENTIFIER = 266,              /* IDENTIFIER  */
-    AMPER = 267,                   /* AMPER  */
-    EXCLA = 268,                   /* EXCLA  */
-    KEYWORD_FUNC = 269,            /* KEYWORD_FUNC  */
-    KEYWORD_VAR_TYPE = 270,        /* KEYWORD_VAR_TYPE  */
-    PAR_START = 271,               /* PAR_START  */
-    PAR_END = 272,                 /* PAR_END  */
-    BRACE_START = 273,             /* BRACE_START  */
-    BRACE_END = 274,               /* BRACE_END  */
-    LOGICAL_OR = 275,              /* LOGICAL_OR  */
-    LOGICAL_AND = 276,             /* LOGICAL_AND  */
-    BRACKET_START = 277,           /* BRACKET_START  */
-    BRACKET_END = 278,             /* BRACKET_END  */
-    GREATER = 279,                 /* GREATER  */
-    LESSER = 280,                  /* LESSER  */
-    GREATER_EQ = 281,              /* GREATER_EQ  */
-    LESSER_EQ = 282,               /* LESSER_EQ  */
-    EQQ = 283,                     /* EQQ  */
-    EQ = 284,                      /* EQ  */
-    NEQ = 285,                     /* NEQ  */
-    EQ_MULTI = 286,                /* EQ_MULTI  */
-    EQ_DIV = 287,                  /* EQ_DIV  */
-    EQ_PLUS = 288,                 /* EQ_PLUS  */
-    EQ_MINUS = 289,                /* EQ_MINUS  */
-    PLUS = 290,                    /* PLUS  */
-    PLUSPLUS = 291,                /* PLUSPLUS  */
-    MINUS = 292,                   /* MINUS  */
-    MINUSMINUS = 293,              /* MINUSMINUS  */
-    DIV = 294,                     /* DIV  */
-    MOD = 295,                     /* MOD  */
-    MULTI = 296,                   /* MULTI  */
-    POW = 297                      /* POW  */
+    DOUBLE = 261,                  /* DOUBLE  */
+    STRING = 262,                  /* STRING  */
+    NEWLINE = 263,                 /* NEWLINE  */
+    KEYWORD = 264,                 /* KEYWORD  */
+    INTCONST = 265,                /* INTCONST  */
+    PUNCTUATOR = 266,              /* PUNCTUATOR  */
+    IDENTIFIER = 267,              /* IDENTIFIER  */
+    AMPER = 268,                   /* AMPER  */
+    EXCLA = 269,                   /* EXCLA  */
+    KEYWORD_RET = 270,             /* KEYWORD_RET  */
+    KEYWORD_FUNC = 271,            /* KEYWORD_FUNC  */
+    KEYWORD_VAR_TYPE = 272,        /* KEYWORD_VAR_TYPE  */
+    PAR_START = 273,               /* PAR_START  */
+    PAR_END = 274,                 /* PAR_END  */
+    BRACE_START = 275,             /* BRACE_START  */
+    BRACE_END = 276,               /* BRACE_END  */
+    LOGICAL_OR = 277,              /* LOGICAL_OR  */
+    LOGICAL_AND = 278,             /* LOGICAL_AND  */
+    BRACKET_START = 279,           /* BRACKET_START  */
+    BRACKET_END = 280,             /* BRACKET_END  */
+    GREATER = 281,                 /* GREATER  */
+    LESSER = 282,                  /* LESSER  */
+    GREATER_EQ = 283,              /* GREATER_EQ  */
+    LESSER_EQ = 284,               /* LESSER_EQ  */
+    EQQ = 285,                     /* EQQ  */
+    EQ = 286,                      /* EQ  */
+    NEQ = 287,                     /* NEQ  */
+    EQ_MULTI = 288,                /* EQ_MULTI  */
+    EQ_DIV = 289,                  /* EQ_DIV  */
+    EQ_PLUS = 290,                 /* EQ_PLUS  */
+    EQ_MINUS = 291,                /* EQ_MINUS  */
+    PLUS = 292,                    /* PLUS  */
+    PLUSPLUS = 293,                /* PLUSPLUS  */
+    MINUS = 294,                   /* MINUS  */
+    MINUSMINUS = 295,              /* MINUSMINUS  */
+    DIV = 296,                     /* DIV  */
+    MOD = 297,                     /* MOD  */
+    MULTI = 298,                   /* MULTI  */
+    POW = 299                      /* POW  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef int YYSTYPE;
+union YYSTYPE
+{
+#line 46 "bison-SA.y"
+
+    int    ival;
+    char*  sval;
+    float  fval;
+    double dval;
+
+#line 115 "bison-SA.tab.h"
+
+};
+typedef union YYSTYPE YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
 #endif

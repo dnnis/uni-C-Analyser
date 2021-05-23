@@ -107,7 +107,7 @@ FLOAT                [0-9]+\.[0-9]+|[0-9]+\.[0-9]+e[0-9]+
                     else if ( !strcmp(yytext,"void"    ) ) return KEYWORD;
                     else if ( !strcmp(yytext,"while"   ) ) return KEYWORD;
                     else if ( !strcmp(yytext,"break"   ) ) return KEYWORD;
-                    else if ( !strcmp(yytext,"return"  ) ) return KEYWORD;
+                    else if ( !strcmp(yytext,"return"  ) ) return KEYWORD_RET;
                     else if ( !strcmp(yytext,"sizeof"  ) ) return KEYWORD;
                     else if ( !strcmp(yytext,"struct"  ) ) return KEYWORD;
                     else if ( !strcmp(yytext,"switch"  ) ) return KEYWORD;

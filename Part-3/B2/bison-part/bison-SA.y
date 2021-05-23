@@ -8,7 +8,7 @@
             panta thn timh 0). Leitourgei autonoma, dhladh xwris Flex kai anagnwrizei kena
             (space & tab), akeraious (dekadikou systhmatos) kai onomata metablhtwn ths glwssas
             Uni-C enw diaxeirizetai tous eidikous xarakthres neas grammhs '\n' (new line)
-            kai 'EOF' (end of file). Kathara gia logous debugging typwnei sthn othonh otidhpote
+            kai 'EOF' (end of file). Kathara gia logous YYDEBUGging typwnei sthn othonh otidhpote
             epistrefei h synarthsh yylex().
    Odhgies ekteleshs:   Dinete "make" xwris ta eisagwgika ston trexonta katalogo. Enallaktika:
             bison -o simple-bison-code.c simple-bison-code.y
@@ -19,43 +19,59 @@
 %{
 /* Orismoi kai dhlwseis glwssas C. Otidhpote exei na kanei me orismo h arxikopoihsh
    metablhtwn & synarthsewn, arxeia header kai dhlwseis #define mpainei se auto to shmeio */
-        #include <math.h>
-        #include <stdio.h>
-        #include <stdlib.h>
-        #include <string.h>
-        extern int yylex(void);
-        extern int yyparse(void);
-        extern FILE *yyin;
-        void yyerror(char *);
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+extern int yylex(void);
+extern int yyparse(void);
+extern FILE *yyin;
+void yyerror(char *);
+
+#define YYERROR_VERBOSE 1
+
+// Η global αυτή μεταβλητή για να κάνουμε το απαραίτητο debugging
+#define YYDEBUG 1
+
 %}
 
-/*TODO: 
+/*TODO:
     1. WRITE LOGIC FOR BRACKETS ( "[" and "]" )
     2. MAKE DEBUG MODE
     3. FLEX ANALYSES CHAR BY CHAR. MAKE CHANGES ON SA LOGIC (EQ_MINUS etc)
     4. DOCUMENTATION AND COMMENTS
-*/ 
+*/
+
+%union
+{
+    int    ival;
+    char*  sval;
+    float  fval;
+    double dval;
+}
 
 /* Orismos twn anagnwrisimwn lektikwn monadwn. */
-%token SEMI
-       COMMA
-       FLOAT
-       STRING
-       NEWLINE
-       KEYWORD
-       INTCONST
-       PUNCTUATOR
-       IDENTIFIER
-       AMPER EXCLA
-       KEYWORD_FUNC
-       KEYWORD_VAR_TYPE
-       PAR_START PAR_END
-       BRACE_START BRACE_END
-       LOGICAL_OR LOGICAL_AND
-       BRACKET_START BRACKET_END
-       GREATER LESSER GREATER_EQ LESSER_EQ
-       EQQ EQ NEQ EQ_MULTI EQ_DIV EQ_PLUS EQ_MINUS
-       PLUS PLUSPLUS MINUS MINUSMINUS DIV MOD MULTI POW
+%token <sval> SEMI
+       <sval> COMMA
+       <sval> FLOAT
+       <dval> DOUBLE
+       <fval> STRING
+       <sval> NEWLINE
+       <sval> KEYWORD
+       <ival> INTCONST
+       <sval> PUNCTUATOR
+       <sval> IDENTIFIER
+       <sval> AMPER EXCLA
+       <sval> KEYWORD_RET
+       <sval> KEYWORD_FUNC
+       <sval> KEYWORD_VAR_TYPE
+       <sval> PAR_START PAR_END
+       <sval> BRACE_START BRACE_END
+       <sval> LOGICAL_OR LOGICAL_AND
+       <sval> BRACKET_START BRACKET_END
+       <sval> GREATER LESSER GREATER_EQ LESSER_EQ
+       <sval> EQQ EQ NEQ EQ_MULTI EQ_DIV EQ_PLUS EQ_MINUS
+       <sval> PLUS PLUSPLUS MINUS MINUSMINUS DIV MOD MULTI POW
 /* Orismos proteraiothtwn sta tokens */
 %left  POW
 %left  PLUS MINUS
@@ -73,10 +89,12 @@ program:
 
 // Εδώ ορίζεται το τι μπορεί να είναι κομμάτι μίας έκφρασης. Ένας χαρακτήρας ή ένας αριθμός
 expr_part:
-          STRING
-        | KEYWORD
-        | INTCONST
-        | IDENTIFIER
+          FLOAT      { if (YYDEBUG) printf("Found float: %f",$1);      }
+        | STRING     { if (YYDEBUG) printf("Found string: %c",$1);     }
+        | DOUBLE     { if (YYDEBUG) printf("Found double: %lf",$1);    }
+        | KEYWORD    { if (YYDEBUG) printf("Found keyword: %s",$1);    }
+        | INTCONST   { if (YYDEBUG) printf("Found intconst: %d",$1);   }
+        | IDENTIFIER { if (YYDEBUG) printf("Found identifier: %s",$1); }
         ;
 
 operator:
@@ -105,6 +123,7 @@ expr_proc:
         | expr_part operator expr_part
         | expr_part in_de_crement_operator
         | in_de_crement_operator expr_part
+        | KEYWORD_RET expr_part
         ;
 
 // Εδώ ορίζεται το "σώμα" του κώδικα, δηλαδή ένας αριθμός συντακτικά σωστών εκφράσεων.
@@ -126,7 +145,7 @@ arguments:
          ;
 
 // Εδώ ορίζεται τι θεωρείται ορισμός μιας συνάρτησης
-func_par: 
+func_par:
           KEYWORD_FUNC IDENTIFIER PAR_START arguments PAR_END { printf("Valid arguments\n"); }
         | KEYWORD_FUNC IDENTIFIER PAR_START expr_part PAR_END { printf("Valid argument\n" ); }
         ;
@@ -139,13 +158,13 @@ declaration:
 
 // Εδώ ορίζεται τι θεωρείται ανάθεση σε μεταβλητή
 assignment:
-          IDENTIFIER EQ expr_proc { $$ = $1; };
+          IDENTIFIER EQ expr_proc
 
 // Εδώ ορίζεται τι θεωρείται συντακτικά σώστο
 valid:
           expr_proc   SEMI { printf("Valid expression!\n");           }
         | declaration SEMI { printf("Valid declaration!\n");          }
-        | assignment  SEMI { printf("Valid assignment!\n" );          }
+        | assignment  SEMI { printf("Valid assignment!\n");           }
         | in_bra           { printf("Valid function body!\n");        }
         | func_par         { printf("Valid function declaration!\n"); }
         | NEWLINE

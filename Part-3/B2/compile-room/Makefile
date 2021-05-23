@@ -1,7 +1,7 @@
 make: 
 	cp ../flex-part/flex-LA.l .
 	cp ../bison-part/bison-SA.y .
-	bison bison-SA.y
+	bison -d bison-SA.y
 	flex flex-LA.l
 	gcc -lm bison-SA.tab.c lex.yy.c -o uni-c-analyser
 clean:
