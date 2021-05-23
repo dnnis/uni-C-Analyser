@@ -29,7 +29,7 @@
 #include "bison-SA.tab.h"
 
 /* Orismos metrhth trexousas grammhs */
-int line = 1;
+//int line = 1;
 
 %}
 /* Onomata kai antistoixoi orismoi (ypo morfh kanonikhs ekfrashs).
@@ -168,21 +168,19 @@ FLOAT                [0-9]+\.[0-9]+|[0-9]+\.[0-9]+e[0-9]+
 {WHITESPACE}    { /*Do nothing, whitespace*/ }
 {COMMENT}       { /*Do nothing, comment*/    }
 \n              { line++;                    }
-<INITIAL><<EOF>>         { BEGIN(REALLYEND); printf("#END-OF-FILE#\n"); return EOP; }
-<REALLYEND><<EOF>> {return 0;}
-.               { fprintf(yyout, "Line=%d, UNKNOWN TOKEN, value=\"%s\"\n", line, yytext); }
+ /*Εδώ το flex "πιάνει" οποιονδήποτε άλλο χαρακτήρα που δεν περιγράφεται απο
+   ις παραπάνω κανονικές εκφράσεις.*/
+. { fprintf(yyout, "Line=%d, UNKNOWN TOKEN, value=\"%s\"\n", line, yytext); }
+ /*Εδώ καλούμε ένα τμήμα κώδικα που μας βοηθά να δώσουμε ένα token στον bison
+  για να δηλώσουμε το τέλος του αρχείου, αποτρέποντας όμως τον bison να
+  τερματίζει άμεσα την εκτέλεση. Έτσι, καταφέρνουμε να εκτελούμε την συνάρτηση
+  print_report() στο bison-SA.y, για να ανεφέρουμε τον αριθμό των σωστών και
+  λανθασμένων λέξεων και εκφράσεων.*/
+<INITIAL><<EOF>>  { BEGIN(REALLYEND); printf("#END-OF-FILE#\n"); return EOP; }
+ /*Εδώ, μετά την πάροδο των προηγούμενων, "πραγματικά" τερματίζουμε την
+  εκτέλεση του flex, έχουμε ήδη τυπώσει την αναφορά με την print_report() με το
+  bison, και αρχίζουμε να τερματίζουμε το πρόγραμμα συνολικά.*/
+<REALLYEND><<EOF>> {yyterminate();}
 %%
-
-/* H synarthsh main: O kwdikas autos tha topotheththei autousios sto
-   programma C pou tha dhmiourghsei to Flex kai tha apotelesei to arxiko
-   shmeio ekteleshs ths efarmoghs tou lektikou analyth. 
-int main (int argc, char **argv)
-{
-    int token;
-    while( (token=yylex()) >= 0 )
-    {
-        fprintf(yyout, "* From FLEX: Line=%d, value=\"%s\"\n", line, yytext);
-    }
-    return 0;
-}
-*/
+/* Το πρόγραμμα αυτό δεν έχει main(), καθώς δεν τρέχει αυτόνομα, είναι απλά ο
+   λεκτικός αναλυτής, η συντακτική ανάλυση γίνεται από τον bison. */

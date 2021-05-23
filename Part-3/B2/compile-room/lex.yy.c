@@ -516,7 +516,7 @@ char *yytext;
 #include "bison-SA.tab.h"
 
 /* Orismos metrhth trexousas grammhs */
-int line = 1;
+//int line = 1;
 
 #line 521 "lex.yy.c"
 /* Onomata kai antistoixoi orismoi (ypo morfh kanonikhs ekfrashs).
@@ -1013,25 +1013,35 @@ YY_RULE_SETUP
 #line 170 "flex-LA.l"
 { line++;                    }
 	YY_BREAK
-case YY_STATE_EOF(INITIAL):
-#line 171 "flex-LA.l"
-{ BEGIN(REALLYEND); printf("#END-OF-FILE#\n"); return EOP; }
-	YY_BREAK
-case YY_STATE_EOF(REALLYEND):
-#line 172 "flex-LA.l"
-{return 0;}
-	YY_BREAK
+/*Εδώ το flex "πιάνει" οποιονδήποτε άλλο χαρακτήρα που δεν περιγράφεται απο
+   ις παραπάνω κανονικές εκφράσεις.*/
 case 29:
 YY_RULE_SETUP
 #line 173 "flex-LA.l"
 { fprintf(yyout, "Line=%d, UNKNOWN TOKEN, value=\"%s\"\n", line, yytext); }
 	YY_BREAK
+/*Εδώ καλούμε ένα τμήμα κώδικα που μας βοηθά να δώσουμε ένα token στον bison
+  για να δηλώσουμε το τέλος του αρχείου, αποτρέποντας όμως τον bison να
+  τερματίζει άμεσα την εκτέλεση. Έτσι, καταφέρνουμε να εκτελούμε την συνάρτηση
+  print_report() στο bison-SA.y, για να ανεφέρουμε τον αριθμό των σωστών και
+  λανθασμένων λέξεων και εκφράσεων.*/
+case YY_STATE_EOF(INITIAL):
+#line 179 "flex-LA.l"
+{ BEGIN(REALLYEND); printf("#END-OF-FILE#\n"); return EOP; }
+	YY_BREAK
+/*Εδώ, μετά την πάροδο των προηγούμενων, "πραγματικά" τερματίζουμε την
+  εκτέλεση του flex, έχουμε ήδη τυπώσει την αναφορά με την print_report() με το
+  bison, και αρχίζουμε να τερματίζουμε το πρόγραμμα συνολικά.*/
+case YY_STATE_EOF(REALLYEND):
+#line 183 "flex-LA.l"
+{yyterminate();}
+	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 174 "flex-LA.l"
+#line 184 "flex-LA.l"
 ECHO;
 	YY_BREAK
-#line 1034 "lex.yy.c"
+#line 1044 "lex.yy.c"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -2034,20 +2044,8 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 174 "flex-LA.l"
+#line 184 "flex-LA.l"
 
-
-/* H synarthsh main: O kwdikas autos tha topotheththei autousios sto
-   programma C pou tha dhmiourghsei to Flex kai tha apotelesei to arxiko
-   shmeio ekteleshs ths efarmoghs tou lektikou analyth. 
-int main (int argc, char **argv)
-{
-    int token;
-    while( (token=yylex()) >= 0 )
-    {
-        fprintf(yyout, "* From FLEX: Line=%d, value=\"%s\"\n", line, yytext);
-    }
-    return 0;
-}
-*/
+/* Το πρόγραμμα αυτό δεν έχει main(), καθώς δεν τρέχει αυτόνομα, είναι απλά ο
+   λεκτικός αναλυτής, η συντακτική ανάλυση γίνεται από τον bison. */
 

@@ -1,19 +1,15 @@
-/* Onoma arxeiou:       simple-bison-code.y
-   Perigrafh:           Ypodeigma gia anaptyksh syntaktikou analyth me xrhsh tou ergaleiou Bison
-   Syggrafeas:          Ergasthrio Metaglwttistwn, Tmhma Mhxanikwn Plhroforikhs kai Ypologistwn,
-                        Panepisthmio Dytikhs Attikhs
-   Sxolia:              To paron programma ylopoiei (me th xrhsh Bison) enan aplo syntaktiko analyth
-            pou anagnwrizei thn prosthesh akeraiwn arithmwn (dekadikou systhmatos) & metablhtwn
-            kai ektypwnei to apotelesma sthn othonh (thewrontas oti oi metablhtes exoun
-            panta thn timh 0). Leitourgei autonoma, dhladh xwris Flex kai anagnwrizei kena
-            (space & tab), akeraious (dekadikou systhmatos) kai onomata metablhtwn ths glwssas
-            Uni-C enw diaxeirizetai tous eidikous xarakthres neas grammhs '\n' (new line)
-            kai 'EOF' (end of file). Kathara gia logous YYDEBUGging typwnei sthn othonh otidhpote
-            epistrefei h synarthsh yylex().
-   Odhgies ekteleshs:   Dinete "make" xwris ta eisagwgika ston trexonta katalogo. Enallaktika:
-            bison -o simple-bison-code.c simple-bison-code.y
-                        gcc -o simple-bison-code simple-bison-code.c
-                        ./simple-bison-code
+/* Όνομα αρχείου:      bison-SA.y
+   Περιγραφή:          Αυτό είναι το αρχείο με το οποίο ορίζουμε τις
+                       λειτουργίες του συντακτικού μας αναλυτή,
+                       υλοποιημένο σε GNU Bison.
+   Συγγραφείς:         ΟΜΑΔΑ 15:
+                        Διονύσης Νικολόπουλος
+                        Αθανάσιος Αναγνωστόπουλος
+                        Άριστείδης Αναγνωστόπουλος
+                        Σπυρίδων Φλώρος
+   Σχόλια:             Κάποια σχόλια έχουν γίνει πάνω στον κώδικα, αλλά ο
+                       κώδικας επίσης εξηγήται στο PDF της εργασίας.
+   Οδηγίες Εκτέλεσης:
 */
 
 %{
@@ -25,8 +21,12 @@
 #include <string.h>
 extern int yylex(void);
 extern int yyparse(void);
-extern FILE *yyin;
 void yyerror(char *);
+// Αρχικοποιούμε τον pointer για τη εισαγωγή δεδομένων με αρχείο και όχι απο το
+// stdin
+extern FILE *yyin;
+// Αρχικοποιούμε τις μεταβλητές για το άθροισμα των σωστών και λάθος εκφράσεων
+// και λέξεων
 int cor_words = 0;
 int cor_expr = 0;
 int inc_words = 0;
@@ -36,9 +36,8 @@ int inc_expr = 0;
 
 /*TODO:
     1. WRITE LOGIC FOR BRACKETS ( "[" and "]" )
-    2. MAKE DEBUG MODE
-    3. FLEX ANALYSES CHAR BY CHAR. MAKE CHANGES ON SA LOGIC (EQ_MINUS etc)
-    4. DOCUMENTATION AND COMMENTS
+    2. DOCUMENTATION AND COMMENTS
+    3. line counting etc?
 */
 
 %union
@@ -49,7 +48,7 @@ int inc_expr = 0;
     double dval;
 }
 
-/* Orismos twn anagnwrisimwn lektikwn monadwn. */
+// Ορισμός των λεκτικών μονάδων
 %token EOP
        <sval> SEMI
        <sval> COMMA
@@ -72,7 +71,8 @@ int inc_expr = 0;
        <sval> GREATER LESSER GREATER_EQ LESSER_EQ
        <sval> EQQ EQ NEQ EQ_MULTI EQ_DIV EQ_PLUS EQ_MINUS
        <sval> PLUS PLUSPLUS MINUS MINUSMINUS DIV MOD MULTI POW
-/* Orismos proteraiothtwn sta tokens */
+
+// Ορισμός προτεραιώτητας στα tokens
 %left  POW
 %left  PLUS MINUS
 %left  DIV MULTI
@@ -173,12 +173,9 @@ valid:
 
 %%
 
-/*
-void print_scanner_ret(int line) {
-    printf("Line %d: Scanner returned token: ",line);
-}
-*/
-
+// Αυτή η συνάρτηση τυπώνει το πλήθος των σωστών και λάθος λέξεων και εκφράσεων
+// Ενεργοποιήται μόλις ο bison δεχθεί token EOP
+// (End of Parse, δίνεται στο τέλος του αρχείου)
 void print_report (int cor_words, int cor_expr) {
     printf(" /------- RUN REPORT: ------/\n"
            "* Number of correct words: %d\n"
