@@ -28,11 +28,6 @@ extern int yyparse(void);
 extern FILE *yyin;
 void yyerror(char *);
 
-#define YYERROR_VERBOSE 1
-
-// Η global αυτή μεταβλητή για να κάνουμε το απαραίτητο debugging
-#define YYDEBUG 1
-
 %}
 
 /*TODO:
@@ -89,12 +84,12 @@ program:
 
 // Εδώ ορίζεται το τι μπορεί να είναι κομμάτι μίας έκφρασης. Ένας χαρακτήρας ή ένας αριθμός
 expr_part:
-          FLOAT      { if (YYDEBUG) printf("Found float: %f",$1);      }
-        | STRING     { if (YYDEBUG) printf("Found string: %c",$1);     }
-        | DOUBLE     { if (YYDEBUG) printf("Found double: %lf",$1);    }
-        | KEYWORD    { if (YYDEBUG) printf("Found keyword: %s",$1);    }
-        | INTCONST   { if (YYDEBUG) printf("Found intconst: %d",$1);   }
-        | IDENTIFIER { if (YYDEBUG) printf("Found identifier: %s",$1); }
+          FLOAT
+        | STRING
+        | DOUBLE
+        | KEYWORD
+        | INTCONST
+        | IDENTIFIER
         ;
 
 operator:
@@ -163,8 +158,8 @@ assignment:
 // Εδώ ορίζεται τι θεωρείται συντακτικά σώστο
 valid:
           expr_proc   SEMI { printf("Valid expression!\n");           }
+        | assignment  SEMI { printf("Valid assignment!\n");           }
         | declaration SEMI { printf("Valid declaration!\n");          }
-        | assignment  SEMI { printf("Valid assignment!\n" );          }
         | in_bra           { printf("Valid function body!\n");        }
         | func_par         { printf("Valid function declaration!\n"); }
         | NEWLINE
@@ -190,6 +185,10 @@ void yyerror(char *s) {
    Sthn sygkekrimenh periptwsh apla kalei thn synarthsh yyparse tou Bison
    gia na ksekinhsei h syntaktikh analysh. */
 int main(void)  {
+    //Αναγκαίες εντολές για να γίνεται το debugging στον Bison
+    #ifdef YYDEBUG
+      yydebug = 1;
+    #endif
     // Open a file handle to a particular file:
     FILE *myfile = fopen("input.txt", "r");
     // Make sure it is valid:
@@ -198,6 +197,8 @@ int main(void)  {
       return -1;
     }
     // Set Flex to read from it instead of defaulting to STDIN:
- //   yyin = myfile;
+    yyin = myfile;
     yyparse();
+
+    fclose(myfile);
 }

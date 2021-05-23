@@ -39,6 +39,8 @@ int line = 1;
 SEMI                 ;
 NEQ                  !=
 MOD                  \%
+POW                  \^
+COMMA                \,
 PAR_END              \)
 PAR_START            \(
 BRACE_END            \}
@@ -57,8 +59,8 @@ WHITESPACE           [ \t]+
 TYPE_PLUS            \+[\+=]?
 TYPE_MINUS           \-[\-=]?
 STRING               '.*'|\".*\"
+PUNCTUATOR           #|\:|\~|\&
 INTCONST             0|[1-9]+[0-9]*
-PUNCTUATOR           #|\:|\~|\&|\^|\,
 COMMENT              \/\*(.|\n)*?\*\/|\/\/.*
 IDENTIFIER           [a-zA-Z_]([0-9_a-zA-Z]*)
 FLOAT                [0-9]+\.[0-9]+|[0-9]+\.[0-9]+e[0-9]+
@@ -87,7 +89,9 @@ FLOAT                [0-9]+\.[0-9]+|[0-9]+\.[0-9]+e[0-9]+
                     επιτρέφει token για αυτά για το συντακτικό αναλυτή. */
 %%
 {MOD}           {   return MOD;            }
+{POW}           {   return POW;            }
 {SEMI}          {   return SEMI;           }
+{COMMA}         {   return COMMA;          }
 {FLOAT}         {   return FLOAT;          }
 {STRING}        {   return STRING;         }
 {PAR_END}       {   return PAR_END;        }

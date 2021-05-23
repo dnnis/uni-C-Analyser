@@ -80,13 +80,8 @@ extern int yyparse(void);
 extern FILE *yyin;
 void yyerror(char *);
 
-#define YYERROR_VERBOSE 1
 
-// Η global αυτή μεταβλητή για να κάνουμε το απαραίτητο debugging
-#define YYDEBUG 1
-
-
-#line 90 "bison-SA.tab.c"
+#line 85 "bison-SA.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -555,11 +550,11 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    86,    86,    87,    92,    93,    94,    95,    96,    97,
-     101,   102,   103,   104,   105,   106,   107,   108,   109,   110,
-     111,   112,   115,   116,   117,   122,   123,   124,   125,   126,
-     131,   132,   133,   138,   142,   143,   144,   149,   150,   155,
-     156,   161,   165,   166,   167,   168,   169,   170
+       0,    81,    81,    82,    87,    88,    89,    90,    91,    92,
+      96,    97,    98,    99,   100,   101,   102,   103,   104,   105,
+     106,   107,   110,   111,   112,   117,   118,   119,   120,   121,
+     126,   127,   128,   133,   137,   138,   139,   144,   145,   150,
+     151,   156,   160,   161,   162,   163,   164,   165
 };
 #endif
 
@@ -640,7 +635,7 @@ static const yytype_int8 yydefact[] =
        0,     0,     0,    32,    24,    23,    22,     0,     0,    45,
       46,     0,     0,     2,     0,     9,    29,     0,    39,     0,
       31,    11,    10,    12,    20,    18,    19,    21,    15,    16,
-      13,    17,    14,     0,    27,    28,    42,    43,    44,    41,
+      13,    17,    14,     0,    27,    28,    42,    44,    43,    41,
       36,     0,    33,    30,    26,     0,     0,    40,     0,     0,
       38,    37,     0,    25,    35,     0,    34
 };
@@ -1195,86 +1190,50 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-  case 4: /* expr_part: FLOAT  */
-#line 92 "bison-SA.y"
-                     { if (YYDEBUG) printf("Found float: %f",(yyvsp[0].sval));      }
-#line 1202 "bison-SA.tab.c"
-    break;
-
-  case 5: /* expr_part: STRING  */
-#line 93 "bison-SA.y"
-                     { if (YYDEBUG) printf("Found string: %c",(yyvsp[0].fval));     }
-#line 1208 "bison-SA.tab.c"
-    break;
-
-  case 6: /* expr_part: DOUBLE  */
-#line 94 "bison-SA.y"
-                     { if (YYDEBUG) printf("Found double: %lf",(yyvsp[0].dval));    }
-#line 1214 "bison-SA.tab.c"
-    break;
-
-  case 7: /* expr_part: KEYWORD  */
-#line 95 "bison-SA.y"
-                     { if (YYDEBUG) printf("Found keyword: %s",(yyvsp[0].sval));    }
-#line 1220 "bison-SA.tab.c"
-    break;
-
-  case 8: /* expr_part: INTCONST  */
-#line 96 "bison-SA.y"
-                     { if (YYDEBUG) printf("Found intconst: %d",(yyvsp[0].ival));   }
-#line 1226 "bison-SA.tab.c"
-    break;
-
-  case 9: /* expr_part: IDENTIFIER  */
-#line 97 "bison-SA.y"
-                     { if (YYDEBUG) printf("Found identifier: %s",(yyvsp[0].sval)); }
-#line 1232 "bison-SA.tab.c"
-    break;
-
   case 37: /* func_par: KEYWORD_FUNC IDENTIFIER PAR_START arguments PAR_END  */
-#line 149 "bison-SA.y"
+#line 144 "bison-SA.y"
                                                               { printf("Valid arguments\n"); }
-#line 1238 "bison-SA.tab.c"
+#line 1197 "bison-SA.tab.c"
     break;
 
   case 38: /* func_par: KEYWORD_FUNC IDENTIFIER PAR_START expr_part PAR_END  */
-#line 150 "bison-SA.y"
+#line 145 "bison-SA.y"
                                                               { printf("Valid argument\n" ); }
-#line 1244 "bison-SA.tab.c"
+#line 1203 "bison-SA.tab.c"
     break;
 
   case 42: /* valid: expr_proc SEMI  */
-#line 165 "bison-SA.y"
+#line 160 "bison-SA.y"
                            { printf("Valid expression!\n");           }
-#line 1250 "bison-SA.tab.c"
+#line 1209 "bison-SA.tab.c"
     break;
 
-  case 43: /* valid: declaration SEMI  */
-#line 166 "bison-SA.y"
+  case 43: /* valid: assignment SEMI  */
+#line 161 "bison-SA.y"
+                           { printf("Valid assignment!\n");           }
+#line 1215 "bison-SA.tab.c"
+    break;
+
+  case 44: /* valid: declaration SEMI  */
+#line 162 "bison-SA.y"
                            { printf("Valid declaration!\n");          }
-#line 1256 "bison-SA.tab.c"
-    break;
-
-  case 44: /* valid: assignment SEMI  */
-#line 167 "bison-SA.y"
-                           { printf("Valid assignment!\n" );          }
-#line 1262 "bison-SA.tab.c"
+#line 1221 "bison-SA.tab.c"
     break;
 
   case 45: /* valid: in_bra  */
-#line 168 "bison-SA.y"
+#line 163 "bison-SA.y"
                            { printf("Valid function body!\n");        }
-#line 1268 "bison-SA.tab.c"
+#line 1227 "bison-SA.tab.c"
     break;
 
   case 46: /* valid: func_par  */
-#line 169 "bison-SA.y"
+#line 164 "bison-SA.y"
                            { printf("Valid function declaration!\n"); }
-#line 1274 "bison-SA.tab.c"
+#line 1233 "bison-SA.tab.c"
     break;
 
 
-#line 1278 "bison-SA.tab.c"
+#line 1237 "bison-SA.tab.c"
 
       default: break;
     }
@@ -1468,7 +1427,7 @@ yyreturn:
   return yyresult;
 }
 
-#line 173 "bison-SA.y"
+#line 168 "bison-SA.y"
 
 
 /*
@@ -1489,6 +1448,10 @@ void yyerror(char *s) {
    Sthn sygkekrimenh periptwsh apla kalei thn synarthsh yyparse tou Bison
    gia na ksekinhsei h syntaktikh analysh. */
 int main(void)  {
+    //Αναγκαίες εντολές για να γίνεται το debugging στον Bison
+    #ifdef YYDEBUG
+      yydebug = 1;
+    #endif
     // Open a file handle to a particular file:
     FILE *myfile = fopen("input.txt", "r");
     // Make sure it is valid:
@@ -1497,6 +1460,8 @@ int main(void)  {
       return -1;
     }
     // Set Flex to read from it instead of defaulting to STDIN:
- //   yyin = myfile;
+    yyin = myfile;
     yyparse();
+
+    fclose(myfile);
 }
