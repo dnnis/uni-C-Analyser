@@ -12,12 +12,13 @@ Valid declaration!
 Valid declaration!
 Valid declaration!
 Valid declaration!
+Valid declaration!
 Valid function body!
 #END-OF-FILE#
 *---- RUN REPORT: ---------------------*
-| Number of  correct  words       : 35
-| Number of  correct  expressions : 15
+| Number of  correct  words       : 39
+| Number of  correct  expressions : 16
 *--------------------------------------*
 | Number of incorrect words       : 3
-| Number of incorrect expressions : 4
+| Number of incorrect expressions : 1
 *--------------------------------------*

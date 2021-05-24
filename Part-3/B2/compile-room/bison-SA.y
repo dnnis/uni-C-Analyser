@@ -96,7 +96,7 @@ expr_part:
         | KEYWORD     { cor_words++; }
         | INTCONST    { cor_words++; }
         | IDENTIFIER  { cor_words++; }
-        | UNKNOWN     { inc_words++; }
+        | UNKNOWN     { inc_words++; inc_expr--; }
         ;
 
 operator:
@@ -135,8 +135,17 @@ body:
         |
         ;
 
-// Εδώ ορίζεται τι μπορεί να βρίσκεται μέσα σε αγκύλες
-in_bra:
+elements:
+        expr_part COMMA elements
+        | expr_part
+        ;
+
+// Εδώ ορίζεται τι μπορεί να βρίσκεται μέσα σε αγγύλες
+in_brack:
+        BRACKET_START elements BRACKET_END
+
+// Εδώ ορίζεται τι μπορεί να βρίσκεται μέσα σε άγκυστρο
+in_brace:
         BRACE_START body BRACE_END
 
 // Εδώ ορίζεται τι μπορεί να είναι ορίσματα μιας συνάρτησης
@@ -156,6 +165,9 @@ func_par:
 declaration:
           KEYWORD_VAR_TYPE IDENTIFIER
         | KEYWORD_VAR_TYPE IDENTIFIER EQ expr_proc
+        | KEYWORD_VAR_TYPE IDENTIFIER in_brack EQ expr_proc
+        | KEYWORD_VAR_TYPE IDENTIFIER in_brack EQ BRACE_START elements BRACE_END
+        | KEYWORD_VAR_TYPE IDENTIFIER in_brack
         ;
 
 // Εδώ ορίζεται τι θεωρείται ανάθεση σε μεταβλητή
@@ -167,7 +179,7 @@ valid:
           expr_proc   SEMI { cor_expr++; printf("Valid expression!\n");           }
         | assignment  SEMI { cor_expr++; printf("Valid assignment!\n");           }
         | declaration SEMI { cor_expr++; printf("Valid declaration!\n");          }
-        | in_bra           { cor_expr++; printf("Valid function body!\n");        }
+        | in_brace         { cor_expr++; printf("Valid function body!\n");        }
         | func_par         { cor_expr++; printf("Valid function declaration!\n"); }
         | NEWLINE
         | EOP { print_report(cor_words,cor_expr,inc_words,inc_expr); }

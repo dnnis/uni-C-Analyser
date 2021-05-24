@@ -13,4 +13,5 @@ func main (argc, argv) {
     int res8 = 1 / 1;
     int res9 = 1 ^ 100;
     int res9 = 10 ^ variable;
+    int res10[10] = {1,2,3};
 }
