@@ -1,24 +1,15 @@
 Valid arguments
 Valid function declaration!
-Valid declaration!
-Valid declaration!
-Valid declaration!
-Valid declaration!
-Valid declaration!
-Valid declaration!
-Valid declaration!
-Valid declaration!
-Valid declaration!
-Valid declaration!
-Valid declaration!
-Valid declaration!
-Valid declaration!
+Valid assignment!
+Valid function body!
+Valid assignment!
+Valid conditional clause!
 Valid function body!
 #END-OF-FILE#
 *---- RUN REPORT: ---------------------*
-| Number of  correct  words       : 39
-| Number of  correct  expressions : 16
+| Number of  correct  words       : 8
+| Number of  correct  expressions : 7
 *--------------------------------------*
-| Number of incorrect words       : 3
-| Number of incorrect expressions : 1
+| Number of incorrect words       : 0
+| Number of incorrect expressions : 4
 *--------------------------------------*

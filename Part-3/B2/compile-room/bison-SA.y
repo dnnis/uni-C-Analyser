@@ -52,6 +52,8 @@ int inc_expr = 0;
 %token EOP
        UNKNOWN
        <sval> SEMI
+       <sval> HASH
+       <sval> COLON
        <sval> COMMA
        <sval> FLOAT
        <dval> DOUBLE
@@ -59,11 +61,16 @@ int inc_expr = 0;
        <sval> NEWLINE
        <sval> KEYWORD
        <ival> INTCONST
-       <sval> PUNCTUATOR
        <sval> IDENTIFIER
+       <sval> KEYWORD_IF
        <sval> AMPER EXCLA
        <sval> KEYWORD_RET
+       <sval> KEYWORD_ELSE
+       <sval> KEYWORD_CONT
+       <sval> KEYWORD_CASE
+       <sval> KEYWORD_INCL
        <sval> KEYWORD_FUNC
+       <sval> KEYWORD_SWITCH
        <sval> KEYWORD_VAR_TYPE
        <sval> PAR_START PAR_END
        <sval> BRACE_START BRACE_END
@@ -96,7 +103,7 @@ expr_part:
         | KEYWORD     { cor_words++; }
         | INTCONST    { cor_words++; }
         | IDENTIFIER  { cor_words++; }
-        | UNKNOWN     { inc_words++; inc_expr--; }
+        | UNKNOWN     { inc_words++; }
         ;
 
 operator:
@@ -125,7 +132,6 @@ expr_proc:
         | expr_part operator expr_part
         | expr_part in_de_crement_operator
         | in_de_crement_operator expr_part
-        | KEYWORD_RET expr_part
         ;
 
 // Εδώ ορίζεται το "σώμα" του κώδικα, δηλαδή ένας αριθμός συντακτικά σωστών εκφράσεων.
@@ -174,6 +180,38 @@ declaration:
 assignment:
           IDENTIFIER EQ expr_proc
 
+return:
+       KEYWORD_RET expr_proc
+       | KEYWORD_RET expr_part
+       ;
+
+include: 
+        HASH KEYWORD_INCL LESSER IDENTIFIER GREATER
+        | HASH KEYWORD_INCL STRING
+        ;
+
+cases:
+     KEYWORD_CASE COLON valid NEWLINE cases
+     | KEYWORD_CASE COLON valid NEWLINE
+
+case_grammar:
+            KEYWORD_SWITCH PAR_START expr_proc PAR_END BRACE_START cases BRACE_END
+            | KEYWORD_SWITCH PAR_START expr_part PAR_END BRACE_START cases BRACE_END
+            ;
+
+else_grammar:
+            KEYWORD_ELSE in_brace
+
+if_grammar:
+            KEYWORD_IF PAR_START expr_proc PAR_END in_brace
+          | KEYWORD_IF PAR_START expr_proc PAR_END expr_proc NEWLINE
+          ;
+
+conditionals:
+            if_grammar
+          | else_grammar
+          | case_grammar
+
 // Εδώ ορίζεται τι θεωρείται συντακτικά σώστο
 valid:
           expr_proc   SEMI { cor_expr++; printf("Valid expression!\n");           }
@@ -181,8 +219,11 @@ valid:
         | declaration SEMI { cor_expr++; printf("Valid declaration!\n");          }
         | in_brace         { cor_expr++; printf("Valid function body!\n");        }
         | func_par         { cor_expr++; printf("Valid function declaration!\n"); }
+        | return      SEMI { cor_expr++; printf("Valid return statement!\n");     }
+        | include     SEMI { cor_expr++; printf("Valid include statement!\n");    }
+        | conditionals     { cor_expr++; printf("Valid conditional clause!\n");   }
         | NEWLINE
-        | EOP { print_report(cor_words,cor_expr,inc_words,inc_expr); }
+        | EOP   { print_report(cor_words,cor_expr,inc_words,inc_expr); }
         | error { inc_expr++; }
         ;
 

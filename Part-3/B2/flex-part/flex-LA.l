@@ -37,10 +37,14 @@ int line = 1;
    synhthws idiaiterws makroskelwn kai dysnohtwn, kanonikwn ekfrasewn */
 
 SEMI                 ;
+HASH                 #
+TILDE                ~
 NEQ                  !=
 MOD                  \%
 POW                  \^
 COMMA                \,
+COLON                \:
+AMPER                \&
 PAR_END              \)
 PAR_START            \(
 BRACE_END            \}
@@ -59,7 +63,6 @@ WHITESPACE           [ \t]+
 TYPE_PLUS            \+[\+=]?
 TYPE_MINUS           \-[\-=]?
 STRING               '.*'|\".*\"
-PUNCTUATOR           #|\:|\~|\&
 INTCONST             0|[1-9]+[0-9]*
 COMMENT              \/\*(.|\n)*?\*\/|\/\/.*
 IDENTIFIER           [a-zA-Z_]([0-9_a-zA-Z]*)
@@ -101,7 +104,6 @@ FLOAT                [0-9]+\.[0-9]+|[0-9]+\.[0-9]+e[0-9]+
 {PAR_START}     {   return PAR_START;      }
 {BRACE_END}     {   return BRACE_END;      }
 {LOGICAL_OR}    {   return LOGICAL_OR;     }
-{PUNCTUATOR}    {   return PUNCTUATOR;     }
 {BRACE_START}   {   return BRACE_START;    }
 {BRACKET_END}   {   return BRACKET_END;    }
 {BRACKET_START} {   return BRACKET_START;  }
@@ -109,16 +111,18 @@ FLOAT                [0-9]+\.[0-9]+|[0-9]+\.[0-9]+e[0-9]+
                     if      ( !strcmp(yytext,"if"      ) ) return KEYWORD;
                     else if ( !strcmp(yytext,"do"      ) ) return KEYWORD;
                     else if ( !strcmp(yytext,"for"     ) ) return KEYWORD;
-                    else if ( !strcmp(yytext,"case"    ) ) return KEYWORD;
                     else if ( !strcmp(yytext,"void"    ) ) return KEYWORD;
                     else if ( !strcmp(yytext,"while"   ) ) return KEYWORD;
                     else if ( !strcmp(yytext,"break"   ) ) return KEYWORD;
-                    else if ( !strcmp(yytext,"return"  ) ) return KEYWORD_RET;
                     else if ( !strcmp(yytext,"sizeof"  ) ) return KEYWORD;
                     else if ( !strcmp(yytext,"struct"  ) ) return KEYWORD;
-                    else if ( !strcmp(yytext,"switch"  ) ) return KEYWORD;
-                    else if ( !strcmp(yytext,"continue") ) return KEYWORD;
+                    else if ( !strcmp(yytext,"return"  ) ) return KEYWORD_RET;
+                    else if ( !strcmp(yytext,"case"    ) ) return KEYWORD_CASE;
+                    else if ( !strcmp(yytext,"else"    ) ) return KEYWORD_ELSE;
                     else if ( !strcmp(yytext,"func"    ) ) return KEYWORD_FUNC;
+                    else if ( !strcmp(yytext,"include" ) ) return KEYWORD_INCL;
+                    else if ( !strcmp(yytext,"continue") ) return KEYWORD_CONT;
+                    else if ( !strcmp(yytext,"switch"  ) ) return KEYWORD_SWITCH;
                     else if ( !strcmp(yytext,"int"     ) ) return KEYWORD_VAR_TYPE;
                     else if ( !strcmp(yytext,"long"    ) ) return KEYWORD_VAR_TYPE;
                     else if ( !strcmp(yytext,"short"   ) ) return KEYWORD_VAR_TYPE;
@@ -169,7 +173,7 @@ FLOAT                [0-9]+\.[0-9]+|[0-9]+\.[0-9]+e[0-9]+
 {COMMENT}       { /*Do nothing, comment*/    }
 \n              { line++;                    }
  /*Εδώ το flex "πιάνει" οποιονδήποτε άλλο χαρακτήρα που δεν περιγράφεται απο
-   ις παραπάνω κανονικές εκφράσεις.*/
+  τις παραπάνω κανονικές εκφράσεις.*/
 . { return UNKNOWN; }
  /*Εδώ καλούμε ένα τμήμα κώδικα που μας βοηθά να δώσουμε ένα token στον bison
   για να δηλώσουμε το τέλος του αρχείου, αποτρέποντας όμως τον bison να
