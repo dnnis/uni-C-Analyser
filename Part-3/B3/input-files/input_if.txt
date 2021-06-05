@@ -1,0 +1,8 @@
+func main (argc, argv) {
+    if ( condition == true )
+    {
+        flag = 1;
+    } else {
+        flag = 0;
+    }
+}
