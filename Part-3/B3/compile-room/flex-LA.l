@@ -44,6 +44,7 @@ TILDE                ~
 NEQ                  !=
 MOD                  \%
 POW                  \^
+DOT                  \.
 COMMA                \,
 COLON                \:
 AMPER                \&
@@ -101,7 +102,9 @@ FLOAT                [0-9]+\.[0-9]+|[0-9]+\.[0-9]+e[0-9]+
 %%
 {MOD}           {  columns++; return MOD;                     }
 {POW}           {  columns++; return POW;                     }
+{DOT}           {  columns++; return DOT;                     }
 {SEMI}          {  columns++; return SEMI;                    }
+{HASH}          {  columns++; return HASH;                    }
 {COMMA}         {  columns++; return COMMA;                   }
 {PAR_END}       {  columns++; return PAR_END;                 }
 {PAR_START}     {  columns++; return PAR_START;               }

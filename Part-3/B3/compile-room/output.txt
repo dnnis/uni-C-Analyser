@@ -1,12 +1,8 @@
-Line: 1 Column: 1 Unknown word: '#include'
-Line: 1 Column: 8 Unknown word: '.h>'
-Line: 1 Column: 1 Unknown word: '#include'
-Line: 1 Column: 9 Unknown word: '.h>'
-Line: 2 Valid arguments
-Line: 2 Valid function declaration!
-Line: 3 Valid declaration!
-Line: 4 Valid declaration!
-Line: 5 Valid declaration!
+Line: 1 Valid include statement!
+Line: 2 Valid include statement!
+Line: 3 Valid include statement!
+Line: 5 Valid arguments
+Line: 5 Valid function declaration!
 Line: 6 Valid declaration!
 Line: 7 Valid declaration!
 Line: 8 Valid declaration!
@@ -17,15 +13,18 @@ Line: 12 Valid declaration!
 Line: 13 Valid declaration!
 Line: 14 Valid declaration!
 Line: 15 Valid declaration!
-Line: 18 Column: 5 Unknown word: '$$a56f$$$'
-Line: 18 Column: 5 Unknown word: '$$a56'
-Line: 18 Column: 6 Unknown word: '$$sdfisd'
-Line: 18 Column: 12 Unknown word: '$rhfa'$\5[fiw'
-Line(s): 2 - 18 Valid function body!
+Line: 16 Valid declaration!
+Line: 17 Valid declaration!
+Line: 18 Valid declaration!
+Line: 21 Column: 5 Unknown word: '$$a56f$$$'
+Line: 21 Column: 5 Unknown word: '$$a56'
+Line: 21 Column: 6 Unknown word: '$$sdfisd'
+Line: 21 Column: 12 Unknown word: '$rhfa'$\5[fiw'
+Line(s): 5 - 21 Valid function body!
 *---- RUN REPORT: ---------------------*
-| Number of  correct  words       : 38
-| Number of  correct  expressions : 17
+| Number of  correct  words       : 36
+| Number of  correct  expressions : 20
 *--------------------------------------*
-| Number of incorrect words       : 8
-| Number of incorrect expressions : 12
+| Number of incorrect words       : 4
+| Number of incorrect expressions : 4
 *--------------------------------------*

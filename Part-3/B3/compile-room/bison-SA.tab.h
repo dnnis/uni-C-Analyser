@@ -56,56 +56,57 @@ extern int yydebug;
     YYUNDEF = 257,                 /* "invalid token"  */
     EOP = 258,                     /* EOP  */
     UNKNOWN = 259,                 /* UNKNOWN  */
-    SEMI = 260,                    /* SEMI  */
-    HASH = 261,                    /* HASH  */
-    COLON = 262,                   /* COLON  */
-    COMMA = 263,                   /* COMMA  */
-    FLOAT = 264,                   /* FLOAT  */
-    DOUBLE = 265,                  /* DOUBLE  */
-    STRING = 266,                  /* STRING  */
-    NEWLINE = 267,                 /* NEWLINE  */
-    KEYWORD = 268,                 /* KEYWORD  */
-    INTCONST = 269,                /* INTCONST  */
-    IDENTIFIER = 270,              /* IDENTIFIER  */
-    KEYWORD_IF = 271,              /* KEYWORD_IF  */
-    AMPER = 272,                   /* AMPER  */
-    EXCLA = 273,                   /* EXCLA  */
-    KEYWORD_RET = 274,             /* KEYWORD_RET  */
-    KEYWORD_FOR = 275,             /* KEYWORD_FOR  */
-    KEYWORD_ELSE = 276,            /* KEYWORD_ELSE  */
-    KEYWORD_CONT = 277,            /* KEYWORD_CONT  */
-    KEYWORD_CASE = 278,            /* KEYWORD_CASE  */
-    KEYWORD_INCL = 279,            /* KEYWORD_INCL  */
-    KEYWORD_FUNC = 280,            /* KEYWORD_FUNC  */
-    KEYWORD_SWITCH = 281,          /* KEYWORD_SWITCH  */
-    KEYWORD_VAR_TYPE = 282,        /* KEYWORD_VAR_TYPE  */
-    PAR_START = 283,               /* PAR_START  */
-    PAR_END = 284,                 /* PAR_END  */
-    BRACE_START = 285,             /* BRACE_START  */
-    BRACE_END = 286,               /* BRACE_END  */
-    LOGICAL_OR = 287,              /* LOGICAL_OR  */
-    LOGICAL_AND = 288,             /* LOGICAL_AND  */
-    BRACKET_START = 289,           /* BRACKET_START  */
-    BRACKET_END = 290,             /* BRACKET_END  */
-    GREATER = 291,                 /* GREATER  */
-    LESSER = 292,                  /* LESSER  */
-    GREATER_EQ = 293,              /* GREATER_EQ  */
-    LESSER_EQ = 294,               /* LESSER_EQ  */
-    EQQ = 295,                     /* EQQ  */
-    EQ = 296,                      /* EQ  */
-    NEQ = 297,                     /* NEQ  */
-    EQ_MULTI = 298,                /* EQ_MULTI  */
-    EQ_DIV = 299,                  /* EQ_DIV  */
-    EQ_PLUS = 300,                 /* EQ_PLUS  */
-    EQ_MINUS = 301,                /* EQ_MINUS  */
-    PLUS = 302,                    /* PLUS  */
-    PLUSPLUS = 303,                /* PLUSPLUS  */
-    MINUS = 304,                   /* MINUS  */
-    MINUSMINUS = 305,              /* MINUSMINUS  */
-    DIV = 306,                     /* DIV  */
-    MOD = 307,                     /* MOD  */
-    MULTI = 308,                   /* MULTI  */
-    POW = 309                      /* POW  */
+    DOT = 260,                     /* DOT  */
+    SEMI = 261,                    /* SEMI  */
+    HASH = 262,                    /* HASH  */
+    COLON = 263,                   /* COLON  */
+    COMMA = 264,                   /* COMMA  */
+    FLOAT = 265,                   /* FLOAT  */
+    DOUBLE = 266,                  /* DOUBLE  */
+    STRING = 267,                  /* STRING  */
+    NEWLINE = 268,                 /* NEWLINE  */
+    KEYWORD = 269,                 /* KEYWORD  */
+    INTCONST = 270,                /* INTCONST  */
+    IDENTIFIER = 271,              /* IDENTIFIER  */
+    KEYWORD_IF = 272,              /* KEYWORD_IF  */
+    AMPER = 273,                   /* AMPER  */
+    EXCLA = 274,                   /* EXCLA  */
+    KEYWORD_RET = 275,             /* KEYWORD_RET  */
+    KEYWORD_FOR = 276,             /* KEYWORD_FOR  */
+    KEYWORD_ELSE = 277,            /* KEYWORD_ELSE  */
+    KEYWORD_CONT = 278,            /* KEYWORD_CONT  */
+    KEYWORD_CASE = 279,            /* KEYWORD_CASE  */
+    KEYWORD_INCL = 280,            /* KEYWORD_INCL  */
+    KEYWORD_FUNC = 281,            /* KEYWORD_FUNC  */
+    KEYWORD_SWITCH = 282,          /* KEYWORD_SWITCH  */
+    KEYWORD_VAR_TYPE = 283,        /* KEYWORD_VAR_TYPE  */
+    PAR_START = 284,               /* PAR_START  */
+    PAR_END = 285,                 /* PAR_END  */
+    BRACE_START = 286,             /* BRACE_START  */
+    BRACE_END = 287,               /* BRACE_END  */
+    LOGICAL_OR = 288,              /* LOGICAL_OR  */
+    LOGICAL_AND = 289,             /* LOGICAL_AND  */
+    BRACKET_START = 290,           /* BRACKET_START  */
+    BRACKET_END = 291,             /* BRACKET_END  */
+    GREATER = 292,                 /* GREATER  */
+    LESSER = 293,                  /* LESSER  */
+    GREATER_EQ = 294,              /* GREATER_EQ  */
+    LESSER_EQ = 295,               /* LESSER_EQ  */
+    EQQ = 296,                     /* EQQ  */
+    EQ = 297,                      /* EQ  */
+    NEQ = 298,                     /* NEQ  */
+    EQ_MULTI = 299,                /* EQ_MULTI  */
+    EQ_DIV = 300,                  /* EQ_DIV  */
+    EQ_PLUS = 301,                 /* EQ_PLUS  */
+    EQ_MINUS = 302,                /* EQ_MINUS  */
+    PLUS = 303,                    /* PLUS  */
+    PLUSPLUS = 304,                /* PLUSPLUS  */
+    MINUS = 305,                   /* MINUS  */
+    MINUSMINUS = 306,              /* MINUSMINUS  */
+    DIV = 307,                     /* DIV  */
+    MOD = 308,                     /* MOD  */
+    MULTI = 309,                   /* MULTI  */
+    POW = 310                      /* POW  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -121,7 +122,7 @@ union YYSTYPE
     float  fval;
     double dval;
 
-#line 125 "bison-SA.tab.h"
+#line 126 "bison-SA.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

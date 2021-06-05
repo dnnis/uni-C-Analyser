@@ -58,6 +58,7 @@ int line=1;
 // Ορισμός των λεκτικών μονάδων
 %token EOP
     UNKNOWN
+    <sval> DOT
     <sval> SEMI
     <sval> HASH
     <sval> COLON
@@ -199,7 +200,7 @@ return:
     ;
 
 include:
-    HASH KEYWORD_INCL LESSER IDENTIFIER GREATER
+    HASH KEYWORD_INCL LESSER IDENTIFIER DOT IDENTIFIER GREATER
     | HASH KEYWORD_INCL STRING
     ;
 
