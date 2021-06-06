@@ -1,41 +1,14 @@
 
 *---- ANALYSIS: ---------------------*
-O	Line:  1 	Valid include statement!
-O	Line:  2 	Valid include statement!
-O	Line:  3 	Valid include statement!
-O	Line:  6 	Valid declaration!
-O	Line:  8 	Valid declaration!
-O	Lines: 6-8	Valid function body!
-O	Line:  10 	Valid argument
-O	Line:  10 	Valid function declaration!
-O	Line:  10 	Valid declaration!
-O	Line:  10 	Valid function body!
-O	Line:  12 	Valid arguments
-O	Line:  12 	Valid function declaration!
-O	Line:  12 	Valid declaration!
-O	Line:  13 	Valid declaration!
-O	Line:  14 	Valid declaration!
-O	Line:  15 	Valid declaration!
-O	Line:  16 	Valid declaration!
-O	Line:  17 	Valid declaration!
-O	Line:  18 	Valid declaration!
-O	Line:  19 	Valid declaration!
-O	Line:  20 	Valid declaration!
-O	Line:  21 	Valid declaration!
-O	Line:  22 	Valid declaration!
-O	Line:  23 	Valid declaration!
-O	Line:  24 	Valid declaration!
-O	Line:  25 	Valid expression!
-O	Line:  26 	Valid expression!
-O	Line:  29 	Column: 5 Unknown word: '$$a56f$$$'
-O	Line:  29 	Column: 5 Unknown word: '$$a56'
-O	Line:  29 	Column: 6 Unknown word: '$$sdfisd'
-O	Line:  29 	Column: 12 Unknown word: '$rhfa'$\5[fiw'
-O	Lines: 12-29	Valid function body!
+O	Line:  2 	Valid declaration!
+O	Line:  3 	Valid declaration!
+O	Line:  4 	Valid declaration!
+O	Line:  7 	Valid arguments
+O	Line:  7 	Valid function declaration!
 *---- RUN REPORT: ---------------------*
-| Number of  correct  words       : 46
-| Number of  correct  expressions : 31
+| Number of  correct  words       : 3
+| Number of  correct  expressions : 7
 *--------------------------------------*
-| Number of incorrect words       : 4
-| Number of incorrect expressions : 29
+| Number of incorrect words       : 0
+| Number of incorrect expressions : 0
 *--------------------------------------*

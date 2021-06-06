@@ -930,6 +930,7 @@ YY_RULE_SETUP
       else if ( !strcmp(yytext,"continue") ) { columns += strlen(yytext); return KEYWORD_CONT;}
       else if ( !strcmp(yytext,"switch"  ) ) { columns += strlen(yytext); return KEYWORD_SWITCH;}
       else if ( !strcmp(yytext,"int"     ) ) { columns += strlen(yytext); return KEYWORD_VAR_TYPE;}
+      else if ( !strcmp(yytext,"char"    ) ) { columns += strlen(yytext); return KEYWORD_VAR_TYPE;}
       else if ( !strcmp(yytext,"long"    ) ) { columns += strlen(yytext); return KEYWORD_VAR_TYPE;}
       else if ( !strcmp(yytext,"short"   ) ) { columns += strlen(yytext); return KEYWORD_VAR_TYPE;}
       else if ( !strcmp(yytext,"float"   ) ) { columns += strlen(yytext); return KEYWORD_VAR_TYPE;}
@@ -940,92 +941,92 @@ YY_RULE_SETUP
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 143 "flex-LA.l"
+#line 144 "flex-LA.l"
 { if (!strcmp(yytext, "!=")) { columns += 2; return NEQ;        } else    { columns++; return EXCLA;  }}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 144 "flex-LA.l"
+#line 145 "flex-LA.l"
 { if (!strcmp(yytext, "==")) { columns += 2; return EQQ;        } else    { columns++; return EQ;     }}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 145 "flex-LA.l"
+#line 146 "flex-LA.l"
 { if (!strcmp(yytext, "/=")) { columns += 2; return EQ_DIV;     } else    { columns++; return DIV;    }}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 146 "flex-LA.l"
+#line 147 "flex-LA.l"
 { if (!strcmp(yytext, "*=")) { columns += 2; return EQ_MULTI;   } else    { columns++; return MULTI;  }}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 147 "flex-LA.l"
+#line 148 "flex-LA.l"
 { if (!strcmp(yytext, "<=")) { columns += 2; return LESSER_EQ;  } else    { columns++; return LESSER; }}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 148 "flex-LA.l"
+#line 149 "flex-LA.l"
 { if (!strcmp(yytext, ">=")) { columns += 2; return GREATER_EQ; } else    { columns++; return GREATER;}}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 149 "flex-LA.l"
+#line 150 "flex-LA.l"
 { if (!strcmp(yytext, "&&")) { columns += 2; return LOGICAL_AND;} else    { columns++; return AMPER;  }}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 150 "flex-LA.l"
+#line 151 "flex-LA.l"
 { if (!strcmp(yytext, "--")) { columns += 2; return MINUSMINUS; } else if (!strcmp(yytext, "-=")) { columns+=2; return EQ_MINUS; } else { columns++; return MINUS;}}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 151 "flex-LA.l"
+#line 152 "flex-LA.l"
 { if (!strcmp(yytext, "++")) { columns += 2; return PLUSPLUS;   } else if (!strcmp(yytext, "+=")) { columns+=2; return EQ_PLUS;  } else { columns++; return PLUS; }}
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 152 "flex-LA.l"
+#line 153 "flex-LA.l"
 { columns++; }
 	YY_BREAK
 case 28:
 /* rule 28 can match eol */
 YY_RULE_SETUP
-#line 153 "flex-LA.l"
+#line 154 "flex-LA.l"
 { /*Do nothing, comment*/ }
 	YY_BREAK
 case 29:
 /* rule 29 can match eol */
 YY_RULE_SETUP
-#line 154 "flex-LA.l"
+#line 155 "flex-LA.l"
 { columns=1; /*Start from zero cols again*/ return NEWLINE; }
 	YY_BREAK
 /*Εδώ το flex "πιάνει" οποιονδήποτε άλλο χαρακτήρα που δεν περιγράφεται απο
   τις παραπάνω κανονικές εκφράσεις.*/
 case 30:
 YY_RULE_SETUP
-#line 157 "flex-LA.l"
+#line 158 "flex-LA.l"
 { BEGIN(PREPANIC); strcpy(panic_cause_char,yytext); return UNKNOWN;}
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 158 "flex-LA.l"
+#line 159 "flex-LA.l"
 { BEGIN(PANIC); printf("Column: %d Unknown word: '%s%s",columns,panic_cause_char,yytext);}
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 159 "flex-LA.l"
+#line 160 "flex-LA.l"
 { columns++; printf("'\n"); BEGIN(INITIAL);}
 	YY_BREAK
 case 33:
 /* rule 33 can match eol */
 YY_RULE_SETUP
-#line 160 "flex-LA.l"
+#line 161 "flex-LA.l"
 { columns=1; printf("'\n"); BEGIN(INITIAL);}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 161 "flex-LA.l"
+#line 162 "flex-LA.l"
 { ECHO; }
 	YY_BREAK
 /*Εδώ καλούμε ένα τμήμα κώδικα που μας βοηθά να δώσουμε ένα token στον bison
@@ -1034,22 +1035,22 @@ YY_RULE_SETUP
   print_report() στο bison-SA.y, για να ανεφέρουμε τον αριθμό των σωστών και
   λανθασμένων λέξεων και εκφράσεων.*/
 case YY_STATE_EOF(INITIAL):
-#line 167 "flex-LA.l"
+#line 168 "flex-LA.l"
 { BEGIN(REALLYEND); return EOP; }
 	YY_BREAK
 /*Εδώ, μετά την πάροδο των προηγούμενων, "πραγματικά" τερματίζουμε την
   εκτέλεση του flex, έχουμε ήδη τυπώσει την αναφορά με την print_report() με το
   bison, και αρχίζουμε να τερματίζουμε το πρόγραμμα συνολικά.*/
 case YY_STATE_EOF(REALLYEND):
-#line 171 "flex-LA.l"
+#line 172 "flex-LA.l"
 {yyterminate();}
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 172 "flex-LA.l"
+#line 173 "flex-LA.l"
 ECHO;
 	YY_BREAK
-#line 1052 "lex.yy.c"
+#line 1053 "lex.yy.c"
 case YY_STATE_EOF(PREPANIC):
 case YY_STATE_EOF(PANIC):
 	yyterminate();
@@ -2055,7 +2056,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 172 "flex-LA.l"
+#line 173 "flex-LA.l"
 
 /* Το πρόγραμμα αυτό δεν έχει main(), καθώς δεν τρέχει αυτόνομα, είναι απλά ο
    λεκτικός αναλυτής, η συντακτική ανάλυση γίνεται από τον bison. */

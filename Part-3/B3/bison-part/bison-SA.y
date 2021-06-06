@@ -24,6 +24,7 @@ extern int yylex(void);
 extern int yyparse(void);
 void yyerror(char *);
 void print_report(int,int,int,int);
+void print_valid (char *);
 // Αρχικοποιούμε τον pointer για τη εισαγωγή δεδομένων με αρχείο και όχι απο το
 // stdin
 extern FILE *yyin;
@@ -35,9 +36,12 @@ int cor_expr  = 0;
 int inc_expr  = 0;
 // Για την γραμμή που αρχίζει μία συνάρτηση
 int brack_start_line=0;
-int brace_start_line=0;
 
-int brace_started_flag=0;
+int function_start_line=0;
+int function_started_flag=0;
+
+int struct_start_line=0;
+int struct_started_flag=0;
 // Για την μέτρηση γραμμών
 int line=1;
 %}
@@ -107,6 +111,62 @@ program:
     |
     ;
 
+
+words: 
+     DOT{ cor_words++; }
+   | SEMI{ cor_words++; }
+   | HASH{ cor_words++; }
+   | COLON{ cor_words++; }
+   | COMMA{ cor_words++; }
+   | FLOAT{ cor_words++; }
+   | DOUBLE{ cor_words++; }
+   | STRING{ cor_words++; }
+   | NEWLINE{ cor_words++; }
+   | KEYWORD{ cor_words++; }
+   | INTCONST{ cor_words++; }
+   | IDENTIFIER{ cor_words++; }
+   | KEYWORD_IF{ cor_words++; }
+   | AMPER EXCLA{ cor_words++; }
+   | KEYWORD_RET{ cor_words++; }
+   | KEYWORD_FOR{ cor_words++; }
+   | KEYWORD_STR{ cor_words++; }
+   | KEYWORD_ELSE{ cor_words++; }
+   | KEYWORD_SIZE{ cor_words++; }
+   | KEYWORD_CONT{ cor_words++; }
+   | KEYWORD_CASE{ cor_words++; }
+   | KEYWORD_INCL{ cor_words++; }
+   | KEYWORD_FUNC{ cor_words++; }
+   | KEYWORD_SWITCH{ cor_words++; }
+   | KEYWORD_VAR_TYPE{ cor_words++; }
+   | PAR_START{ cor_words++; }
+   | PAR_END{ cor_words++; }
+   | BRACE_START{ cor_words++; }
+   | BRACE_END{ cor_words++; }
+   | LOGICAL_OR{ cor_words++; }
+   | LOGICAL_AND{ cor_words++; }
+   | BRACKET_START{ cor_words++; }
+   | BRACKET_END{ cor_words++; }
+   | GREATER{ cor_words++; }
+   | LESSER{ cor_words++; }
+   | GREATER_EQ{ cor_words++; }
+   | LESSER_EQ{ cor_words++; }
+   | EQQ{ cor_words++; }
+   | EQ{ cor_words++; }
+   | NEQ{ cor_words++; }
+   | EQ_MULTI{ cor_words++; }
+   | EQ_DIV{ cor_words++; }
+   | EQ_PLUS{ cor_words++; }
+   | EQ_MINUS{ cor_words++; }
+   | PLUS{ cor_words++; }
+   | PLUSPLUS{ cor_words++; }
+   | MINUS{ cor_words++; }
+   | MINUSMINUS{ cor_words++; }
+   | DIV{ cor_words++; }
+   | MOD{ cor_words++; }
+   | MULTI{ cor_words++; }
+   | POW{ cor_words++; }
+   ;
+
 /* Εδώ ορίζεται το τι μπορεί να είναι κομμάτι μίας έκφρασης.
    Ένας χαρακτήρας ή ένας αριθμός */
 expr_part:
@@ -149,11 +209,11 @@ expr_proc:
 
 /* Εδώ ορίζεται το "σώμα" του κώδικα, δηλαδή ένας αριθμός συντακτικά
    σωστών εκφράσεων. */
-//body:
-//    body valid
-//    | valid
-//    |
-//    ;
+body:
+    body valid
+    | valid
+    |
+    ;
 
 elements:
     expr_part COMMA elements
@@ -166,11 +226,15 @@ in_brack:
 
 // Εδώ ορίζεται τι μπορεί να βρίσκεται μέσα σε άγκυστρο
 in_brace:
-      BRACE_START 
-    | BRACE_START NEWLINE
-    | BRACE_END
-    | NEWLINE BRACE_END
+    BRACE_START body BRACE_END
+
+struct:
+      KEYWORD_STR IDENTIFIER in_brace
+    | KEYWORD_STR IDENTIFIER NEWLINE in_brace
     ;
+
+loops:
+    for_grammar
 
 // Εδώ ορίζεται τι μπορεί να είναι ορίσματα μιας συνάρτησης
 arguments:
@@ -240,12 +304,6 @@ for_args:
     | SEMI SEMI
     ;
 
-struct:
-    KEYWORD_STR in_brace
-
-loops:
-    for_grammar
-
 half_expr:
       operator IDENTIFIER
     | operator INTCONST
@@ -266,45 +324,45 @@ conditionals:
 
 // Εδώ ορίζεται τι θεωρείται συντακτικά σώστο
 valid:
-     return      SEMI { cor_expr++; printf("O\tLine:  %d \tValid return statement!\n"    ,line);}
-   | sizeof      SEMI { cor_expr++; printf("O\tLine:  %d \tValid sizeof statement!\n"    ,line);}
-   | include     SEMI { cor_expr++; printf("O\tLine:  %d \tValid include statement!\n"   ,line);}
-   | expr_proc   SEMI { cor_expr++; printf("O\tLine:  %d \tValid expression!\n"          ,line);}
-   | assignment  SEMI { cor_expr++; printf("O\tLine:  %d \tValid assignment!\n"          ,line);}
-   | declaration SEMI { cor_expr++; printf("O\tLine:  %d \tValid declaration!\n"         ,line);}
-   | loops            { cor_expr++; printf("O\tLine:  %d \tValid loop clause!\n"         ,line);}
+     return      SEMI { cor_expr++; print_valid("return");}
+   | sizeof      SEMI { cor_expr++; print_valid("sizeof");}
+   | include     SEMI { cor_expr++; print_valid("include");}
+   | expr_proc   SEMI { cor_expr++; print_valid("expression");}
+   | assignment  SEMI { cor_expr++; print_valid("assignment");}
+   | declaration SEMI { cor_expr++; print_valid("declaration");}
+   | loops            { cor_expr++; print_valid("loop clause");}
    | in_brace         { cor_expr++;
-                        if( brace_started_flag)
+                        if( function_started_flag)
                         {
-                          brace_started_flag=0;
-                          if (line == brace_start_line)
-                          {
-                            printf("O\tLine:  %d \tValid function body!\n",brace_start_line);
-                          } else if (line >= brace_start_line) { 
-                            printf("O\tLines: %d-%d\tValid function body!\n",brace_start_line, line);
-                          }
+                            function_started_flag=0;
+                            if (line == function_start_line)
+                            {
+                               printf("O\tLine:  %d \tValid function body!\n",function_start_line);
+                            } else if (line >= function_start_line) {
+                               printf("O\tLines: %d-%d\tValid function body!\n",function_start_line, line);
+                            }
                         } else {
-                          brace_started_flag=1;
-                          brace_start_line=line;
+                            function_started_flag=1;
+                            function_start_line=line;
                         }
                       }
    | struct SEMI      { cor_expr++;
-                        if( brace_started_flag)
+                        if( struct_started_flag)
                         {
-                          brace_started_flag=0;
-                          if (line == brace_start_line)
-                          {
-                            printf("O\tLine:  %d \tValid struct statement!\n",brace_start_line);
-                          } else if (line >= brace_start_line) { 
-                            printf("O\tLines: %d-%d\tValid struct statement!\n",brace_start_line, line);
-                          }
+                            struct_started_flag=0;
+                            if (line == struct_start_line)
+                            {
+                                printf("O\tLine:  %d \tValid struct statement!\n",struct_start_line);
+                            } else if (line >= struct_start_line) {
+                                printf("O\tLines: %d-%d\tValid struct statement!\n",struct_start_line, line);
+                            }
                         } else {
-                          brace_started_flag=1;
-                          brace_start_line=line;
+                            struct_started_flag=1;
+                            struct_start_line=line;
                         }
                       }
-   | func_par         { cor_expr++; printf("O\tLine:  %d \tValid function declaration!\n",line);}
-   | conditionals     { cor_expr++; printf("O\tLine:  %d \tValid conditional clause!\n"  ,line);}
+   | func_par         { cor_expr++; print_valid("function declaration");}
+   | conditionals     { cor_expr++; print_valid("conditional clause");  }
    | NEWLINE          { line++; }
    | EOP              { print_report(cor_words,cor_expr,inc_words,inc_expr); }
    | error            { inc_expr++; }
@@ -312,6 +370,9 @@ valid:
 
 %%
 
+void print_valid (char * type) {
+    printf("O\tLine:  %d \tValid %s!\n"    ,line, type);
+}
 // Αυτή η συνάρτηση τυπώνει το πλήθος των σωστών και λάθος λέξεων και εκφράσεων
 // Ενεργοποιήται μόλις ο bison δεχθεί token EOP
 // (End of Parse, δίνεται στο τέλος του αρχείου)
@@ -333,14 +394,15 @@ void yyerror(char *s) {
     fprintf(stderr, "X\tLine:  %d \tError: %s\n",line, s);
 }
 
+//Αναγκαίες εντολές για να γίνεται το debugging στον Bison
+#ifdef YYDEBUG
+  yydebug = 1;
+#endif
+
 /* H synarthsh main pou apotelei kai to shmeio ekkinhshs tou programmatos.
    Sthn sygkekrimenh periptwsh apla kalei thn synarthsh yyparse tou Bison
    gia na ksekinhsei h syntaktikh analysh. */
 int main(void) {
-    //Αναγκαίες εντολές για να γίνεται το debugging στον Bison
-   // #ifdef YYDEBUG
-   //   yydebug = 1;
-   // #endif
     // Open a file handle to a particular file:
     FILE *myfile = fopen("input.txt", "r");
     // Make sure it is valid:

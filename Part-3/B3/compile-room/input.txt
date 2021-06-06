@@ -1,36 +1,9 @@
-#include <stdio.h>;
-#include <string.h>;
-#include "customlib.h";
-
-struct Car
+struct car
 {
-    int   numberplate;
-    char  brand[20];
+    int numberplate;
+    char brand[20];
     float eng_capacity;
 };
 
-func oneline_function (void) { int nothing; }
-
-func main (argc, argv) {
-    int metavliti = 1;
-    int variable = 0;
-    int res  = variable + 1;
-    int res2 = variable * 8;
-    int res3 = variable + metavliti;
-    int res4 = variable - 1;
-    int res5 = 5 + 5;
-    int res6 = 100/5;
-    int res7 = 700-800;
-    int res8 = 1 / 1;
-    int res9 = 1 ^ 100;
-    int res9 = 10 ^ variable;
-    int res10[12] = 1;
-    int res11 = sizeof(char) * 10;
-    int res12 = sizeof(char) + 10;
-    int res13 = sizeof(char);
-
-    $$a56f$$$
-    $$a56
-     $$sdfisd
-           $rhfa'$\5[fiw
-}
+func main (argc, argv) 
+{}

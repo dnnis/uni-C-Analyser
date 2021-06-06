@@ -133,6 +133,7 @@ FLOAT                [0-9]+\.[0-9]+|[0-9]+\.[0-9]+e[0-9]+
       else if ( !strcmp(yytext,"continue") ) { columns += strlen(yytext); return KEYWORD_CONT;}
       else if ( !strcmp(yytext,"switch"  ) ) { columns += strlen(yytext); return KEYWORD_SWITCH;}
       else if ( !strcmp(yytext,"int"     ) ) { columns += strlen(yytext); return KEYWORD_VAR_TYPE;}
+      else if ( !strcmp(yytext,"char"    ) ) { columns += strlen(yytext); return KEYWORD_VAR_TYPE;}
       else if ( !strcmp(yytext,"long"    ) ) { columns += strlen(yytext); return KEYWORD_VAR_TYPE;}
       else if ( !strcmp(yytext,"short"   ) ) { columns += strlen(yytext); return KEYWORD_VAR_TYPE;}
       else if ( !strcmp(yytext,"float"   ) ) { columns += strlen(yytext); return KEYWORD_VAR_TYPE;}
