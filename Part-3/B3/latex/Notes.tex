@@ -88,6 +88,11 @@
   \end{tabular}
 \vspace{5mm}
 \\
+  \textlatin{Github Repo}
+  \\
+  https://github.com/dnnis/uni-C-Analyser
+  \vspace{5mm}
+\\
   \textlatin{Usernames} στο \textlatin{Github}
 \\
   \vspace{5mm}
@@ -794,4 +799,132 @@ int main(void) {
 Κατα τα άλλα έχουμε μια απλή υλοποίηση διαβάσματος από αρχείο στην C, με κάλεσμα
 της yyparse για να αναλυθεί το αρχείο λεκτικά από τον λεκτικό αναλυτή πρώτα, που με την σειρά
 του δίνει tokens για την συντακτική ανάλυση του στον συντακτικό αναλυτή.
+\section{Compilation}
+Το makefile μας βρήσκεται μέσα στον κατάλογο \texttt{compile-room} και, εφόσον μεταβούμε
+στον κατάλογο αυτό μπορούμε να δώσουμε 3 εντολές:
+
+\begin{itemize}
+    \item \texttt{\textbf{make}} για το "κανονικό" compilation. Θα αντιγράψει τα απαράιτητα
+        αρχεία στον κατάλογο compile-room και θα κάνει compile χωρίς πρόσθετες επιλογές
+        το πρόγραμμα uni-c-analyser.
+    \item \texttt{\textbf{make debug}} για το "debug" compilation. Όπως αναφέραμε
+        και στο κεφάλαιο 2.2.5, λόγω ειδικών ρυθμίσεων μπορούμε να κάνουμε compile
+        το πρόγραμμα έτσι ώστε ο BISON να δίνει πρόσθετες πληροφορίες για το stack και
+        για τα token που δέχεται, όπως και το ποιόν κανόνα "ακολουθεί" κάθε φορά που
+        δέχεται token.
+    \item \texttt{\textbf{make clean}} για το "καθάρισμα" του καταλόγου απο τα πρόσθετα αρχεία
+        που δημιουργούνται από τα compilation.
+\end{itemize}
+\section{Εκτέλεση}
+Όταν κάνουμε make το πρόγραμμα, αυτό αυτόματα εκτελέιται για πρώτη φορά και βάζει
+το output σε ένα αρχείο στον τρέχοντα κατάλογο, που λέγεται "output.txt". 
+\\
+Φυσικά, "χειροκίνητα"
+μπορούμε να τρέξουμε το αρχείο και με την εντολή \texttt{./uni-c-analyser} στον κατάλογο που βρίσκεται
+το εκτελέσιμο αρχέιο.
+\section{Αρχείο input.txt}
+Τα αρχέια εισαγωγής βρισκονται στον κατάλογο \texttt{input-files}. 
+Από έκει το makefile αντιγράφει κάθε φορά που εκτελείται εντολή \texttt{make} ή 
+\texttt{make debug} το αρχέιο "input.txt", που μετά χρησιμοποιται για την είσοδο στο uni-c-analyser, αντί
+για το stdin, αρκεί το εκτελέσιμο και το αρχέιο εισαγωγής να είναι τον ίδιο κατάλογο
+(κάτι που συμβαίνει αν απλά τρεχτεί το makefile από τον κατάλογο \texttt{compile-room}).
+\clearpage
+\section{Ενδεικτική εκτέλεση}
+To input.txt μας είναι αυτό:
+\begin{lstlisting}[language=C]
+#include <stdio.h>;
+#include <string.h>;
+#include "customlib.h";
+
+struct Car
+{
+    int   numberplate;
+    char  brand[20];
+    float eng_capacity;
+};
+
+func oneline_function (void) { int nothing; }
+
+func main (argc, argv) {
+    int metavliti = 1;
+    int variable = 0;
+    int res  = variable + 1;
+    int res2 = variable * 8;
+    int res3 = variable + metavliti;
+    int res4 = variable - 1;
+    int res5 = 5 + 5;
+    int res6 = 100/5;
+    int res7 = 700-800;
+    int res8 = 1 / 1;
+    int res9 = 1 ^ 100;
+    int res9 = 10 ^ variable;
+    int res10[12] = 1;
+    int res11 = sizeof(char) * 10;
+    int res12 = sizeof(char) + 10;
+    int res13 = sizeof(char);
+
+    if ( variable == true ) {
+        someflag=1;
+    } else {
+        someflag=0;
+    }
+
+    //Below are some errors/unknown tokens
+    $$a56f$$$
+    $$a56
+     $$sdfisd
+           $rhfa'$\5[fiw
+}
+\end{lstlisting}
+To output.txt μας είναι αυτό:
+\begin{lstlisting}[language=C]
+*---- ANALYSIS: ---------------------*
+O	Line:  1 	Valid include!
+O	Line:  2 	Valid include!
+O	Line:  3 	Valid include!
+O	Line:  6 	Valid declaration!
+O	Line:  7 	Valid declaration!
+O	Line:  8 	Valid declaration!
+O	Line:  9 	Valid struct!
+O	Line:  11 	Valid arguments!
+O	Line:  11 	Valid function declaration!
+O	Line:  11 	Valid declaration!
+O	Line:  13 	Valid arguments!
+O	Line:  13 	Valid function declaration!
+O	Line:  14 	Valid declaration!
+O	Line:  15 	Valid declaration!
+O	Line:  16 	Valid declaration!
+O	Line:  17 	Valid declaration!
+O	Line:  18 	Valid declaration!
+O	Line:  19 	Valid declaration!
+O	Line:  20 	Valid declaration!
+O	Line:  21 	Valid declaration!
+O	Line:  22 	Valid declaration!
+O	Line:  23 	Valid declaration!
+O	Line:  24 	Valid declaration!
+O	Line:  25 	Valid declaration!
+O	Line:  26 	Valid declaration!
+O	Line:  27 	Valid declaration!
+O	Line:  28 	Valid declaration!
+O	Line:  29 	Valid declaration!
+O	Line:  32 	Valid assignment!
+O	Line:  33 	Valid conditional clause!
+O	Line:  34 	Valid assignment!
+O	Line:  35 	Valid conditional clause!
+X	Line:  38 	Column: 5 Unknown word: '$$a56f$$$'
+X	Line:  38 	Column: 5 Unknown word: '$$a56'
+X	Line:  38 	Column: 6 Unknown word: '$$sdfisd'
+X	Line:  38 	Column: 12 Unknown word: '$rhfa'$\5[fiw'
+O	Lines: 11-38	Valid function body!
+*---- RUN REPORT: ---------------------*
+|- Words:
+| Number of  correct  words       : 159
+| Number of incorrect words       : 4
+*--------------------------------------*
+|- Expressions:
+| Number of  correct  expressions : 34
+| Number of incorrect expressions : 4
+*--------------------------------------*
+\end{lstlisting}
+
 \end{document}

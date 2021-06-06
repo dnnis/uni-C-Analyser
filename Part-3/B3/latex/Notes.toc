@@ -14,3 +14,7 @@
 \contentsline {subsubsection}{\numberline {2.2.3}Γραμματικοί κανόνες}{14}{subsubsection.2.2.3}%
 \contentsline {subsubsection}{\numberline {2.2.4}Οι συναρτήσεις μας}{20}{subsubsection.2.2.4}%
 \contentsline {subsubsection}{\numberline {2.2.5}Η συνάρτηση main}{20}{subsubsection.2.2.5}%
+\contentsline {section}{\numberline {3}Compilation}{21}{section.3}%
+\contentsline {section}{\numberline {4}Εκτέλεση}{22}{section.4}%
+\contentsline {section}{\numberline {5}Αρχείο input.txt}{22}{section.5}%
+\contentsline {section}{\numberline {6}Ενδεικτική εκτέλεση}{23}{section.6}%
