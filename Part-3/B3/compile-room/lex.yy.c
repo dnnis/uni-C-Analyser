@@ -918,7 +918,6 @@ YY_RULE_SETUP
 #line 122 "flex-LA.l"
 {
       if      ( !strcmp(yytext,"do"      ) ) {cor_words++; columns += strlen(yytext); return KEYWORD;}
-      else if ( !strcmp(yytext,"void"    ) ) {cor_words++; columns += strlen(yytext); return KEYWORD;}
       else if ( !strcmp(yytext,"while"   ) ) {cor_words++; columns += strlen(yytext); return KEYWORD;}
       else if ( !strcmp(yytext,"break"   ) ) {cor_words++; columns += strlen(yytext); return KEYWORD;}
       else if ( !strcmp(yytext,"if"      ) ) {cor_words++; columns += strlen(yytext); return KEYWORD_IF;}
@@ -928,6 +927,7 @@ YY_RULE_SETUP
       else if ( !strcmp(yytext,"case"    ) ) {cor_words++; columns += strlen(yytext); return KEYWORD_CASE;}
       else if ( !strcmp(yytext,"else"    ) ) {cor_words++; columns += strlen(yytext); return KEYWORD_ELSE;}
       else if ( !strcmp(yytext,"func"    ) ) {cor_words++; columns += strlen(yytext); return KEYWORD_FUNC;}
+      else if ( !strcmp(yytext,"void"    ) ) {cor_words++; columns += strlen(yytext); return KEYWORD_VOID;}
       else if ( !strcmp(yytext,"sizeof"  ) ) {cor_words++; columns += strlen(yytext); return KEYWORD_SIZE;}
       else if ( !strcmp(yytext,"include" ) ) {cor_words++; columns += strlen(yytext); return KEYWORD_INCL;}
       else if ( !strcmp(yytext,"continue") ) {cor_words++; columns += strlen(yytext); return KEYWORD_CONT;}

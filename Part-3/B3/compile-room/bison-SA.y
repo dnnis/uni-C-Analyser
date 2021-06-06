@@ -34,19 +34,13 @@ int inc_expr  = 0;
 // Για την γραμμή που αρχίζει μία συνάρτηση
 int brack_start_line=0;
 
+// Για να αναφέρουμε απο που ως που μια συνάρτηση αρχίζει.
 int function_start_line=0;
 int function_started_flag=0;
 
-int struct_start_line=0;
-int struct_started_flag=0;
 // Για την μέτρηση γραμμών
 int line=1;
 %}
-
-/*TODO:
-    1. DOCUMENTATION AND COMMENTS
-    2. line counting etc?
-*/
 
 %union
 {
@@ -82,6 +76,7 @@ int line=1;
     <sval> KEYWORD_CASE
     <sval> KEYWORD_INCL
     <sval> KEYWORD_FUNC
+    <sval> KEYWORD_VOID
     <sval> KEYWORD_SWITCH
     <sval> KEYWORD_VAR_TYPE
     <sval> PAR_START PAR_END
@@ -182,6 +177,7 @@ loops:
 arguments:
       arguments expr_part COMMA expr_part
     | expr_part COMMA expr_part
+    | KEYWORD_VOID
     |
     ;
 
@@ -198,6 +194,7 @@ declaration:
     | KEYWORD_VAR_TYPE IDENTIFIER in_brack EQ expr_proc
     | KEYWORD_VAR_TYPE IDENTIFIER in_brack EQ BRACE_START elements BRACE_END
     | KEYWORD_VAR_TYPE IDENTIFIER in_brack
+    | KEYWORD_VAR_TYPE IDENTIFIER EQ sizeof
     ;
 
 // Εδώ ορίζεται τι θεωρείται ανάθεση σε μεταβλητή
@@ -288,21 +285,7 @@ valid:
                             function_start_line=line;
                         }
                       }
-   | struct SEMI      { cor_expr++;
-                        if( struct_started_flag)
-                        {
-                            struct_started_flag=0;
-                            if (line == struct_start_line)
-                            {
-                                printf("O\tLine:  %d \tValid struct statement!\n",struct_start_line);
-                            } else if (line >= struct_start_line) {
-                                printf("O\tLines: %d-%d\tValid struct statement!\n",struct_start_line, line);
-                            }
-                        } else {
-                            struct_started_flag=1;
-                            struct_start_line=line;
-                        }
-                      }
+   | struct SEMI      { cor_expr++; print_valid("struct");}
    | func_par         { cor_expr++; print_valid("function declaration");}
    | conditionals     { cor_expr++; print_valid("conditional clause");  }
    | NEWLINE          { line++; }

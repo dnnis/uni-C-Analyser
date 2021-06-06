@@ -6,7 +6,8 @@ O	Line:  3 	Valid include!
 O	Line:  6 	Valid declaration!
 O	Line:  7 	Valid declaration!
 O	Line:  8 	Valid declaration!
-O	Line:  11 	Valid argument!
+O	Line:  9 	Valid struct!
+O	Line:  11 	Valid arguments!
 O	Line:  11 	Valid function declaration!
 O	Line:  11 	Valid declaration!
 O	Line:  13 	Valid arguments!
@@ -24,20 +25,24 @@ O	Line:  23 	Valid declaration!
 O	Line:  24 	Valid declaration!
 O	Line:  25 	Valid declaration!
 O	Line:  26 	Valid declaration!
-O	Line:  27 	Valid sizeof!
-O	Line:  28 	Valid sizeof!
-O	Line:  29 	Valid sizeof!
-X	Line:  31 	Column: 5 Unknown word: '$$a56f$$$'
-X	Line:  31 	Column: 5 Unknown word: '$$a56'
-X	Line:  31 	Column: 6 Unknown word: '$$sdfisd'
-X	Line:  31 	Column: 12 Unknown word: '$rhfa'$\5[fiw'
-O	Lines: 11-31	Valid function body!
+O	Line:  27 	Valid declaration!
+O	Line:  28 	Valid declaration!
+O	Line:  29 	Valid declaration!
+O	Line:  32 	Valid assignment!
+O	Line:  33 	Valid conditional clause!
+O	Line:  34 	Valid assignment!
+O	Line:  35 	Valid conditional clause!
+X	Line:  38 	Column: 5 Unknown word: '$$a56f$$$'
+X	Line:  38 	Column: 5 Unknown word: '$$a56'
+X	Line:  38 	Column: 6 Unknown word: '$$sdfisd'
+X	Line:  38 	Column: 12 Unknown word: '$rhfa'$\5[fiw'
+O	Lines: 11-38	Valid function body!
 *---- RUN REPORT: ---------------------*
 |- Words:
-| Number of  correct  words       : 142
+| Number of  correct  words       : 159
 | Number of incorrect words       : 4
 *--------------------------------------*
 |- Expressions:
-| Number of  correct  expressions : 30
-| Number of incorrect expressions : 7
+| Number of  correct  expressions : 34
+| Number of incorrect expressions : 4
 *--------------------------------------*

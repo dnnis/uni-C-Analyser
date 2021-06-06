@@ -29,6 +29,13 @@ func main (argc, argv) {
     int res12 = sizeof(char) + 10;
     int res13 = sizeof(char);
 
+    if ( variable == true ) {
+        someflag=1;
+    } else {
+        someflag=0;
+    }
+
+    //Below are some errors/unknown tokens
     $$a56f$$$
     $$a56
      $$sdfisd

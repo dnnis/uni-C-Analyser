@@ -80,35 +80,36 @@ extern int yydebug;
     KEYWORD_CASE = 281,            /* KEYWORD_CASE  */
     KEYWORD_INCL = 282,            /* KEYWORD_INCL  */
     KEYWORD_FUNC = 283,            /* KEYWORD_FUNC  */
-    KEYWORD_SWITCH = 284,          /* KEYWORD_SWITCH  */
-    KEYWORD_VAR_TYPE = 285,        /* KEYWORD_VAR_TYPE  */
-    PAR_START = 286,               /* PAR_START  */
-    PAR_END = 287,                 /* PAR_END  */
-    BRACE_START = 288,             /* BRACE_START  */
-    BRACE_END = 289,               /* BRACE_END  */
-    LOGICAL_OR = 290,              /* LOGICAL_OR  */
-    LOGICAL_AND = 291,             /* LOGICAL_AND  */
-    BRACKET_START = 292,           /* BRACKET_START  */
-    BRACKET_END = 293,             /* BRACKET_END  */
-    GREATER = 294,                 /* GREATER  */
-    LESSER = 295,                  /* LESSER  */
-    GREATER_EQ = 296,              /* GREATER_EQ  */
-    LESSER_EQ = 297,               /* LESSER_EQ  */
-    EQQ = 298,                     /* EQQ  */
-    EQ = 299,                      /* EQ  */
-    NEQ = 300,                     /* NEQ  */
-    EQ_MULTI = 301,                /* EQ_MULTI  */
-    EQ_DIV = 302,                  /* EQ_DIV  */
-    EQ_PLUS = 303,                 /* EQ_PLUS  */
-    EQ_MINUS = 304,                /* EQ_MINUS  */
-    PLUS = 305,                    /* PLUS  */
-    PLUSPLUS = 306,                /* PLUSPLUS  */
-    MINUS = 307,                   /* MINUS  */
-    MINUSMINUS = 308,              /* MINUSMINUS  */
-    DIV = 309,                     /* DIV  */
-    MOD = 310,                     /* MOD  */
-    MULTI = 311,                   /* MULTI  */
-    POW = 312                      /* POW  */
+    KEYWORD_VOID = 284,            /* KEYWORD_VOID  */
+    KEYWORD_SWITCH = 285,          /* KEYWORD_SWITCH  */
+    KEYWORD_VAR_TYPE = 286,        /* KEYWORD_VAR_TYPE  */
+    PAR_START = 287,               /* PAR_START  */
+    PAR_END = 288,                 /* PAR_END  */
+    BRACE_START = 289,             /* BRACE_START  */
+    BRACE_END = 290,               /* BRACE_END  */
+    LOGICAL_OR = 291,              /* LOGICAL_OR  */
+    LOGICAL_AND = 292,             /* LOGICAL_AND  */
+    BRACKET_START = 293,           /* BRACKET_START  */
+    BRACKET_END = 294,             /* BRACKET_END  */
+    GREATER = 295,                 /* GREATER  */
+    LESSER = 296,                  /* LESSER  */
+    GREATER_EQ = 297,              /* GREATER_EQ  */
+    LESSER_EQ = 298,               /* LESSER_EQ  */
+    EQQ = 299,                     /* EQQ  */
+    EQ = 300,                      /* EQ  */
+    NEQ = 301,                     /* NEQ  */
+    EQ_MULTI = 302,                /* EQ_MULTI  */
+    EQ_DIV = 303,                  /* EQ_DIV  */
+    EQ_PLUS = 304,                 /* EQ_PLUS  */
+    EQ_MINUS = 305,                /* EQ_MINUS  */
+    PLUS = 306,                    /* PLUS  */
+    PLUSPLUS = 307,                /* PLUSPLUS  */
+    MINUS = 308,                   /* MINUS  */
+    MINUSMINUS = 309,              /* MINUSMINUS  */
+    DIV = 310,                     /* DIV  */
+    MOD = 311,                     /* MOD  */
+    MULTI = 312,                   /* MULTI  */
+    POW = 313                      /* POW  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -117,14 +118,14 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 52 "bison-SA.y"
+#line 46 "bison-SA.y"
 
     int    ival;
     char*  sval;
     float  fval;
     double dval;
 
-#line 128 "bison-SA.tab.h"
+#line 129 "bison-SA.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
