@@ -2,6 +2,15 @@
 #include <string.h>;
 #include "customlib.h";
 
+struct Car
+{
+    int   numberplate;
+    char  brand[20];
+    float eng_capacity;
+};
+
+func oneline_function (void) { int nothing; }
+
 func main (argc, argv) {
     int metavliti = 1;
     int variable = 0;
@@ -16,7 +25,9 @@ func main (argc, argv) {
     int res9 = 1 ^ 100;
     int res9 = 10 ^ variable;
     int res10[12] = 1;
-
+    int res11 = sizeof(char) * 10;
+    int res12 = sizeof(char) + 10;
+    int res13 = sizeof(char);
 
     $$a56f$$$
     $$a56

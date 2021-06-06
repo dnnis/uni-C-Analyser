@@ -74,7 +74,9 @@ int line=1;
     <sval> AMPER EXCLA
     <sval> KEYWORD_RET
     <sval> KEYWORD_FOR
+    <sval> KEYWORD_STR
     <sval> KEYWORD_ELSE
+    <sval> KEYWORD_SIZE
     <sval> KEYWORD_CONT
     <sval> KEYWORD_CASE
     <sval> KEYWORD_INCL
@@ -114,7 +116,7 @@ expr_part:
     | KEYWORD     { cor_words++; }
     | INTCONST    { cor_words++; }
     | IDENTIFIER  { cor_words++; }
-    | UNKNOWN     { inc_words++; printf("Line: %d ",line);}
+    | UNKNOWN     { inc_words++; printf("O\tLine:  %d \t",line);}
     ;
 
 operator:
@@ -164,8 +166,10 @@ in_brack:
 
 // Εδώ ορίζεται τι μπορεί να βρίσκεται μέσα σε άγκυστρο
 in_brace:
-      BRACE_START
+      BRACE_START 
+    | BRACE_START NEWLINE
     | BRACE_END
+    | NEWLINE BRACE_END
     ;
 
 // Εδώ ορίζεται τι μπορεί να είναι ορίσματα μιας συνάρτησης
@@ -177,8 +181,8 @@ arguments:
 
 // Εδώ ορίζεται τι θεωρείται ορισμός μιας συνάρτησης
 func_par:
-      KEYWORD_FUNC IDENTIFIER PAR_START arguments PAR_END {cor_expr++; printf("Line: %d Valid arguments\n",line); }
-    | KEYWORD_FUNC IDENTIFIER PAR_START expr_part PAR_END {cor_expr++; printf("Line: %d Valid argument\n" ,line); }
+      KEYWORD_FUNC IDENTIFIER PAR_START arguments PAR_END {cor_expr++; printf("O\tLine:  %d \tValid arguments\n",line); }
+    | KEYWORD_FUNC IDENTIFIER PAR_START expr_part PAR_END {cor_expr++; printf("O\tLine:  %d \tValid argument\n" ,line); }
     ;
 
 // Εδώ ορίζεται τι θεωρείται ορισμός μιας μεταβλητής
@@ -236,8 +240,23 @@ for_args:
     | SEMI SEMI
     ;
 
+struct:
+    KEYWORD_STR in_brace
+
 loops:
     for_grammar
+
+half_expr:
+      operator IDENTIFIER
+    | operator INTCONST
+    | operator DOUBLE
+    | operator FLOAT
+    ;
+
+sizeof:
+      KEYWORD_SIZE PAR_START KEYWORD_VAR_TYPE PAR_END
+    | KEYWORD_SIZE PAR_START KEYWORD_VAR_TYPE PAR_END half_expr
+    ;
 
 conditionals:
       if_grammar
@@ -247,24 +266,45 @@ conditionals:
 
 // Εδώ ορίζεται τι θεωρείται συντακτικά σώστο
 valid:
-     return      SEMI { cor_expr++; printf("Line: %d Valid return statement!\n"    ,line);}
-   | include     SEMI { cor_expr++; printf("Line: %d Valid include statement!\n"   ,line);}
-   | expr_proc   SEMI { cor_expr++; printf("Line: %d Valid expression!\n"          ,line);}
-   | assignment  SEMI { cor_expr++; printf("Line: %d Valid assignment!\n"          ,line);}
-   | declaration SEMI { cor_expr++; printf("Line: %d Valid declaration!\n"         ,line);}
-   | loops            { cor_expr++; printf("Line: %d Valid loop clause!\n"         ,line);}
+     return      SEMI { cor_expr++; printf("O\tLine:  %d \tValid return statement!\n"    ,line);}
+   | sizeof      SEMI { cor_expr++; printf("O\tLine:  %d \tValid sizeof statement!\n"    ,line);}
+   | include     SEMI { cor_expr++; printf("O\tLine:  %d \tValid include statement!\n"   ,line);}
+   | expr_proc   SEMI { cor_expr++; printf("O\tLine:  %d \tValid expression!\n"          ,line);}
+   | assignment  SEMI { cor_expr++; printf("O\tLine:  %d \tValid assignment!\n"          ,line);}
+   | declaration SEMI { cor_expr++; printf("O\tLine:  %d \tValid declaration!\n"         ,line);}
+   | loops            { cor_expr++; printf("O\tLine:  %d \tValid loop clause!\n"         ,line);}
    | in_brace         { cor_expr++;
-                        if(brace_started_flag)
+                        if( brace_started_flag)
                         {
                           brace_started_flag=0;
-                          printf("Line(s): %d - %d Valid function body!\n",brace_start_line, line);
+                          if (line == brace_start_line)
+                          {
+                            printf("O\tLine:  %d \tValid function body!\n",brace_start_line);
+                          } else if (line >= brace_start_line) { 
+                            printf("O\tLines: %d-%d\tValid function body!\n",brace_start_line, line);
+                          }
                         } else {
                           brace_started_flag=1;
                           brace_start_line=line;
                         }
                       }
-   | func_par         { cor_expr++; printf("Line: %d Valid function declaration!\n",line);}
-   | conditionals     { cor_expr++; printf("Line: %d Valid conditional clause!\n"  ,line);}
+   | struct SEMI      { cor_expr++;
+                        if( brace_started_flag)
+                        {
+                          brace_started_flag=0;
+                          if (line == brace_start_line)
+                          {
+                            printf("O\tLine:  %d \tValid struct statement!\n",brace_start_line);
+                          } else if (line >= brace_start_line) { 
+                            printf("O\tLines: %d-%d\tValid struct statement!\n",brace_start_line, line);
+                          }
+                        } else {
+                          brace_started_flag=1;
+                          brace_start_line=line;
+                        }
+                      }
+   | func_par         { cor_expr++; printf("O\tLine:  %d \tValid function declaration!\n",line);}
+   | conditionals     { cor_expr++; printf("O\tLine:  %d \tValid conditional clause!\n"  ,line);}
    | NEWLINE          { line++; }
    | EOP              { print_report(cor_words,cor_expr,inc_words,inc_expr); }
    | error            { inc_expr++; }
@@ -290,7 +330,7 @@ void print_report (int cor_words, int cor_expr,int inc_words,int inc_expr) {
    apo thn yyparse otan yparksei kapoio syntaktiko lathos. Sthn parakatw periptwsh h
    synarthsh epi ths ousias typwnei mhnyma lathous sthn othonh. */
 void yyerror(char *s) {
-    fprintf(stderr, "Error: %s\n", s);
+    fprintf(stderr, "X\tLine:  %d \tError: %s\n",line, s);
 }
 
 /* H synarthsh main pou apotelei kai to shmeio ekkinhshs tou programmatos.
@@ -310,6 +350,7 @@ int main(void) {
       return -1;
     }
     // Set Flex to read from it instead of defaulting to STDIN:
+    printf("\n*---- ANALYSIS: ---------------------*\n");
     yyin = myfile;
     yyparse();
     fclose(myfile);

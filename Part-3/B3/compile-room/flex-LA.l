@@ -100,35 +100,35 @@ FLOAT                [0-9]+\.[0-9]+|[0-9]+\.[0-9]+e[0-9]+
                     γραμμές, δεν επιτρέφει token για αυτά για το συντακτικό
                     αναλυτή. */
 %%
-{MOD}           {  columns++; return MOD;                     }
-{POW}           {  columns++; return POW;                     }
-{DOT}           {  columns++; return DOT;                     }
-{SEMI}          {  columns++; return SEMI;                    }
-{HASH}          {  columns++; return HASH;                    }
-{COMMA}         {  columns++; return COMMA;                   }
-{PAR_END}       {  columns++; return PAR_END;                 }
-{PAR_START}     {  columns++; return PAR_START;               }
-{BRACE_END}     {  columns++; return BRACE_END;               }
-{LOGICAL_OR}    {  columns++; return LOGICAL_OR;              }
-{BRACE_START}   {  columns++; return BRACE_START;             }
-{BRACKET_END}   {  columns++; return BRACKET_END;             }
-{BRACKET_START} {  columns++; return BRACKET_START;           }
-{FLOAT}         {  columns += strlen(yytext); return FLOAT;   }
-{STRING}        {  columns += strlen(yytext); return STRING;  }
-{INTCONST}      {  columns += strlen(yytext); return INTCONST;}
+{MOD}           { columns++; return MOD;                     }
+{POW}           { columns++; return POW;                     }
+{DOT}           { columns++; return DOT;                     }
+{SEMI}          { columns++; return SEMI;                    }
+{HASH}          { columns++; return HASH;                    }
+{COMMA}         { columns++; return COMMA;                   }
+{PAR_END}       { columns++; return PAR_END;                 }
+{PAR_START}     { columns++; return PAR_START;               }
+{BRACE_END}     { columns++; return BRACE_END;               }
+{LOGICAL_OR}    { columns++; return LOGICAL_OR;              }
+{BRACE_START}   { columns++; return BRACE_START;             }
+{BRACKET_END}   { columns++; return BRACKET_END;             }
+{BRACKET_START} { columns++; return BRACKET_START;           }
+{FLOAT}         { columns += strlen(yytext); return FLOAT;   }
+{STRING}        { columns += strlen(yytext); return STRING;  }
+{INTCONST}      { columns += strlen(yytext); return INTCONST;}
 {IDENTIFIER}    {
       if      ( !strcmp(yytext,"do"      ) ) { columns += strlen(yytext); return KEYWORD;}
       else if ( !strcmp(yytext,"void"    ) ) { columns += strlen(yytext); return KEYWORD;}
       else if ( !strcmp(yytext,"while"   ) ) { columns += strlen(yytext); return KEYWORD;}
       else if ( !strcmp(yytext,"break"   ) ) { columns += strlen(yytext); return KEYWORD;}
-      else if ( !strcmp(yytext,"sizeof"  ) ) { columns += strlen(yytext); return KEYWORD;}
-      else if ( !strcmp(yytext,"struct"  ) ) { columns += strlen(yytext); return KEYWORD;}
       else if ( !strcmp(yytext,"if"      ) ) { columns += strlen(yytext); return KEYWORD_IF;}
+      else if ( !strcmp(yytext,"struct"  ) ) { columns += strlen(yytext); return KEYWORD_STR;}
       else if ( !strcmp(yytext,"for"     ) ) { columns += strlen(yytext); return KEYWORD_FOR;}
       else if ( !strcmp(yytext,"return"  ) ) { columns += strlen(yytext); return KEYWORD_RET;}
       else if ( !strcmp(yytext,"case"    ) ) { columns += strlen(yytext); return KEYWORD_CASE;}
       else if ( !strcmp(yytext,"else"    ) ) { columns += strlen(yytext); return KEYWORD_ELSE;}
       else if ( !strcmp(yytext,"func"    ) ) { columns += strlen(yytext); return KEYWORD_FUNC;}
+      else if ( !strcmp(yytext,"sizeof"  ) ) { columns += strlen(yytext); return KEYWORD_SIZE;}
       else if ( !strcmp(yytext,"include" ) ) { columns += strlen(yytext); return KEYWORD_INCL;}
       else if ( !strcmp(yytext,"continue") ) { columns += strlen(yytext); return KEYWORD_CONT;}
       else if ( !strcmp(yytext,"switch"  ) ) { columns += strlen(yytext); return KEYWORD_SWITCH;}

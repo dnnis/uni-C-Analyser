@@ -833,82 +833,82 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 YY_RULE_SETUP
 #line 103 "flex-LA.l"
-{  columns++; return MOD;                     }
+{ columns++; return MOD;                     }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
 #line 104 "flex-LA.l"
-{  columns++; return POW;                     }
+{ columns++; return POW;                     }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
 #line 105 "flex-LA.l"
-{  columns++; return DOT;                     }
+{ columns++; return DOT;                     }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
 #line 106 "flex-LA.l"
-{  columns++; return SEMI;                    }
+{ columns++; return SEMI;                    }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
 #line 107 "flex-LA.l"
-{  columns++; return HASH;                    }
+{ columns++; return HASH;                    }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
 #line 108 "flex-LA.l"
-{  columns++; return COMMA;                   }
+{ columns++; return COMMA;                   }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
 #line 109 "flex-LA.l"
-{  columns++; return PAR_END;                 }
+{ columns++; return PAR_END;                 }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
 #line 110 "flex-LA.l"
-{  columns++; return PAR_START;               }
+{ columns++; return PAR_START;               }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
 #line 111 "flex-LA.l"
-{  columns++; return BRACE_END;               }
+{ columns++; return BRACE_END;               }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
 #line 112 "flex-LA.l"
-{  columns++; return LOGICAL_OR;              }
+{ columns++; return LOGICAL_OR;              }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
 #line 113 "flex-LA.l"
-{  columns++; return BRACE_START;             }
+{ columns++; return BRACE_START;             }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
 #line 114 "flex-LA.l"
-{  columns++; return BRACKET_END;             }
+{ columns++; return BRACKET_END;             }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
 #line 115 "flex-LA.l"
-{  columns++; return BRACKET_START;           }
+{ columns++; return BRACKET_START;           }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
 #line 116 "flex-LA.l"
-{  columns += strlen(yytext); return FLOAT;   }
+{ columns += strlen(yytext); return FLOAT;   }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
 #line 117 "flex-LA.l"
-{  columns += strlen(yytext); return STRING;  }
+{ columns += strlen(yytext); return STRING;  }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
 #line 118 "flex-LA.l"
-{  columns += strlen(yytext); return INTCONST;}
+{ columns += strlen(yytext); return INTCONST;}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
@@ -918,14 +918,14 @@ YY_RULE_SETUP
       else if ( !strcmp(yytext,"void"    ) ) { columns += strlen(yytext); return KEYWORD;}
       else if ( !strcmp(yytext,"while"   ) ) { columns += strlen(yytext); return KEYWORD;}
       else if ( !strcmp(yytext,"break"   ) ) { columns += strlen(yytext); return KEYWORD;}
-      else if ( !strcmp(yytext,"sizeof"  ) ) { columns += strlen(yytext); return KEYWORD;}
-      else if ( !strcmp(yytext,"struct"  ) ) { columns += strlen(yytext); return KEYWORD;}
       else if ( !strcmp(yytext,"if"      ) ) { columns += strlen(yytext); return KEYWORD_IF;}
+      else if ( !strcmp(yytext,"struct"  ) ) { columns += strlen(yytext); return KEYWORD_STR;}
       else if ( !strcmp(yytext,"for"     ) ) { columns += strlen(yytext); return KEYWORD_FOR;}
       else if ( !strcmp(yytext,"return"  ) ) { columns += strlen(yytext); return KEYWORD_RET;}
       else if ( !strcmp(yytext,"case"    ) ) { columns += strlen(yytext); return KEYWORD_CASE;}
       else if ( !strcmp(yytext,"else"    ) ) { columns += strlen(yytext); return KEYWORD_ELSE;}
       else if ( !strcmp(yytext,"func"    ) ) { columns += strlen(yytext); return KEYWORD_FUNC;}
+      else if ( !strcmp(yytext,"sizeof"  ) ) { columns += strlen(yytext); return KEYWORD_SIZE;}
       else if ( !strcmp(yytext,"include" ) ) { columns += strlen(yytext); return KEYWORD_INCL;}
       else if ( !strcmp(yytext,"continue") ) { columns += strlen(yytext); return KEYWORD_CONT;}
       else if ( !strcmp(yytext,"switch"  ) ) { columns += strlen(yytext); return KEYWORD_SWITCH;}
