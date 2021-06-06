@@ -520,10 +520,13 @@ char *yytext;
 
 // Για να μετράμε τις κολόνες
 int columns = 1;
+// Αρχικοποιούμε τις μεταβλητές για το άθροισμα των σωστών και λάθος λέξεων
+int cor_words = 0;
+int inc_words = 0;
 // Για να καταφέρνουμε να δίνουμε στον χρήστη σωστό output.
 char panic_cause_char[100];
 
-#line 526 "lex.yy.c"
+#line 529 "lex.yy.c"
 /* Onomata kai antistoixoi orismoi (ypo morfh kanonikhs ekfrashs).
    Meta apo auto, mporei na ginei xrhsh twn onomatwn (aristera) anti twn,
    synhthws idiaiterws makroskelwn kai dysnohtwn, kanonikwn ekfrasewn */
@@ -551,7 +554,7 @@ char panic_cause_char[100];
     -Κενά:          Ο λεκτικός μας αναλυτής αγνοεί τα κενά και τις κενές
                     γραμμές, δεν επιτρέφει token για αυτά για το συντακτικό
                     αναλυτή. */
-#line 554 "lex.yy.c"
+#line 557 "lex.yy.c"
 
 #define INITIAL 0
 #define REALLYEND 1
@@ -771,9 +774,9 @@ YY_DECL
 		}
 
 	{
-#line 102 "flex-LA.l"
+#line 105 "flex-LA.l"
 
-#line 776 "lex.yy.c"
+#line 779 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -832,201 +835,201 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 103 "flex-LA.l"
-{ columns++; return MOD;                     }
+#line 106 "flex-LA.l"
+{cor_words++; columns++; return MOD;                     }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 104 "flex-LA.l"
-{ columns++; return POW;                     }
+#line 107 "flex-LA.l"
+{cor_words++; columns++; return POW;                     }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 105 "flex-LA.l"
-{ columns++; return DOT;                     }
+#line 108 "flex-LA.l"
+{cor_words++; columns++; return DOT;                     }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 106 "flex-LA.l"
-{ columns++; return SEMI;                    }
+#line 109 "flex-LA.l"
+{cor_words++; columns++; return SEMI;                    }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 107 "flex-LA.l"
-{ columns++; return HASH;                    }
+#line 110 "flex-LA.l"
+{cor_words++; columns++; return HASH;                    }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 108 "flex-LA.l"
-{ columns++; return COMMA;                   }
+#line 111 "flex-LA.l"
+{cor_words++; columns++; return COMMA;                   }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 109 "flex-LA.l"
-{ columns++; return PAR_END;                 }
+#line 112 "flex-LA.l"
+{cor_words++; columns++; return PAR_END;                 }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 110 "flex-LA.l"
-{ columns++; return PAR_START;               }
+#line 113 "flex-LA.l"
+{cor_words++; columns++; return PAR_START;               }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 111 "flex-LA.l"
-{ columns++; return BRACE_END;               }
+#line 114 "flex-LA.l"
+{cor_words++; columns++; return BRACE_END;               }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 112 "flex-LA.l"
-{ columns++; return LOGICAL_OR;              }
+#line 115 "flex-LA.l"
+{cor_words++; columns++; return LOGICAL_OR;              }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 113 "flex-LA.l"
-{ columns++; return BRACE_START;             }
+#line 116 "flex-LA.l"
+{cor_words++; columns++; return BRACE_START;             }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 114 "flex-LA.l"
-{ columns++; return BRACKET_END;             }
+#line 117 "flex-LA.l"
+{cor_words++; columns++; return BRACKET_END;             }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 115 "flex-LA.l"
-{ columns++; return BRACKET_START;           }
+#line 118 "flex-LA.l"
+{cor_words++; columns++; return BRACKET_START;           }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 116 "flex-LA.l"
-{ columns += strlen(yytext); return FLOAT;   }
+#line 119 "flex-LA.l"
+{cor_words++; columns += strlen(yytext); return FLOAT;   }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 117 "flex-LA.l"
-{ columns += strlen(yytext); return STRING;  }
+#line 120 "flex-LA.l"
+{cor_words++; columns += strlen(yytext); return STRING;  }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 118 "flex-LA.l"
-{ columns += strlen(yytext); return INTCONST;}
+#line 121 "flex-LA.l"
+{cor_words++; columns += strlen(yytext); return INTCONST;}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 119 "flex-LA.l"
+#line 122 "flex-LA.l"
 {
-      if      ( !strcmp(yytext,"do"      ) ) { columns += strlen(yytext); return KEYWORD;}
-      else if ( !strcmp(yytext,"void"    ) ) { columns += strlen(yytext); return KEYWORD;}
-      else if ( !strcmp(yytext,"while"   ) ) { columns += strlen(yytext); return KEYWORD;}
-      else if ( !strcmp(yytext,"break"   ) ) { columns += strlen(yytext); return KEYWORD;}
-      else if ( !strcmp(yytext,"if"      ) ) { columns += strlen(yytext); return KEYWORD_IF;}
-      else if ( !strcmp(yytext,"struct"  ) ) { columns += strlen(yytext); return KEYWORD_STR;}
-      else if ( !strcmp(yytext,"for"     ) ) { columns += strlen(yytext); return KEYWORD_FOR;}
-      else if ( !strcmp(yytext,"return"  ) ) { columns += strlen(yytext); return KEYWORD_RET;}
-      else if ( !strcmp(yytext,"case"    ) ) { columns += strlen(yytext); return KEYWORD_CASE;}
-      else if ( !strcmp(yytext,"else"    ) ) { columns += strlen(yytext); return KEYWORD_ELSE;}
-      else if ( !strcmp(yytext,"func"    ) ) { columns += strlen(yytext); return KEYWORD_FUNC;}
-      else if ( !strcmp(yytext,"sizeof"  ) ) { columns += strlen(yytext); return KEYWORD_SIZE;}
-      else if ( !strcmp(yytext,"include" ) ) { columns += strlen(yytext); return KEYWORD_INCL;}
-      else if ( !strcmp(yytext,"continue") ) { columns += strlen(yytext); return KEYWORD_CONT;}
-      else if ( !strcmp(yytext,"switch"  ) ) { columns += strlen(yytext); return KEYWORD_SWITCH;}
-      else if ( !strcmp(yytext,"int"     ) ) { columns += strlen(yytext); return KEYWORD_VAR_TYPE;}
-      else if ( !strcmp(yytext,"char"    ) ) { columns += strlen(yytext); return KEYWORD_VAR_TYPE;}
-      else if ( !strcmp(yytext,"long"    ) ) { columns += strlen(yytext); return KEYWORD_VAR_TYPE;}
-      else if ( !strcmp(yytext,"short"   ) ) { columns += strlen(yytext); return KEYWORD_VAR_TYPE;}
-      else if ( !strcmp(yytext,"float"   ) ) { columns += strlen(yytext); return KEYWORD_VAR_TYPE;}
-      else if ( !strcmp(yytext,"const"   ) ) { columns += strlen(yytext); return KEYWORD_VAR_TYPE;}
-      else if ( !strcmp(yytext,"double"  ) ) { columns += strlen(yytext); return KEYWORD_VAR_TYPE;}
-      else                                   { columns += strlen(yytext); return IDENTIFIER;}
+      if      ( !strcmp(yytext,"do"      ) ) {cor_words++; columns += strlen(yytext); return KEYWORD;}
+      else if ( !strcmp(yytext,"void"    ) ) {cor_words++; columns += strlen(yytext); return KEYWORD;}
+      else if ( !strcmp(yytext,"while"   ) ) {cor_words++; columns += strlen(yytext); return KEYWORD;}
+      else if ( !strcmp(yytext,"break"   ) ) {cor_words++; columns += strlen(yytext); return KEYWORD;}
+      else if ( !strcmp(yytext,"if"      ) ) {cor_words++; columns += strlen(yytext); return KEYWORD_IF;}
+      else if ( !strcmp(yytext,"struct"  ) ) {cor_words++; columns += strlen(yytext); return KEYWORD_STR;}
+      else if ( !strcmp(yytext,"for"     ) ) {cor_words++; columns += strlen(yytext); return KEYWORD_FOR;}
+      else if ( !strcmp(yytext,"return"  ) ) {cor_words++; columns += strlen(yytext); return KEYWORD_RET;}
+      else if ( !strcmp(yytext,"case"    ) ) {cor_words++; columns += strlen(yytext); return KEYWORD_CASE;}
+      else if ( !strcmp(yytext,"else"    ) ) {cor_words++; columns += strlen(yytext); return KEYWORD_ELSE;}
+      else if ( !strcmp(yytext,"func"    ) ) {cor_words++; columns += strlen(yytext); return KEYWORD_FUNC;}
+      else if ( !strcmp(yytext,"sizeof"  ) ) {cor_words++; columns += strlen(yytext); return KEYWORD_SIZE;}
+      else if ( !strcmp(yytext,"include" ) ) {cor_words++; columns += strlen(yytext); return KEYWORD_INCL;}
+      else if ( !strcmp(yytext,"continue") ) {cor_words++; columns += strlen(yytext); return KEYWORD_CONT;}
+      else if ( !strcmp(yytext,"switch"  ) ) {cor_words++; columns += strlen(yytext); return KEYWORD_SWITCH;}
+      else if ( !strcmp(yytext,"int"     ) ) {cor_words++; columns += strlen(yytext); return KEYWORD_VAR_TYPE;}
+      else if ( !strcmp(yytext,"char"    ) ) {cor_words++; columns += strlen(yytext); return KEYWORD_VAR_TYPE;}
+      else if ( !strcmp(yytext,"long"    ) ) {cor_words++; columns += strlen(yytext); return KEYWORD_VAR_TYPE;}
+      else if ( !strcmp(yytext,"short"   ) ) {cor_words++; columns += strlen(yytext); return KEYWORD_VAR_TYPE;}
+      else if ( !strcmp(yytext,"float"   ) ) {cor_words++; columns += strlen(yytext); return KEYWORD_VAR_TYPE;}
+      else if ( !strcmp(yytext,"const"   ) ) {cor_words++; columns += strlen(yytext); return KEYWORD_VAR_TYPE;}
+      else if ( !strcmp(yytext,"double"  ) ) {cor_words++; columns += strlen(yytext); return KEYWORD_VAR_TYPE;}
+      else                                   {cor_words++; columns += strlen(yytext); return IDENTIFIER;}
 }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 144 "flex-LA.l"
-{ if (!strcmp(yytext, "!=")) { columns += 2; return NEQ;        } else    { columns++; return EXCLA;  }}
+#line 147 "flex-LA.l"
+{ if (!strcmp(yytext, "!=")) {cor_words++; columns += 2; return NEQ;        } else    { columns++; return EXCLA;  }}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 145 "flex-LA.l"
-{ if (!strcmp(yytext, "==")) { columns += 2; return EQQ;        } else    { columns++; return EQ;     }}
+#line 148 "flex-LA.l"
+{ if (!strcmp(yytext, "==")) {cor_words++; columns += 2; return EQQ;        } else    { columns++; return EQ;     }}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 146 "flex-LA.l"
-{ if (!strcmp(yytext, "/=")) { columns += 2; return EQ_DIV;     } else    { columns++; return DIV;    }}
+#line 149 "flex-LA.l"
+{ if (!strcmp(yytext, "/=")) {cor_words++; columns += 2; return EQ_DIV;     } else    { columns++; return DIV;    }}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 147 "flex-LA.l"
-{ if (!strcmp(yytext, "*=")) { columns += 2; return EQ_MULTI;   } else    { columns++; return MULTI;  }}
+#line 150 "flex-LA.l"
+{ if (!strcmp(yytext, "*=")) {cor_words++; columns += 2; return EQ_MULTI;   } else    { columns++; return MULTI;  }}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 148 "flex-LA.l"
-{ if (!strcmp(yytext, "<=")) { columns += 2; return LESSER_EQ;  } else    { columns++; return LESSER; }}
+#line 151 "flex-LA.l"
+{ if (!strcmp(yytext, "<=")) {cor_words++; columns += 2; return LESSER_EQ;  } else    { columns++; return LESSER; }}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 149 "flex-LA.l"
-{ if (!strcmp(yytext, ">=")) { columns += 2; return GREATER_EQ; } else    { columns++; return GREATER;}}
+#line 152 "flex-LA.l"
+{ if (!strcmp(yytext, ">=")) {cor_words++; columns += 2; return GREATER_EQ; } else    { columns++; return GREATER;}}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 150 "flex-LA.l"
-{ if (!strcmp(yytext, "&&")) { columns += 2; return LOGICAL_AND;} else    { columns++; return AMPER;  }}
+#line 153 "flex-LA.l"
+{ if (!strcmp(yytext, "&&")) {cor_words++; columns += 2; return LOGICAL_AND;} else    { columns++; return AMPER;  }}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 151 "flex-LA.l"
-{ if (!strcmp(yytext, "--")) { columns += 2; return MINUSMINUS; } else if (!strcmp(yytext, "-=")) { columns+=2; return EQ_MINUS; } else { columns++; return MINUS;}}
+#line 154 "flex-LA.l"
+{ if (!strcmp(yytext, "--")) {cor_words++; columns += 2; return MINUSMINUS; } else if (!strcmp(yytext, "-=")) { columns+=2; return EQ_MINUS; } else { columns++; return MINUS;}}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 152 "flex-LA.l"
-{ if (!strcmp(yytext, "++")) { columns += 2; return PLUSPLUS;   } else if (!strcmp(yytext, "+=")) { columns+=2; return EQ_PLUS;  } else { columns++; return PLUS; }}
+#line 155 "flex-LA.l"
+{ if (!strcmp(yytext, "++")) {cor_words++; columns += 2; return PLUSPLUS;   } else if (!strcmp(yytext, "+=")) { columns+=2; return EQ_PLUS;  } else { columns++; return PLUS; }}
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 153 "flex-LA.l"
+#line 156 "flex-LA.l"
 { columns++; }
 	YY_BREAK
 case 28:
 /* rule 28 can match eol */
 YY_RULE_SETUP
-#line 154 "flex-LA.l"
+#line 157 "flex-LA.l"
 { /*Do nothing, comment*/ }
 	YY_BREAK
 case 29:
 /* rule 29 can match eol */
 YY_RULE_SETUP
-#line 155 "flex-LA.l"
+#line 158 "flex-LA.l"
 { columns=1; /*Start from zero cols again*/ return NEWLINE; }
 	YY_BREAK
 /*Εδώ το flex "πιάνει" οποιονδήποτε άλλο χαρακτήρα που δεν περιγράφεται απο
   τις παραπάνω κανονικές εκφράσεις.*/
 case 30:
 YY_RULE_SETUP
-#line 158 "flex-LA.l"
-{ BEGIN(PREPANIC); strcpy(panic_cause_char,yytext); return UNKNOWN;}
+#line 161 "flex-LA.l"
+{ BEGIN(PREPANIC); strcpy(panic_cause_char,yytext); inc_words++; return UNKNOWN;}
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 159 "flex-LA.l"
+#line 162 "flex-LA.l"
 { BEGIN(PANIC); printf("Column: %d Unknown word: '%s%s",columns,panic_cause_char,yytext);}
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 160 "flex-LA.l"
+#line 163 "flex-LA.l"
 { columns++; printf("'\n"); BEGIN(INITIAL);}
 	YY_BREAK
 case 33:
 /* rule 33 can match eol */
 YY_RULE_SETUP
-#line 161 "flex-LA.l"
+#line 164 "flex-LA.l"
 { columns=1; printf("'\n"); BEGIN(INITIAL);}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 162 "flex-LA.l"
+#line 165 "flex-LA.l"
 { ECHO; }
 	YY_BREAK
 /*Εδώ καλούμε ένα τμήμα κώδικα που μας βοηθά να δώσουμε ένα token στον bison
@@ -1035,22 +1038,29 @@ YY_RULE_SETUP
   print_report() στο bison-SA.y, για να ανεφέρουμε τον αριθμό των σωστών και
   λανθασμένων λέξεων και εκφράσεων.*/
 case YY_STATE_EOF(INITIAL):
-#line 168 "flex-LA.l"
-{ BEGIN(REALLYEND); return EOP; }
+#line 171 "flex-LA.l"
+{ BEGIN(REALLYEND);
+                    printf("*---- RUN REPORT: ---------------------*\n"
+                           "|- Words:\n"
+                           "| Number of  correct  words       : %d\n"
+                           "| Number of incorrect words       : %d\n"
+                           "*--------------------------------------*\n"
+                           ,cor_words, inc_words);
+                    return EOP; }
 	YY_BREAK
 /*Εδώ, μετά την πάροδο των προηγούμενων, "πραγματικά" τερματίζουμε την
   εκτέλεση του flex, έχουμε ήδη τυπώσει την αναφορά με την print_report() με το
   bison, και αρχίζουμε να τερματίζουμε το πρόγραμμα συνολικά.*/
 case YY_STATE_EOF(REALLYEND):
-#line 172 "flex-LA.l"
+#line 182 "flex-LA.l"
 {yyterminate();}
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 173 "flex-LA.l"
+#line 183 "flex-LA.l"
 ECHO;
 	YY_BREAK
-#line 1053 "lex.yy.c"
+#line 1063 "lex.yy.c"
 case YY_STATE_EOF(PREPANIC):
 case YY_STATE_EOF(PANIC):
 	yyterminate();
@@ -2056,7 +2066,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 173 "flex-LA.l"
+#line 183 "flex-LA.l"
 
 /* Το πρόγραμμα αυτό δεν έχει main(), καθώς δεν τρέχει αυτόνομα, είναι απλά ο
    λεκτικός αναλυτής, η συντακτική ανάλυση γίνεται από τον bison. */

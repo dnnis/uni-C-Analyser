@@ -23,15 +23,12 @@
 extern int yylex(void);
 extern int yyparse(void);
 void yyerror(char *);
-void print_report(int,int,int,int);
+void print_report(int,int);
 void print_valid (char *);
 // Αρχικοποιούμε τον pointer για τη εισαγωγή δεδομένων με αρχείο και όχι απο το
 // stdin
 extern FILE *yyin;
 // Αρχικοποιούμε τις μεταβλητές για το άθροισμα των σωστών και λάθος εκφράσεων
-// και λέξεων
-int cor_words = 0;
-int inc_words = 0;
 int cor_expr  = 0;
 int inc_expr  = 0;
 // Για την γραμμή που αρχίζει μία συνάρτηση
@@ -112,91 +109,36 @@ program:
     ;
 
 
-words: 
-     DOT{ cor_words++; }
-   | SEMI{ cor_words++; }
-   | HASH{ cor_words++; }
-   | COLON{ cor_words++; }
-   | COMMA{ cor_words++; }
-   | FLOAT{ cor_words++; }
-   | DOUBLE{ cor_words++; }
-   | STRING{ cor_words++; }
-   | NEWLINE{ cor_words++; }
-   | KEYWORD{ cor_words++; }
-   | INTCONST{ cor_words++; }
-   | IDENTIFIER{ cor_words++; }
-   | KEYWORD_IF{ cor_words++; }
-   | AMPER EXCLA{ cor_words++; }
-   | KEYWORD_RET{ cor_words++; }
-   | KEYWORD_FOR{ cor_words++; }
-   | KEYWORD_STR{ cor_words++; }
-   | KEYWORD_ELSE{ cor_words++; }
-   | KEYWORD_SIZE{ cor_words++; }
-   | KEYWORD_CONT{ cor_words++; }
-   | KEYWORD_CASE{ cor_words++; }
-   | KEYWORD_INCL{ cor_words++; }
-   | KEYWORD_FUNC{ cor_words++; }
-   | KEYWORD_SWITCH{ cor_words++; }
-   | KEYWORD_VAR_TYPE{ cor_words++; }
-   | PAR_START{ cor_words++; }
-   | PAR_END{ cor_words++; }
-   | BRACE_START{ cor_words++; }
-   | BRACE_END{ cor_words++; }
-   | LOGICAL_OR{ cor_words++; }
-   | LOGICAL_AND{ cor_words++; }
-   | BRACKET_START{ cor_words++; }
-   | BRACKET_END{ cor_words++; }
-   | GREATER{ cor_words++; }
-   | LESSER{ cor_words++; }
-   | GREATER_EQ{ cor_words++; }
-   | LESSER_EQ{ cor_words++; }
-   | EQQ{ cor_words++; }
-   | EQ{ cor_words++; }
-   | NEQ{ cor_words++; }
-   | EQ_MULTI{ cor_words++; }
-   | EQ_DIV{ cor_words++; }
-   | EQ_PLUS{ cor_words++; }
-   | EQ_MINUS{ cor_words++; }
-   | PLUS{ cor_words++; }
-   | PLUSPLUS{ cor_words++; }
-   | MINUS{ cor_words++; }
-   | MINUSMINUS{ cor_words++; }
-   | DIV{ cor_words++; }
-   | MOD{ cor_words++; }
-   | MULTI{ cor_words++; }
-   | POW{ cor_words++; }
-   ;
-
 /* Εδώ ορίζεται το τι μπορεί να είναι κομμάτι μίας έκφρασης.
    Ένας χαρακτήρας ή ένας αριθμός */
 expr_part:
-      FLOAT       { cor_words++; }
-    | STRING      { cor_words++; }
-    | DOUBLE      { cor_words++; }
-    | KEYWORD     { cor_words++; }
-    | INTCONST    { cor_words++; }
-    | IDENTIFIER  { cor_words++; }
-    | UNKNOWN     { inc_words++; printf("O\tLine:  %d \t",line);}
+      FLOAT
+    | STRING
+    | DOUBLE
+    | KEYWORD
+    | INTCONST
+    | IDENTIFIER
+    | UNKNOWN { printf("X\tLine:  %d \t",line); }
     ;
 
 operator:
-      EQ          { cor_words++; }
-    | EQQ         { cor_words++; }
-    | NEQ         { cor_words++; }
-    | DIV         { cor_words++; }
-    | POW         { cor_words++; }
-    | PLUS        { cor_words++; }
-    | MINUS       { cor_words++; }
-    | MULTI       { cor_words++; }
-    | EQ_DIV      { cor_words++; }
-    | EQ_PLUS     { cor_words++; }
-    | EQ_MULTI    { cor_words++; }
-    | EQ_MINUS    { cor_words++; }
+      EQ
+    | EQQ
+    | NEQ
+    | DIV
+    | POW
+    | PLUS
+    | MINUS
+    | MULTI
+    | EQ_DIV
+    | EQ_PLUS
+    | EQ_MULTI
+    | EQ_MINUS
     ;
 
 in_de_crement_operator:
-    | MINUSMINUS  { cor_words++; }
-    | PLUSPLUS    { cor_words++; }
+    | MINUSMINUS
+    | PLUSPLUS
     ;
 
 // Εδώ ορίζονται ποιές είναι οι εκφράσεις υπο επεξεργασία
@@ -245,8 +187,8 @@ arguments:
 
 // Εδώ ορίζεται τι θεωρείται ορισμός μιας συνάρτησης
 func_par:
-      KEYWORD_FUNC IDENTIFIER PAR_START arguments PAR_END {cor_expr++; printf("O\tLine:  %d \tValid arguments\n",line); }
-    | KEYWORD_FUNC IDENTIFIER PAR_START expr_part PAR_END {cor_expr++; printf("O\tLine:  %d \tValid argument\n" ,line); }
+      KEYWORD_FUNC IDENTIFIER PAR_START arguments PAR_END {cor_expr++; print_valid("arguments"); }
+    | KEYWORD_FUNC IDENTIFIER PAR_START expr_part PAR_END {cor_expr++; print_valid("argument"); }
     ;
 
 // Εδώ ορίζεται τι θεωρείται ορισμός μιας μεταβλητής
@@ -364,8 +306,8 @@ valid:
    | func_par         { cor_expr++; print_valid("function declaration");}
    | conditionals     { cor_expr++; print_valid("conditional clause");  }
    | NEWLINE          { line++; }
-   | EOP              { print_report(cor_words,cor_expr,inc_words,inc_expr); }
-   | error            { inc_expr++; }
+   | EOP              { print_report(cor_expr,inc_expr); }
+   | error            { inc_expr++;}
    ;
 
 %%
@@ -376,15 +318,12 @@ void print_valid (char * type) {
 // Αυτή η συνάρτηση τυπώνει το πλήθος των σωστών και λάθος λέξεων και εκφράσεων
 // Ενεργοποιήται μόλις ο bison δεχθεί token EOP
 // (End of Parse, δίνεται στο τέλος του αρχείου)
-void print_report (int cor_words, int cor_expr,int inc_words,int inc_expr) {
-    printf("*---- RUN REPORT: ---------------------*\n"
-           "| Number of  correct  words       : %d\n"
+void print_report (int cor_expr,int inc_expr) {
+    printf("|- Expressions:\n"
            "| Number of  correct  expressions : %d\n"
-           "*--------------------------------------*\n"
-           "| Number of incorrect words       : %d\n"
            "| Number of incorrect expressions : %d\n"
            "*--------------------------------------*\n"
-           , cor_words, cor_expr, inc_words, inc_expr);
+           ,cor_expr, inc_expr);
 }
 
 /* H synarthsh yyerror xrhsimopoieitai gia thn anafora sfalmatwn. Sygkekrimena kaleitai

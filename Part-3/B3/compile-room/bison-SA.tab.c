@@ -79,15 +79,12 @@
 extern int yylex(void);
 extern int yyparse(void);
 void yyerror(char *);
-void print_report(int,int,int,int);
+void print_report(int,int);
 void print_valid (char *);
 // Αρχικοποιούμε τον pointer για τη εισαγωγή δεδομένων με αρχείο και όχι απο το
 // stdin
 extern FILE *yyin;
 // Αρχικοποιούμε τις μεταβλητές για το άθροισμα των σωστών και λάθος εκφράσεων
-// και λέξεων
-int cor_words = 0;
-int inc_words = 0;
 int cor_expr  = 0;
 int inc_expr  = 0;
 // Για την γραμμή που αρχίζει μία συνάρτηση
@@ -101,7 +98,7 @@ int struct_started_flag=0;
 // Για την μέτρηση γραμμών
 int line=1;
 
-#line 105 "bison-SA.tab.c"
+#line 102 "bison-SA.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -600,16 +597,16 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,   110,   110,   111,   173,   174,   175,   176,   177,   178,
-     179,   183,   184,   185,   186,   187,   188,   189,   190,   191,
-     192,   193,   194,   197,   198,   199,   204,   205,   206,   207,
-     213,   214,   215,   219,   220,   225,   229,   232,   233,   237,
-     241,   242,   243,   248,   249,   254,   255,   256,   257,   258,
-     263,   266,   267,   271,   272,   276,   277,   280,   281,   285,
-     288,   289,   293,   294,   298,   299,   300,   301,   302,   303,
-     304,   308,   309,   310,   311,   315,   316,   320,   321,   322,
-     327,   328,   329,   330,   331,   332,   333,   334,   349,   364,
-     365,   366,   367,   368
+       0,   107,   107,   108,   115,   116,   117,   118,   119,   120,
+     121,   125,   126,   127,   128,   129,   130,   131,   132,   133,
+     134,   135,   136,   139,   140,   141,   146,   147,   148,   149,
+     155,   156,   157,   161,   162,   167,   171,   174,   175,   179,
+     183,   184,   185,   190,   191,   196,   197,   198,   199,   200,
+     205,   208,   209,   213,   214,   218,   219,   222,   223,   227,
+     230,   231,   235,   236,   240,   241,   242,   243,   244,   245,
+     246,   250,   251,   252,   253,   257,   258,   262,   263,   264,
+     269,   270,   271,   272,   273,   274,   275,   276,   291,   306,
+     307,   308,   309,   310
 };
 #endif
 
@@ -1351,188 +1348,68 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-  case 4: /* expr_part: FLOAT  */
-#line 173 "bison-SA.y"
-                  { cor_words++; }
-#line 1358 "bison-SA.tab.c"
-    break;
-
-  case 5: /* expr_part: STRING  */
-#line 174 "bison-SA.y"
-                  { cor_words++; }
-#line 1364 "bison-SA.tab.c"
-    break;
-
-  case 6: /* expr_part: DOUBLE  */
-#line 175 "bison-SA.y"
-                  { cor_words++; }
-#line 1370 "bison-SA.tab.c"
-    break;
-
-  case 7: /* expr_part: KEYWORD  */
-#line 176 "bison-SA.y"
-                  { cor_words++; }
-#line 1376 "bison-SA.tab.c"
-    break;
-
-  case 8: /* expr_part: INTCONST  */
-#line 177 "bison-SA.y"
-                  { cor_words++; }
-#line 1382 "bison-SA.tab.c"
-    break;
-
-  case 9: /* expr_part: IDENTIFIER  */
-#line 178 "bison-SA.y"
-                  { cor_words++; }
-#line 1388 "bison-SA.tab.c"
-    break;
-
   case 10: /* expr_part: UNKNOWN  */
-#line 179 "bison-SA.y"
-                  { inc_words++; printf("O\tLine:  %d \t",line);}
-#line 1394 "bison-SA.tab.c"
-    break;
-
-  case 11: /* operator: EQ  */
-#line 183 "bison-SA.y"
-                  { cor_words++; }
-#line 1400 "bison-SA.tab.c"
-    break;
-
-  case 12: /* operator: EQQ  */
-#line 184 "bison-SA.y"
-                  { cor_words++; }
-#line 1406 "bison-SA.tab.c"
-    break;
-
-  case 13: /* operator: NEQ  */
-#line 185 "bison-SA.y"
-                  { cor_words++; }
-#line 1412 "bison-SA.tab.c"
-    break;
-
-  case 14: /* operator: DIV  */
-#line 186 "bison-SA.y"
-                  { cor_words++; }
-#line 1418 "bison-SA.tab.c"
-    break;
-
-  case 15: /* operator: POW  */
-#line 187 "bison-SA.y"
-                  { cor_words++; }
-#line 1424 "bison-SA.tab.c"
-    break;
-
-  case 16: /* operator: PLUS  */
-#line 188 "bison-SA.y"
-                  { cor_words++; }
-#line 1430 "bison-SA.tab.c"
-    break;
-
-  case 17: /* operator: MINUS  */
-#line 189 "bison-SA.y"
-                  { cor_words++; }
-#line 1436 "bison-SA.tab.c"
-    break;
-
-  case 18: /* operator: MULTI  */
-#line 190 "bison-SA.y"
-                  { cor_words++; }
-#line 1442 "bison-SA.tab.c"
-    break;
-
-  case 19: /* operator: EQ_DIV  */
-#line 191 "bison-SA.y"
-                  { cor_words++; }
-#line 1448 "bison-SA.tab.c"
-    break;
-
-  case 20: /* operator: EQ_PLUS  */
-#line 192 "bison-SA.y"
-                  { cor_words++; }
-#line 1454 "bison-SA.tab.c"
-    break;
-
-  case 21: /* operator: EQ_MULTI  */
-#line 193 "bison-SA.y"
-                  { cor_words++; }
-#line 1460 "bison-SA.tab.c"
-    break;
-
-  case 22: /* operator: EQ_MINUS  */
-#line 194 "bison-SA.y"
-                  { cor_words++; }
-#line 1466 "bison-SA.tab.c"
-    break;
-
-  case 24: /* in_de_crement_operator: MINUSMINUS  */
-#line 198 "bison-SA.y"
-                  { cor_words++; }
-#line 1472 "bison-SA.tab.c"
-    break;
-
-  case 25: /* in_de_crement_operator: PLUSPLUS  */
-#line 199 "bison-SA.y"
-                  { cor_words++; }
-#line 1478 "bison-SA.tab.c"
+#line 121 "bison-SA.y"
+              { printf("X\tLine:  %d \t",line); }
+#line 1355 "bison-SA.tab.c"
     break;
 
   case 43: /* func_par: KEYWORD_FUNC IDENTIFIER PAR_START arguments PAR_END  */
-#line 248 "bison-SA.y"
-                                                          {cor_expr++; printf("O\tLine:  %d \tValid arguments\n",line); }
-#line 1484 "bison-SA.tab.c"
+#line 190 "bison-SA.y"
+                                                          {cor_expr++; print_valid("arguments"); }
+#line 1361 "bison-SA.tab.c"
     break;
 
   case 44: /* func_par: KEYWORD_FUNC IDENTIFIER PAR_START expr_part PAR_END  */
-#line 249 "bison-SA.y"
-                                                          {cor_expr++; printf("O\tLine:  %d \tValid argument\n" ,line); }
-#line 1490 "bison-SA.tab.c"
+#line 191 "bison-SA.y"
+                                                          {cor_expr++; print_valid("argument"); }
+#line 1367 "bison-SA.tab.c"
     break;
 
   case 80: /* valid: return SEMI  */
-#line 327 "bison-SA.y"
+#line 269 "bison-SA.y"
                       { cor_expr++; print_valid("return");}
-#line 1496 "bison-SA.tab.c"
+#line 1373 "bison-SA.tab.c"
     break;
 
   case 81: /* valid: sizeof SEMI  */
-#line 328 "bison-SA.y"
+#line 270 "bison-SA.y"
                       { cor_expr++; print_valid("sizeof");}
-#line 1502 "bison-SA.tab.c"
+#line 1379 "bison-SA.tab.c"
     break;
 
   case 82: /* valid: include SEMI  */
-#line 329 "bison-SA.y"
+#line 271 "bison-SA.y"
                       { cor_expr++; print_valid("include");}
-#line 1508 "bison-SA.tab.c"
+#line 1385 "bison-SA.tab.c"
     break;
 
   case 83: /* valid: expr_proc SEMI  */
-#line 330 "bison-SA.y"
+#line 272 "bison-SA.y"
                       { cor_expr++; print_valid("expression");}
-#line 1514 "bison-SA.tab.c"
+#line 1391 "bison-SA.tab.c"
     break;
 
   case 84: /* valid: assignment SEMI  */
-#line 331 "bison-SA.y"
+#line 273 "bison-SA.y"
                       { cor_expr++; print_valid("assignment");}
-#line 1520 "bison-SA.tab.c"
+#line 1397 "bison-SA.tab.c"
     break;
 
   case 85: /* valid: declaration SEMI  */
-#line 332 "bison-SA.y"
+#line 274 "bison-SA.y"
                       { cor_expr++; print_valid("declaration");}
-#line 1526 "bison-SA.tab.c"
+#line 1403 "bison-SA.tab.c"
     break;
 
   case 86: /* valid: loops  */
-#line 333 "bison-SA.y"
+#line 275 "bison-SA.y"
                       { cor_expr++; print_valid("loop clause");}
-#line 1532 "bison-SA.tab.c"
+#line 1409 "bison-SA.tab.c"
     break;
 
   case 87: /* valid: in_brace  */
-#line 334 "bison-SA.y"
+#line 276 "bison-SA.y"
                       { cor_expr++;
                         if( function_started_flag)
                         {
@@ -1548,11 +1425,11 @@ yyreduce:
                             function_start_line=line;
                         }
                       }
-#line 1552 "bison-SA.tab.c"
+#line 1429 "bison-SA.tab.c"
     break;
 
   case 88: /* valid: struct SEMI  */
-#line 349 "bison-SA.y"
+#line 291 "bison-SA.y"
                       { cor_expr++;
                         if( struct_started_flag)
                         {
@@ -1568,41 +1445,41 @@ yyreduce:
                             struct_start_line=line;
                         }
                       }
-#line 1572 "bison-SA.tab.c"
+#line 1449 "bison-SA.tab.c"
     break;
 
   case 89: /* valid: func_par  */
-#line 364 "bison-SA.y"
+#line 306 "bison-SA.y"
                       { cor_expr++; print_valid("function declaration");}
-#line 1578 "bison-SA.tab.c"
+#line 1455 "bison-SA.tab.c"
     break;
 
   case 90: /* valid: conditionals  */
-#line 365 "bison-SA.y"
+#line 307 "bison-SA.y"
                       { cor_expr++; print_valid("conditional clause");  }
-#line 1584 "bison-SA.tab.c"
+#line 1461 "bison-SA.tab.c"
     break;
 
   case 91: /* valid: NEWLINE  */
-#line 366 "bison-SA.y"
+#line 308 "bison-SA.y"
                       { line++; }
-#line 1590 "bison-SA.tab.c"
+#line 1467 "bison-SA.tab.c"
     break;
 
   case 92: /* valid: EOP  */
-#line 367 "bison-SA.y"
-                      { print_report(cor_words,cor_expr,inc_words,inc_expr); }
-#line 1596 "bison-SA.tab.c"
+#line 309 "bison-SA.y"
+                      { print_report(cor_expr,inc_expr); }
+#line 1473 "bison-SA.tab.c"
     break;
 
   case 93: /* valid: error  */
-#line 368 "bison-SA.y"
-                      { inc_expr++; }
-#line 1602 "bison-SA.tab.c"
+#line 310 "bison-SA.y"
+                      { inc_expr++;}
+#line 1479 "bison-SA.tab.c"
     break;
 
 
-#line 1606 "bison-SA.tab.c"
+#line 1483 "bison-SA.tab.c"
 
       default: break;
     }
@@ -1796,7 +1673,7 @@ yyreturn:
   return yyresult;
 }
 
-#line 371 "bison-SA.y"
+#line 313 "bison-SA.y"
 
 
 void print_valid (char * type) {
@@ -1805,15 +1682,12 @@ void print_valid (char * type) {
 // Αυτή η συνάρτηση τυπώνει το πλήθος των σωστών και λάθος λέξεων και εκφράσεων
 // Ενεργοποιήται μόλις ο bison δεχθεί token EOP
 // (End of Parse, δίνεται στο τέλος του αρχείου)
-void print_report (int cor_words, int cor_expr,int inc_words,int inc_expr) {
-    printf("*---- RUN REPORT: ---------------------*\n"
-           "| Number of  correct  words       : %d\n"
+void print_report (int cor_expr,int inc_expr) {
+    printf("|- Expressions:\n"
            "| Number of  correct  expressions : %d\n"
-           "*--------------------------------------*\n"
-           "| Number of incorrect words       : %d\n"
            "| Number of incorrect expressions : %d\n"
            "*--------------------------------------*\n"
-           , cor_words, cor_expr, inc_words, inc_expr);
+           ,cor_expr, inc_expr);
 }
 
 /* H synarthsh yyerror xrhsimopoieitai gia thn anafora sfalmatwn. Sygkekrimena kaleitai
