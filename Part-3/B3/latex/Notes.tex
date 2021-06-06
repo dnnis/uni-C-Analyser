@@ -13,6 +13,8 @@
 
 \graphicspath{ {./img/} }
 
+\setcounter{tocdepth}{4}
+
 \usepackage{fontspec}
 \setmainfont{CMU Serif}
 \setsansfont{CMU Sans Serif}
@@ -60,6 +62,8 @@
 \begin{document}
 
 \maketitle
+\clearpage
+\tableofcontents
 \clearpage
   \begin{center}
     \large \emph{Ομάδα 15}
@@ -138,7 +142,7 @@ uni-c-analyser.
 #include <stdlib.h>
 #include "bison-SA.tab.h"
 
-// Για να μετράμε τις κολόνες
+// Για να μετράμε τις κολώνες
 int columns = 1;
 // Αρχικοποιούμε τις μεταβλητές για το άθροισμα των σωστών και λάθος λέξεων
 int cor_words = 0;
@@ -155,7 +159,7 @@ char panic_cause_char[100];
 Επίσης, βλέπουμε τις μεταβλητές που ορίζουμε για την ομαλή διεπαφή του χρήστη
 με το πρόγραμμα.
 \\
-Πλέον το πρόγραμμά μας μετρά κολόνες και μπορεί να κατευθύνει τον χρήστη στο
+Πλέον το πρόγραμμά μας μετρά κολώνες και μπορεί να κατευθύνει τον χρήστη στο
 ακριβές σημείο που το πρόβλημα δημιουργήθηκε (με κάποιο άγνωστο token).
 \\
 Επίσης, σε σύγκριση με το μέρος B2, τώρα το πρόγραμμα μετρά σωστά τις σωστές
@@ -204,15 +208,17 @@ INTCONST             0|[1-9]+[0-9]*
 COMMENT              \/\*(.|\n)*?\*\/|\/\/.*
 IDENTIFIER           [a-zA-Z_]([0-9_a-zA-Z]*)
 FLOAT                [0-9]+\.[0-9]+|[0-9]+\.[0-9]+e[0-9]+
+\end{lstlisting}
+Βλέπουμε τις κανονικές εκφράσεις με τις οποίες ο λεκτικός αναλυτής μας
+ανιχνεύει τις λέξεις του αναλυόμενου κώδικα, και τις συσχετίζει με ένα \emph{μοναδικό} token.
+\\
+Στο τέλος έχουμε και τους ορισμούς για τις 3 καταστάσεις τις οποίες ορίσαμε για να λειτουργεί ορθά
+ο λεκτικός αναλυτής.
+\begin{lstlisting}[language=C]
 %x REALLYEND
 %x PREPANIC
 %x PANIC
 \end{lstlisting}
-Τώρα βλέπουμε τις κανονικές εκφράσεις με τις οποίες ο λεκτικός αναλυτής μας
-ανιχνεύει τις λέξεις του αναλυόμενου κώδικα.
-\\
-Στο τέλος έχουμε και τους ορισμούς για τις 3 καταστάσεις τις οποίες ορίσαμε για να λειτουργεί ορθά
-ο λεκτικός αναλυτής.
 \\
 Αυτές είναι:
 \begin{itemize}
@@ -225,7 +231,180 @@ FLOAT                [0-9]+\.[0-9]+|[0-9]+\.[0-9]+e[0-9]+
     \item \textbf{Κατάσταση PANIC} είναι η κατάσταση στην οποία ο λεκτικός αναλυτής
         έχει συναντίσει ένα άγνωστο token (UNKNOWN TOKEN) και προσπαθεί να κάνει
         επανάκτιση κανονικής λειτουργίας.
-    \item \textbf{Κατάσταση PREPANIC}
+    \item \textbf{Κατάσταση PREPANIC} είναι η κατάσταση στην οποία ο λεξικός
+        μας αναλυτής ειδοποιεί τον συντακτικό αναλυτή ότι πρόκειται να βρεθει
+        (ο δεύτερος) σε κατάσταση πανικού.
 \end{itemize}
-\end{document}
+\clearpage
+\subsubsection{Κώδικας κατά την ανίχνευση λεκτικών μονάδων}
+\\
+\begin{lstlisting}[language=C]
+%%
+{MOD}           {cor_words++; columns++; return MOD;}
+{POW}           {cor_words++; columns++; return POW;}
+{DOT}           {cor_words++; columns++; return DOT;}
+{SEMI}          {cor_words++; columns++; return SEMI;}
+{HASH}          {cor_words++; columns++; return HASH;}
+{COMMA}         {cor_words++; columns++; return COMMA;}
+{PAR_END}       {cor_words++; columns++; return PAR_END;}
+{PAR_START}     {cor_words++; columns++; return PAR_START;}
+{BRACE_END}     {cor_words++; columns++; return BRACE_END;}
+{LOGICAL_OR}    {cor_words++; columns++; return LOGICAL_OR;}
+{BRACE_START}   {cor_words++; columns++; return BRACE_START;}
+{BRACKET_END}   {cor_words++; columns++; return BRACKET_END;}
+{BRACKET_START} {cor_words++; columns++; return BRACKET_START;}
+\end{lstlisting}
+\\
+Συνεχίζοντας, παρατηρούμε πώς αυξάνουμε τον αριθμό των σωστών λέξεων για κάθε λέξη που
+ανιχνεύεται σωστά, αυξάνοντας και το αριθμό των κολωνών κατάλληλα επίσης.
+\\
+Συνεχίζοντας σε λεκτικές μονάδες με περισσότερα γράμματα απο 1:
+\begin{lstlisting}[language=C]
+{FLOAT}    {cor_words++; columns += strlen(yytext); return FLOAT;}
+{STRING}   {cor_words++; columns += strlen(yytext); return STRING;}
+{INTCONST} {cor_words++; columns += strlen(yytext); return INTCONST;}
+\end{lstlisting}
+\\
+Εδώ είναι ξεκάθαρο ότι χρησιμοποιούμε την συνάρτηση strlen η οποία μετρά τις
+λεκτικές μονάδες "απρόβλεπτου" μήκους και προσθέτει τον αριθμό γραμμάτων τους
+στην μεταβλητή μέτρησης κολωνών columns.
+\\
+Ακολουθούν τα ονόματα και τα keywords.
+\begin{lstlisting}[language=C]
+{IDENTIFIER}    {
+if      ( !strcmp(yytext,"do"      )) 
+  {cor_words++; columns += strlen(yytext); return KEYWORD;}
+else if ( !strcmp(yytext,"while"   )) 
+  {cor_words++; columns += strlen(yytext); return KEYWORD;}
+else if ( !strcmp(yytext,"break"   )) 
+  {cor_words++; columns += strlen(yytext); return KEYWORD;}
+else if ( !strcmp(yytext,"if"      )) 
+  {cor_words++; columns += strlen(yytext); return KEYWORD_IF;}
+else if ( !strcmp(yytext,"struct"  )) 
+  {cor_words++; columns += strlen(yytext); return KEYWORD_STR;}
+else if ( !strcmp(yytext,"for"     )) 
+  {cor_words++; columns += strlen(yytext); return KEYWORD_FOR;}
+else if ( !strcmp(yytext,"return"  )) 
+  {cor_words++; columns += strlen(yytext); return KEYWORD_RET;}
+else if ( !strcmp(yytext,"case"    )) 
+  {cor_words++; columns += strlen(yytext); return KEYWORD_CASE;}
+else if ( !strcmp(yytext,"else"    )) 
+  {cor_words++; columns += strlen(yytext); return KEYWORD_ELSE;}
+else if ( !strcmp(yytext,"func"    )) 
+  {cor_words++; columns += strlen(yytext); return KEYWORD_FUNC;}
+else if ( !strcmp(yytext,"void"    )) 
+  {cor_words++; columns += strlen(yytext); return KEYWORD_VOID;}
+else if ( !strcmp(yytext,"sizeof"  )) 
+  {cor_words++; columns += strlen(yytext); return KEYWORD_SIZE;}
+else if ( !strcmp(yytext,"include" )) 
+  {cor_words++; columns += strlen(yytext); return KEYWORD_INCL;}
+else if ( !strcmp(yytext,"continue")) 
+  {cor_words++; columns += strlen(yytext); return KEYWORD_CONT;}
+else if ( !strcmp(yytext,"switch"  )) 
+  {cor_words++; columns += strlen(yytext); return KEYWORD_SWITCH;}
+else if ( !strcmp(yytext,"int"     )) 
+  {cor_words++; columns += strlen(yytext); return KEYWORD_VAR_TYPE;}
+else if ( !strcmp(yytext,"char"    )) 
+  {cor_words++; columns += strlen(yytext); return KEYWORD_VAR_TYPE;}
+else if ( !strcmp(yytext,"long"    )) 
+  {cor_words++; columns += strlen(yytext); return KEYWORD_VAR_TYPE;}
+else if ( !strcmp(yytext,"short"   )) 
+  {cor_words++; columns += strlen(yytext); return KEYWORD_VAR_TYPE;}
+else if ( !strcmp(yytext,"float"   )) 
+  {cor_words++; columns += strlen(yytext); return KEYWORD_VAR_TYPE;}
+else if ( !strcmp(yytext,"const"   )) 
+  {cor_words++; columns += strlen(yytext); return KEYWORD_VAR_TYPE;}
+else if ( !strcmp(yytext,"double"  )) 
+  {cor_words++; columns += strlen(yytext); return KEYWORD_VAR_TYPE;}
+else
+  {cor_words++; columns += strlen(yytext); return IDENTIFIER;}
+}
+\end{lstlisting}
+\\
+Εδώ έχουμε το ενδεχόμενο κάποια έγκυρη λεκτική μονάδα που ανιχνεύσαμε να είναι \emph{δευσμευμένη λέξη}
+της Uni-C.
+\\
+Αν είναι, επιστρέφουμε το κατάλληλο token.
+\\
+Αν όχι τότε επιστρέφουμε απλά token IDENTIFIER.
+\clearpage
+\\
+Πηγαίνοντας σε πιο πολύπλοκες λεκτικές μονάδες όπως οι τελεστές:
+\\
+\begin{lstlisting}[language=C]
+{TYPE_EXCLA}    { if (!strcmp(yytext, "!=")) {cor_words++; columns += 2; return NEQ;        } else    { columns++; return EXCLA;  }}
+{TYPE_EQ}       { if (!strcmp(yytext, "==")) {cor_words++; columns += 2; return EQQ;        } else    { columns++; return EQ;     }}
+{TYPE_DIV}      { if (!strcmp(yytext, "/=")) {cor_words++; columns += 2; return EQ_DIV;     } else    { columns++; return DIV;    }}
+{TYPE_MULTI}    { if (!strcmp(yytext, "*=")) {cor_words++; columns += 2; return EQ_MULTI;   } else    { columns++; return MULTI;  }}
+{TYPE_LESSER}   { if (!strcmp(yytext, "<=")) {cor_words++; columns += 2; return LESSER_EQ;  } else    { columns++; return LESSER; }}
+{TYPE_GREATER}  { if (!strcmp(yytext, ">=")) {cor_words++; columns += 2; return GREATER_EQ; } else    { columns++; return GREATER;}}
+{TYPE_AMPER}    { if (!strcmp(yytext, "&&")) {cor_words++; columns += 2; return LOGICAL_AND;} else    { columns++; return AMPER;  }}
+{TYPE_MINUS}    { if (!strcmp(yytext, "--")) {cor_words++; columns += 2; return MINUSMINUS; } else if (!strcmp(yytext, "-=")) { columns+=2; return EQ_MINUS; } else { columns++; return MINUS;}}
+{TYPE_PLUS}     { if (!strcmp(yytext, "++")) {cor_words++; columns += 2; return PLUSPLUS;   } else if (!strcmp(yytext, "+=")) { columns+=2; return EQ_PLUS;  } else { columns++; return PLUS; }}
+\end{lstlisting}
+\\
+Έχουμε ιδιαίτερη διαχείρηση των τελεστών για να είμαστε σίγουροι ότι ο λεκτικός
+μας αναλυτής δεν "μπερδεύει" για παράδειγμα, τον τελεστή "++" από τον "+", καθώς
+συντατικά είναι πολύ διαφορετική η συμπεριφορά τους.
+\\
+Στην συνέχεια δίνονται οδηγίες στον λεκτικό αναλυτή για την διαχείρηση του κενού,
+της κανούργιας γραμμής και των σχολίων του κώδικα.
+\begin{lstlisting}[language=C]
+{WHITESPACE} { columns++; }
+{COMMENT}    { /*Do nothing, comment*/ }
+\n       { columns=1; /*Start from zero cols again*/ return NEWLINE; }
+\end{lstlisting}
+\\
+Για τα κενά ο λεκτικός αναλυτής απλά αυξάνει τις κολώνες, για τα σχόλια δεν κάνει
+τίποτα, ενώ για τις καινούργιες γραμμές επαναφέρει την μεταβλητή μέτρησης κολωνών
+columns στην αρχική τιμή 1.
+\\
+Τελειώνοντας απο τον κώδικα του λεκτικού αναλυτή, βλέπουμε το πιο πολύπλοκο κομμάτι του.
+\clearpage
+\subsubsection{Καταστάσεις (Πανικού!)}
+\\
+Μπαίνοντας στο πιό πολύπλοκο κομμάτι του λεκτικού μας αναλυτή, έχουμε την
+διαχείρηση λανθασμένων λέξεων, οι οποίες ρίχνουν τον αναλυτή μας σε μία κατάσταση
+"πανικού".
+\\
+Απο αυτή την κατάσταση προσπαθεί μετά να "ξεφύγει" με το να αναφέρει το λάθος στον συντακτικό
+αναλυτή και να επανέλθει στην αρχική κατάσταση <INITIAL>, επανακκινόντας την λεκτική ανάλυση του
+υπόλοιπου αρχείου.
+\begin{lstlisting}[language=C]
+/*Εδώ το flex "πιάνει" οποιονδήποτε άλλο χαρακτήρα που 
+ δεν περιγράφεται απο τις παραπάνω κανονικές εκφράσεις.*/
 
+<INITIAL>.  { BEGIN(PREPANIC); strcpy(panic_cause_char,yytext); inc_words++; return UNKNOWN;}
+<PREPANIC>. { BEGIN(PANIC); printf("Column: %d Unknown word: '%s%s",columns,panic_cause_char,yytext);}
+<PANIC>{WHITESPACE} { columns++; printf("'\n"); BEGIN(INITIAL);}
+<PANIC>\n           { columns=1; printf("'\n"); BEGIN(INITIAL);}
+<PANIC>.            { ECHO; }
+
+/*Εδώ καλούμε ένα τμήμα κώδικα που μας βοηθά να δώσουμε ένα token
+  στον bison για να δηλώσουμε το τέλος του αρχείου, αποτρέποντας
+  όμως τον bison να τερματίζει άμεσα την εκτέλεση. Έτσι,
+  καταφέρνουμε να εκτελούμε την συνάρτηση print_report() στο
+  bison-SA.y, για να ανεφέρουμε τον αριθμό των σωστών και
+  λανθασμένων λέξεων και εκφράσεων.*/
+
+<INITIAL><<EOF>>  { BEGIN(REALLYEND);
+                    printf("*---- RUN REPORT: ---------------------*\n"
+                           "|- Words:\n"
+                           "| Number of  correct  words       : %d\n"
+                           "| Number of incorrect words       : %d\n"
+                           "*--------------------------------------*\n"
+                           ,cor_words, inc_words);
+                    return EOP; }
+ /*Εδώ, μετά την πάροδο των προηγούμενων, "πραγματικά"
+  τερματίζουμε την εκτέλεση του flex, έχουμε ήδη τυπώσει την αναφορά
+  με την print_report() με το bison, και αρχίζουμε να τερματίζουμε
+  το πρόγραμμα συνολικά.*/
+<REALLYEND><<EOF>> {yyterminate();}
+%%
+
+/* Το πρόγραμμα αυτό δεν έχει main(), καθώς δεν τρέχει αυτόνομα,
+είναι απλά ο λεκτικός αναλυτής, η συντακτική ανάλυση γίνεται
+από τον bison. */
+
+\end{lstlisting}
+\end{document}

@@ -598,15 +598,15 @@ static const yytype_int8 yytranslate[] =
 static const yytype_int16 yyrline[] =
 {
        0,   102,   102,   103,   110,   111,   112,   113,   114,   115,
-     116,   120,   121,   122,   123,   124,   125,   126,   127,   128,
-     129,   130,   131,   134,   135,   136,   141,   142,   143,   144,
-     150,   151,   152,   156,   157,   162,   166,   169,   170,   174,
-     178,   179,   180,   181,   186,   187,   192,   193,   194,   195,
-     196,   197,   202,   205,   206,   210,   211,   215,   216,   219,
-     220,   224,   227,   228,   232,   233,   237,   238,   239,   240,
-     241,   242,   243,   247,   248,   249,   250,   254,   255,   259,
-     260,   261,   266,   267,   268,   269,   270,   271,   272,   273,
-     288,   289,   290,   291,   292,   293
+     116,   121,   122,   123,   124,   125,   126,   127,   128,   129,
+     130,   131,   132,   135,   136,   137,   142,   143,   144,   145,
+     151,   152,   153,   157,   158,   163,   167,   170,   171,   175,
+     179,   180,   181,   182,   187,   188,   193,   194,   195,   196,
+     197,   198,   203,   207,   208,   213,   214,   218,   219,   222,
+     223,   227,   230,   231,   235,   236,   240,   241,   242,   243,
+     244,   245,   246,   252,   253,   254,   255,   260,   261,   266,
+     267,   268,   273,   274,   275,   276,   277,   278,   279,   280,
+     295,   296,   297,   298,   299,   300
 };
 #endif
 
@@ -1361,61 +1361,61 @@ yyreduce:
     break;
 
   case 44: /* func_par: KEYWORD_FUNC IDENTIFIER PAR_START arguments PAR_END  */
-#line 186 "bison-SA.y"
+#line 187 "bison-SA.y"
                                                           {cor_expr++; print_valid("arguments"); }
 #line 1367 "bison-SA.tab.c"
     break;
 
   case 45: /* func_par: KEYWORD_FUNC IDENTIFIER PAR_START expr_part PAR_END  */
-#line 187 "bison-SA.y"
+#line 188 "bison-SA.y"
                                                           {cor_expr++; print_valid("argument"); }
 #line 1373 "bison-SA.tab.c"
     break;
 
   case 82: /* valid: return SEMI  */
-#line 266 "bison-SA.y"
+#line 273 "bison-SA.y"
                       { cor_expr++; print_valid("return");}
 #line 1379 "bison-SA.tab.c"
     break;
 
   case 83: /* valid: sizeof SEMI  */
-#line 267 "bison-SA.y"
+#line 274 "bison-SA.y"
                       { cor_expr++; print_valid("sizeof");}
 #line 1385 "bison-SA.tab.c"
     break;
 
   case 84: /* valid: include SEMI  */
-#line 268 "bison-SA.y"
+#line 275 "bison-SA.y"
                       { cor_expr++; print_valid("include");}
 #line 1391 "bison-SA.tab.c"
     break;
 
   case 85: /* valid: expr_proc SEMI  */
-#line 269 "bison-SA.y"
+#line 276 "bison-SA.y"
                       { cor_expr++; print_valid("expression");}
 #line 1397 "bison-SA.tab.c"
     break;
 
   case 86: /* valid: assignment SEMI  */
-#line 270 "bison-SA.y"
+#line 277 "bison-SA.y"
                       { cor_expr++; print_valid("assignment");}
 #line 1403 "bison-SA.tab.c"
     break;
 
   case 87: /* valid: declaration SEMI  */
-#line 271 "bison-SA.y"
+#line 278 "bison-SA.y"
                       { cor_expr++; print_valid("declaration");}
 #line 1409 "bison-SA.tab.c"
     break;
 
   case 88: /* valid: loops  */
-#line 272 "bison-SA.y"
+#line 279 "bison-SA.y"
                       { cor_expr++; print_valid("loop clause");}
 #line 1415 "bison-SA.tab.c"
     break;
 
   case 89: /* valid: in_brace  */
-#line 273 "bison-SA.y"
+#line 280 "bison-SA.y"
                       { cor_expr++;
                         if( function_started_flag)
                         {
@@ -1435,37 +1435,37 @@ yyreduce:
     break;
 
   case 90: /* valid: struct SEMI  */
-#line 288 "bison-SA.y"
+#line 295 "bison-SA.y"
                       { cor_expr++; print_valid("struct");}
 #line 1441 "bison-SA.tab.c"
     break;
 
   case 91: /* valid: func_par  */
-#line 289 "bison-SA.y"
+#line 296 "bison-SA.y"
                       { cor_expr++; print_valid("function declaration");}
 #line 1447 "bison-SA.tab.c"
     break;
 
   case 92: /* valid: conditionals  */
-#line 290 "bison-SA.y"
+#line 297 "bison-SA.y"
                       { cor_expr++; print_valid("conditional clause");  }
 #line 1453 "bison-SA.tab.c"
     break;
 
   case 93: /* valid: NEWLINE  */
-#line 291 "bison-SA.y"
+#line 298 "bison-SA.y"
                       { line++; }
 #line 1459 "bison-SA.tab.c"
     break;
 
   case 94: /* valid: EOP  */
-#line 292 "bison-SA.y"
+#line 299 "bison-SA.y"
                       { print_report(cor_expr,inc_expr); }
 #line 1465 "bison-SA.tab.c"
     break;
 
   case 95: /* valid: error  */
-#line 293 "bison-SA.y"
+#line 300 "bison-SA.y"
                       { inc_expr++;}
 #line 1471 "bison-SA.tab.c"
     break;
@@ -1665,7 +1665,7 @@ yyreturn:
   return yyresult;
 }
 
-#line 296 "bison-SA.y"
+#line 303 "bison-SA.y"
 
 
 void print_valid (char * type) {

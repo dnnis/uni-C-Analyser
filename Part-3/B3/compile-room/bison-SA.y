@@ -116,6 +116,7 @@ expr_part:
     | UNKNOWN { printf("X\tLine:  %d \t",line); }
     ;
 
+// Εδώ ορίζονται οι τελεστές
 operator:
       EQ
     | EQQ
@@ -201,11 +202,13 @@ declaration:
 assignment:
     IDENTIFIER EQ expr_proc
 
+// Ο κανόνας για τις επιστροφές
 return:
     KEYWORD_RET expr_proc
     | KEYWORD_RET expr_part
     ;
 
+// Ο κανόνας για τα includes
 include:
     HASH KEYWORD_INCL LESSER IDENTIFIER DOT IDENTIFIER GREATER
     | HASH KEYWORD_INCL STRING
@@ -243,6 +246,8 @@ for_args:
     | SEMI SEMI
     ;
 
+// Ο κανόνας αυτός χρησιμοποιήται μαζί με το sizeof (πχ. sizeof(smth) * 10)
+// Με το "* 10" να είναι το "half_expr"
 half_expr:
       operator IDENTIFIER
     | operator INTCONST
@@ -250,11 +255,13 @@ half_expr:
     | operator FLOAT
     ;
 
+// Ο κανόνας για το sizeof
 sizeof:
       KEYWORD_SIZE PAR_START KEYWORD_VAR_TYPE PAR_END
     | KEYWORD_SIZE PAR_START KEYWORD_VAR_TYPE PAR_END half_expr
     ;
 
+// Εδώ είναι όλοι οι κανόνες των if/else/case
 conditionals:
       if_grammar
     | else_grammar
