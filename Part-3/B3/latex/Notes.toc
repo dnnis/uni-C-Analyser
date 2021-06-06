@@ -8,3 +8,9 @@
 \contentsline {subsubsection}{\numberline {2.1.2}TOKENS, Kανονικές Eκφράσεις, Καταστάσεις}{6}{subsubsection.2.1.2}%
 \contentsline {subsubsection}{\numberline {2.1.3}Κώδικας κατά την ανίχνευση λεκτικών μονάδων}{8}{subsubsection.2.1.3}%
 \contentsline {subsubsection}{\numberline {2.1.4}Καταστάσεις (Πανικού!)}{11}{subsubsection.2.1.4}%
+\contentsline {subsection}{\numberline {2.2}BISON}{12}{subsection.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.1}Αρχικοποίηση συναρτήσεων και μεταβλητών}{12}{subsubsection.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.2}Αρχικοποίηση TOKENS}{13}{subsubsection.2.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.3}Γραμματικοί κανόνες}{14}{subsubsection.2.2.3}%
+\contentsline {subsubsection}{\numberline {2.2.4}Οι συναρτήσεις μας}{20}{subsubsection.2.2.4}%
+\contentsline {subsubsection}{\numberline {2.2.5}Η συνάρτηση main}{20}{subsubsection.2.2.5}%

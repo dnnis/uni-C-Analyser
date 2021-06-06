@@ -302,6 +302,8 @@ valid:
 
 %%
 
+// Αυτή η συνάρτηση τυπώνει το output του συντακτικού αναλυτη όταν μια αποδεκτή
+// έκφραση ανιχνευθεί, με σταθερό format.
 void print_valid (char * type) {
     printf("O\tLine:  %d \tValid %s!\n"    ,line, type);
 }

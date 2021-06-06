@@ -120,61 +120,29 @@ FLOAT                [0-9]+\.[0-9]+|[0-9]+\.[0-9]+e[0-9]+
 {STRING}        {cor_words++; columns += strlen(yytext); return STRING;  }
 {INTCONST}      {cor_words++; columns += strlen(yytext); return INTCONST;}
 {IDENTIFIER}    {
-    switch(yytext)
-    {
-    case "do":
-    case "while":
-    case "break":
-        cor_words++; columns += strlen(yytext); return KEYWORD;
-    break;
-    case "if":
-        cor_words++; columns += strlen(yytext); return KEYWORD_IF;
-    break;
-    case "struct":
-        cor_words++; columns += strlen(yytext); return KEYWORD_STR;
-    break;
-    case "for":
-        cor_words++; columns += strlen(yytext); return KEYWORD_FOR;
-    break;
-    case "return":
-        cor_words++; columns += strlen(yytext); return KEYWORD_RET;
-    break;
-    case "case":
-        cor_words++; columns += strlen(yytext); return KEYWORD_CASE;
-    break;
-    case "else":
-        cor_words++; columns += strlen(yytext); return KEYWORD_ELSE;
-    break;
-    case "func":
-        cor_words++; columns += strlen(yytext); return KEYWORD_FUNC;
-    break;
-    case "void":
-        cor_words++; columns += strlen(yytext); return KEYWORD_VOID;
-    break;
-    case "sizeof":
-        cor_words++; columns += strlen(yytext); return KEYWORD_SIZE;
-    break;
-    case "include":
-        cor_words++; columns += strlen(yytext); return KEYWORD_INCL;
-    break;
-    case "continue":
-        cor_words++; columns += strlen(yytext); return KEYWORD_CONT;
-    break;
-    case "switch":
-        cor_words++; columns += strlen(yytext); return KEYWORD_SWITCH;
-    break;
-    case "int":
-    case "char":
-    case "long":
-    case "short":
-    case "float":
-    case "const":
-    case "double":
-        cor_words++; columns += strlen(yytext); return KEYWORD_VAR_TYPE;
-    break;
-    default:
-        cor_words++; columns += strlen(yytext); return IDENTIFIER;
-    }
+      if      ( !strcmp(yytext,"do"      ) ) {cor_words++; columns += strlen(yytext); return KEYWORD;}
+      else if ( !strcmp(yytext,"while"   ) ) {cor_words++; columns += strlen(yytext); return KEYWORD;}
+      else if ( !strcmp(yytext,"break"   ) ) {cor_words++; columns += strlen(yytext); return KEYWORD;}
+      else if ( !strcmp(yytext,"if"      ) ) {cor_words++; columns += strlen(yytext); return KEYWORD_IF;}
+      else if ( !strcmp(yytext,"struct"  ) ) {cor_words++; columns += strlen(yytext); return KEYWORD_STR;}
+      else if ( !strcmp(yytext,"for"     ) ) {cor_words++; columns += strlen(yytext); return KEYWORD_FOR;}
+      else if ( !strcmp(yytext,"return"  ) ) {cor_words++; columns += strlen(yytext); return KEYWORD_RET;}
+      else if ( !strcmp(yytext,"case"    ) ) {cor_words++; columns += strlen(yytext); return KEYWORD_CASE;}
+      else if ( !strcmp(yytext,"else"    ) ) {cor_words++; columns += strlen(yytext); return KEYWORD_ELSE;}
+      else if ( !strcmp(yytext,"func"    ) ) {cor_words++; columns += strlen(yytext); return KEYWORD_FUNC;}
+      else if ( !strcmp(yytext,"void"    ) ) {cor_words++; columns += strlen(yytext); return KEYWORD_VOID;}
+      else if ( !strcmp(yytext,"sizeof"  ) ) {cor_words++; columns += strlen(yytext); return KEYWORD_SIZE;}
+      else if ( !strcmp(yytext,"include" ) ) {cor_words++; columns += strlen(yytext); return KEYWORD_INCL;}
+      else if ( !strcmp(yytext,"continue") ) {cor_words++; columns += strlen(yytext); return KEYWORD_CONT;}
+      else if ( !strcmp(yytext,"switch"  ) ) {cor_words++; columns += strlen(yytext); return KEYWORD_SWITCH;}
+      else if ( !strcmp(yytext,"int"     ) ) {cor_words++; columns += strlen(yytext); return KEYWORD_VAR_TYPE;}
+      else if ( !strcmp(yytext,"char"    ) ) {cor_words++; columns += strlen(yytext); return KEYWORD_VAR_TYPE;}
+      else if ( !strcmp(yytext,"long"    ) ) {cor_words++; columns += strlen(yytext); return KEYWORD_VAR_TYPE;}
+      else if ( !strcmp(yytext,"short"   ) ) {cor_words++; columns += strlen(yytext); return KEYWORD_VAR_TYPE;}
+      else if ( !strcmp(yytext,"float"   ) ) {cor_words++; columns += strlen(yytext); return KEYWORD_VAR_TYPE;}
+      else if ( !strcmp(yytext,"const"   ) ) {cor_words++; columns += strlen(yytext); return KEYWORD_VAR_TYPE;}
+      else if ( !strcmp(yytext,"double"  ) ) {cor_words++; columns += strlen(yytext); return KEYWORD_VAR_TYPE;}
+      else                                   {cor_words++; columns += strlen(yytext); return IDENTIFIER;}
 }
 {TYPE_EXCLA}    { if (!strcmp(yytext, "!=")) {cor_words++; columns += 2; return NEQ;        } else    { columns++; return EXCLA;  }}
 {TYPE_EQ}       { if (!strcmp(yytext, "==")) {cor_words++; columns += 2; return EQQ;        } else    { columns++; return EQ;     }}
