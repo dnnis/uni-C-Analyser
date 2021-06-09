@@ -1,8 +1,8 @@
 # uni-C-Analyser
-A lexical analyser for uni-C.
+A syntax and lexical analyser for uni-C.
 
 ### Purpose of this repo
-This is the repo used for version control on a uni group project studying compilers.
+This is the repo used for version control on a university group project studying compilers.
 
 ### Goal of this project
 The goal is to make functioning Syntax and Word analyser of a version of the programming language C, Uni-C.
